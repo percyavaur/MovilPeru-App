@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {  Button } from 'native-base';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -44,12 +45,26 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.getStartedText}>
               Change this text and your app will automatically reload.
             </Text>
+            <Text style={styles.getStartedText}>
+                      Sergio Muguruza
+            </Text>
+            
           </View>
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
               <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
             </TouchableOpacity>
+            
+          </View>
+          <View style={styles.buttonContainer}>
+          <Button light><Text> Light </Text></Button>
+          <Button primary><Text> Primary </Text></Button>
+          <Button success><Text> Success </Text></Button>
+          <Button info><Text> Info </Text></Button>
+          <Button warning><Text> Warning </Text></Button>
+          <Button danger><Text> Danger </Text></Button>
+          <Button dark><Text> Dark </Text></Button>
           </View>
         </ScrollView>
 
@@ -60,15 +75,20 @@ export default class HomeScreen extends React.Component {
             <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
           </View>
         </View>
+        
+            
       </View>
+            
     );
+                
   }
+      
 
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
       const learnMoreButton = (
         <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
+          Leer mas
         </Text>
       );
 
@@ -101,7 +121,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -177,6 +197,13 @@ const styles = StyleSheet.create({
   helpContainer: {
     marginTop: 15,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer:{
+    paddingLeft: "40%",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   helpLink: {
     paddingVertical: 15,
