@@ -8,6 +8,7 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
 //hola mundo
+//mundo hola
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
