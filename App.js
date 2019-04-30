@@ -9,6 +9,7 @@ export default class App extends React.Component {
   };
 //hola mundo
 //mundo hola
+//Muguruza
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
