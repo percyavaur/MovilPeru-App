@@ -4,6 +4,6 @@
   "packagerNgrokUrl": "https://packager.wq-fzu.anonymous.movil-peru-app.exp.direct",
   "ngrokPid": 19196,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 19134
+  "packagerPort": null,
+  "packagerPid": null
 }
