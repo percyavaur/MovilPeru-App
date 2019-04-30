@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://wq-fzu.anonymous.movil-peru-app.exp.direct",
-  "packagerNgrokUrl": "https://packager.wq-fzu.anonymous.movil-peru-app.exp.direct",
-  "ngrokPid": 24810,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 24762
+  "packagerPort": null,
+  "packagerPid": null
 }
