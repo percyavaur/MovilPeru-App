@@ -1,27 +1,36 @@
 import React from 'react';
 import {
   Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
+import Icon from '@expo/vector-icons/Ionicons';
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    headerTitle: "hola",
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <Icon
+          style={{ paddingRight: 10 }}
+          onPress={() => navigation.openDrawer()}
+          name="md-menu"
+          size={30}
+        />
+      ),
+      headerTitle: "Movil Peru",
+      headerStyle: {
+        backgroundColor: "rgb(66, 179, 244)",
+      }
+    };
   };
 
   render() {
     return (
       <View style={styles.container}>
         <Image source={require("../assets/images/robot-prod.png")} />
-        <Text> Home Screen </Text>
+        <Text> HOME Screen </Text>
       </View>
     );
   }
@@ -29,8 +38,11 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: "center",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -50,
+    marginLeft: -50,
   }
 });
