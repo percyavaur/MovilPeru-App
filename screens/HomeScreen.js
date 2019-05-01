@@ -8,19 +8,36 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {  Button } from 'native-base';
+import {  Button,Drawer,Header,Left,Right,Icon } from 'native-base';
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+import MenuButton from '../components/MenuButton';
 
 export default class HomeScreen extends React.Component {
+  closeDrawer() {
+    this._drawer._root.close()
+  }
+  OpenDrawer() {
+    this._drawer._root.open()
+  }
+
   static navigationOptions = {
-    header: null,
+    title: 'HomeScreen',
   };
 
   render() {
     return (
+       
       <View style={styles.container}>
+        <MenuButton/>
+        <Header>
+            <Left>
+                 <Icon name='menu' onPress={()=>this.props.navigation.OpenDrawer}/>
+            </Left>
+       </Header>
+         <View style={{alignItems:"center",justifyContent:'center'}}>
+         <Text>HomeScreeen</Text>
+         </View>     
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
@@ -61,24 +78,12 @@ export default class HomeScreen extends React.Component {
           <Button light><Text> Light </Text></Button>
           <Button primary><Text> Primary </Text></Button>
           <Button success><Text> Success </Text></Button>
-          <Button info><Text> Info </Text></Button>
-          <Button warning><Text> Warning </Text></Button>
-          <Button danger><Text> Danger </Text></Button>
-          <Button dark><Text> Dark </Text></Button>
           </View>
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
         
-            
       </View>
-            
+         
     );
                 
   }
@@ -121,7 +126,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -167,6 +172,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   tabBarInfoContainer: {
+    backgroundColor:'blue',
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -177,6 +183,7 @@ const styles = StyleSheet.create({
         shadowOffset: { height: -3 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
+        backgroundColor: 'blue'
       },
       android: {
         elevation: 20,
@@ -193,6 +200,7 @@ const styles = StyleSheet.create({
   },
   navigationFilename: {
     marginTop: 5,
+    backgroundColor:'green'
   },
   helpContainer: {
     marginTop: 15,
