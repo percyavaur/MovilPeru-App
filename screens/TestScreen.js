@@ -14,14 +14,14 @@ import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: "hola",
+    header: null,
   };
 
   render() {
     return (
       <View style={styles.container}>
         <Image source={require("../assets/images/robot-prod.png")} />
-        <Text> Home Screen </Text>
+        <Text> Test Screen </Text>
       </View>
     );
   }
