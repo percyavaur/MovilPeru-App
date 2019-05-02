@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Container, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch, View } from 'native-base';
+import { Container, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch, View, Input, Item } from 'native-base';
 import { Header } from "react-navigation"
-import { StatusBar } from "react-native";
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-const drawerHeaderHeight= StatusBar.currentHeight + Header.HEIGHT;
+const drawerHeaderHeight = getStatusBarHeight() + Header.HEIGHT;
 
 export default class DrawerContent extends Component {
 
     render() {
         return (
             <Container>
-                <View style={{ backgroundColor: "#fecc00" ,height: drawerHeaderHeight }}/>
+                <View style={{ backgroundColor: "#fecc00", height: drawerHeaderHeight }}>
+                </View>
                 <Content>
                     <ListItem icon>
                         <Left>
