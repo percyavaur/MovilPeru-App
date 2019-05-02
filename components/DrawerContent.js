@@ -54,6 +54,11 @@ export default class DrawerContent extends Component {
                             <Icon active name="arrow-forward" />
                         </Right>
                     </ListItem>
+                    <ListItem>
+                        <Left><Text>{getStatusBarHeight()}</Text></Left>
+                        <Body><Text>{Header.HEIGHT}</Text></Body>
+                        <Right><Text>{drawerHeaderHeight}</Text></Right>
+                    </ListItem>
                 </Content>
             </Container>
         );
