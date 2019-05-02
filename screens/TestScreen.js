@@ -13,16 +13,14 @@ export default class HomeScreen extends React.Component {
     return NavigationOptions(navigation);
   };
 
+
   render() {
     return (
-       
       <View style={styles.container}>
-        <Image source={require("../assets/images/robot-prod.png")} />
-        <Text>HOME Screen</Text>
+        <Image source={require("../assets/images/robot-dev.png")} />
+        <Text> TEST Screen </Text>
       </View>
-         
     );
-                
   }
 }
 
