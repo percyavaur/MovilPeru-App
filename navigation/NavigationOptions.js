@@ -1,5 +1,6 @@
 import React from "react";
 import Icon from '@expo/vector-icons/Ionicons';
+import {View} from "native-base"
 
 export const NavigationOptions = (navigation) => {
     return {
