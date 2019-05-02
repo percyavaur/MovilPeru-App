@@ -10,6 +10,7 @@ import {
 
 import HomeScreen from "../screens/HomeScreen";
 import TestScreen from "../screens/TestScreen";
+import DrawerContent from "../components/DrawerContent"
 
 export default class AppNavigator extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class AppNavigator extends Component {
     });
 
     HomeStack.navigationOptions = {
-      tabBarLabel: null,
+      tabBarLabel: "Home",
       tabBarIcon: ({ focused }) => (
         <Icon
           color={focused ? "#848D70" : "#16161E"}
@@ -34,7 +35,7 @@ export default class AppNavigator extends Component {
     });
 
     TestStack.navigationOptions = {
-      tabBarLabel: null,
+      tabBarLabel: "Test",
       tabBarIcon: ({ focused }) => (
         <Icon
           color={focused ? "#848D70" : "#16161E"}
@@ -72,9 +73,10 @@ export default class AppNavigator extends Component {
     const AppDrawerNavigator = createDrawerNavigator({
       Dashboard: {
         screen: DashboardStackNavigator
-      }
+      },
     }, {
-        drawerPosition: "right"
+        contentComponent: DrawerContent,
+        drawerPosition: "right",
       });
 
     const AppSwitchNavigator = createSwitchNavigator({
