@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { View } from "native-base";
 import Icon from '@expo/vector-icons/Ionicons';
 import {
   createSwitchNavigator,
@@ -20,10 +19,10 @@ export default class AppNavigator extends Component {
     });
 
     HomeStack.navigationOptions = {
-      tabBarLabel: 'Home',
+      tabBarLabel: null,
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "white" : "black"}
+          color={focused ? "#848D70" : "#16161E"}
           size={30}
           name="md-home"
         />
@@ -35,10 +34,10 @@ export default class AppNavigator extends Component {
     });
 
     TestStack.navigationOptions = {
-      tabBarLabel: 'Test',
+      tabBarLabel: null,
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "white" : "black"}
+          color={focused ? "#848D70" : "#16161E"}
           size={30}
           name="ios-apps"
         />
@@ -58,10 +57,10 @@ export default class AppNavigator extends Component {
         tabBarOptions: {
           showIcon: true,
           style: {
-            backgroundColor: "rgb(66, 179, 244)",
+            backgroundColor: "#fecc00",
           },
-          activeTintColor: "white",
-          inactiveTintColor: "black",
+          activeTintColor: "#848D70",
+          inactiveTintColor: "#16161E",
         },
       },
     );

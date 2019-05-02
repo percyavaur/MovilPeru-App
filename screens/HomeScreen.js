@@ -5,32 +5,19 @@ import {
   Text,
   View,
 } from 'react-native';
-import Icon from '@expo/vector-icons/Ionicons';
+import {NavigationOptions} from "../navigation/NavigationOptions";
 
 export default class HomeScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
-    return {
-      headerRight: (
-        <Icon
-          style={{ paddingRight: 10 }}
-          onPress={() => navigation.openDrawer()}
-          name="md-menu"
-          size={30}
-        />
-      ),
-      headerTitle: "Movil Peru",
-      headerStyle: {
-        backgroundColor: "rgb(66, 179, 244)",
-      }
-    };
+    return NavigationOptions(navigation);
   };
 
   render() {
     return (
       <View style={styles.container}>
         <Image source={require("../assets/images/robot-prod.png")} />
-        <Text> HOME Screen </Text>
+        <Text>HOME Screen</Text>
       </View>
     );
   }
