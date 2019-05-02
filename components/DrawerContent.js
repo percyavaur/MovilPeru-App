@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch, View, Input, Item } from 'native-base';
+import { Platform, StatusBar } from "react-native"
+import { Container, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch, View, Footer } from 'native-base';
 import { Header } from "react-navigation"
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-const drawerHeaderHeight = getStatusBarHeight() + Header.HEIGHT;
+const drawerHeaderHeight =
+    Platform.OS === 'android'
+        ? StatusBar.currentHeight + Header.HEIGHT
+        : Header.HEIGHT;
 
 export default class DrawerContent extends Component {
 
@@ -54,12 +57,18 @@ export default class DrawerContent extends Component {
                             <Icon active name="arrow-forward" />
                         </Right>
                     </ListItem>
-                    <ListItem>
-                        <Left><Text>{getStatusBarHeight()}</Text></Left>
-                        <Body><Text>{Header.HEIGHT}</Text></Body>
-                        <Right><Text>{drawerHeaderHeight}</Text></Right>
-                    </ListItem>
                 </Content>
+                <Footer style={{ backgroundColor: "white" }}>
+                    <ListItem icon>
+                        <Left>
+                            <Button style={{ backgroundColor: Platform.OS === 'android' ? "#a4c639" : "black" }}>
+                                {Platform.OS === 'android'
+                                    ? <Icon active name="logo-android" />
+                                    : <Icon active name="logo-apple" />}
+                            </Button>
+                        </Left>
+                    </ListItem>
+                </Footer>
             </Container>
         );
     }
