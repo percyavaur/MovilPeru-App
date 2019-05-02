@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch } from 'native-base';
+
 export default class DrawerContent extends Component {
+    
     render() {
         return (
             <Container>

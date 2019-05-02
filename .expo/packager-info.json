@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://yv-htj.anonymous.movil-peru-app.exp.direct",
   "packagerNgrokUrl": "https://packager.yv-htj.anonymous.movil-peru-app.exp.direct",
-  "ngrokPid": 32103,
+  "ngrokPid": 9904,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 32031
+  "packagerPid": 9858
 }
