@@ -8,20 +8,15 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import HomeScreen from "../screens/homeStack/HomeScreen";
-import TestScreen from "../screens/testStack/TestScreen";
-import DrawerContent from "../components/DrawerContent";
-import Home2 from "../screens/homeStack/Home2"
-import Home3 from "../screens/homeStack/Home3"
-import { NavigationOptionsSecundary } from "./NavigationOptions";
+import HomeScreen from "../screens/HomeScreen";
+import TestScreen from "../screens/TestScreen";
+import DrawerContent from "../components/DrawerContent"
 
 export default class AppNavigator extends Component {
   render() {
 
     const HomeStack = createStackNavigator({
-      Home: { screen: HomeScreen },
-      Home2: {screen: Home2, navigationOptions: NavigationOptionsSecundary},
-      Home3: {screen: Home3, navigationOptions: NavigationOptionsSecundary}
+      Home: { screen: HomeScreen }
     });
 
     HomeStack.navigationOptions = {
