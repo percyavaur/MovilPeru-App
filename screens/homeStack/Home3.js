@@ -3,22 +3,16 @@ import {
   Image,
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native';
-import {NavigationOptions} from "../navigation/NavigationOptions";
 
-export default class HomeScreen extends React.Component {
-
-  static navigationOptions = ({ navigation }) => {
-    return NavigationOptions(navigation);
-  };
-
+export default class Home3 extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require("../assets/images/robot-dev.png")} />
-        <Text> TEST Screen </Text>
+        <Image style={{height: 100, width: 100}} source={require("../../assets/images/icon.png")} />
+        <Text>Home 3</Text>
       </View>
     );
   }
