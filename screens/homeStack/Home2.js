@@ -10,11 +10,14 @@ export default class Home2 extends React.Component {
 
   render() {
     return (
+       
       <View style={styles.container}>
         <Image style={{height: 100, width: 100}} source={require("../../assets/images/icon.png")} />
         <Text>Home2</Text>
       </View>
+         
     );
+                
   }
 }
 
