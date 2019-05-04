@@ -26,7 +26,7 @@ export const NavigationOptions = (navigation) => {
   };
 };
 
-export const NavigationOptionsSecundary = (navigation) => {
+export const NavigationOptions2 = ({navigation}) => {
   return {
     headerRight: (
       <Icon

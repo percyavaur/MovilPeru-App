@@ -13,20 +13,18 @@ import TestScreen from "../screens/testStack/TestScreen";
 import DrawerContent from "../components/DrawerContent";
 import Home2 from "../screens/homeStack/Home2"
 import Home3 from "../screens/homeStack/Home3"
-import { NavigationOptionsSecundary } from "./NavigationOptions";
+import { NavigationOptions2 } from "./NavigationOptions";
 
-let Home2Redux = connect(state => ({ count: state.count }))(Home2);
-let Home3Redux = connect(state => ({ count: state.count }))(Home3);
+const Home2Redux = connect(state => ({ count: state.count }))(Home2);
+const Home3Redux = connect(state => ({ count: state.count }))(Home3);
 
 export default class AppNavigator extends Component {
 
-  
   render() {
-
     const HomeStack = createStackNavigator({
       Home: { screen: HomeScreen },
-      Home2: { screen: Home2Redux, navigationOptions: NavigationOptionsSecundary },
-      Home3: { screen: Home3Redux, navigationOptions: NavigationOptionsSecundary }
+      Home2: { screen: Home2Redux, navigationOptions: NavigationOptions2 },
+      Home3: { screen: Home3Redux, navigationOptions: NavigationOptions2 }
     });
 
     HomeStack.navigationOptions = {
