@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {NavigationOptions} from "../../navigation/NavigationOptions";
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { NavigationOptions } from "../../navigation/NavigationOptions";
 
 export default class HomeScreen extends React.Component {
 

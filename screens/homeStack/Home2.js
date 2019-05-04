@@ -1,33 +1,36 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Image, StyleSheet, Text, View, Button } from 'react-native';
 
 export default class Home2 extends React.Component {
 
   render() {
     return (
-       
       <View style={styles.container}>
-        <Image style={{height: 100, width: 100}} source={require("../../assets/images/icon.png")} />
-        <Text>Home2</Text>
+        <Text>{this.props.count}</Text>
+        <Button
+          title="Increment"
+          onPress={() => { this.props.dispatch({ type: 'INCREMENT' }) }}
+        />
+        <Button
+          title="Decrement"
+          onPress={() => this.props.dispatch({ type: 'DECREMENT' })}
+        />
+        <Button
+          title="Go to static count screen"
+          onPress={() => this.props.navigation.navigate('Home3')}
+        />
       </View>
-         
     );
-                
+
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    marginTop: -50,
-    marginLeft: -50,
-  }
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    top: "35%"
+  },
 });
