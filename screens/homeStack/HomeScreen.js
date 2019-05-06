@@ -38,9 +38,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     display: "flex",
     flexDirection: "row",
-    marginTop: "70%",
-    alignItems: "center",
-    justifyContent: "center",
+    alignSelf: 'center',
+    top: "70%"
   },
   Button: {
     marginHorizontal: "3%"

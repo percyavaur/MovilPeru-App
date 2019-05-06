@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar } from "react-native"
+import { Platform, StatusBar, TouchableOpacity } from "react-native"
 import { Container, Content, Button, ListItem, Text, Icon, Left, Body, Right, Switch, View, Footer } from 'native-base';
-import { Header } from "react-navigation"
+import { Header } from "react-navigation";
+import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
+import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
 
 const drawerHeaderHeight =
     Platform.OS === 'android'
@@ -10,53 +12,94 @@ const drawerHeaderHeight =
 
 export default class DrawerContent extends Component {
 
+    state = {
+        username: ""
+    }
+
+    logout = () => {
+        this.props.dispatch({ type: 'LOGOUT' })
+        _RemoveStorage("username");
+        _RemoveStorage("password");
+        this.props.navigation.closeDrawer();
+    }
+
+    getUserName = () => {
+        _GetAsyncStorage("username").then(data => {
+            this.setState({ "username": data })
+        })
+    }
+
     render() {
+        const currentUser = this.props.currentUser._55;
         return (
             <Container>
-                <View style={{ backgroundColor: "#fecc00", height: drawerHeaderHeight }}>
+                <View style={{ backgroundColor: "#f7c600", height: drawerHeaderHeight }}>
                 </View>
-                <Content>
+                <Content style={{ flex: 1, height: "100%" }}>
+                    {
+                        currentUser === false && currentUser !== null
+                            ? <ListItem icon>
+                                <Left>
+                                    <Button style={{ backgroundColor: "#25d366" }}
+                                        onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                        <Icon active name="ios-contact" />
+                                    </Button>
+                                </Left>
+                                <Body>
+                                    <TouchableOpacity
+                                        onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                        <Text>Login</Text>
+                                    </TouchableOpacity>
+                                </Body>
+                            </ListItem>
+                            : null
+                    }
+                    {currentUser === true && currentUser !== null
+                        ? <ListItem icon>
+                            <Left>
+                                <Button style={{ backgroundColor: "#25d366" }}>
+                                    <Icon active name="ios-contact" />
+                                </Button>
+                            </Left>
+                            <Body>
+                                {this.getUserName()}
+                                <Text>{this.state.username}</Text>
+                            </Body>
+                        </ListItem>
+                        : null
+                    }
                     <ListItem icon>
                         <Left>
-                            <Button style={{ backgroundColor: "#FF9501" }}>
-                                <Icon active name="airplane" />
+                            <Button style={{ backgroundColor: "blue" }}>
+                                <Icon active name="ios-information-circle" />
                             </Button>
                         </Left>
                         <Body>
-                            <Text>Airplane Mode</Text>
+                            <TouchableOpacity
+                                onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                <Text>About Us</Text>
+                            </TouchableOpacity>
                         </Body>
-                        <Right>
-                            <Switch value={false} />
-                        </Right>
                     </ListItem>
-                    <ListItem icon>
-                        <Left>
-                            <Button style={{ backgroundColor: "#007AFF" }}>
-                                <Icon active name="wifi" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Text>Wi-Fi</Text>
-                        </Body>
-                        <Right>
-                            <Text>GeekyAnts</Text>
-                            <Icon active name="arrow-forward" />
-                        </Right>
-                    </ListItem>
-                    <ListItem icon>
-                        <Left>
-                            <Button style={{ backgroundColor: "#007AFF" }}>
-                                <Icon active name="bluetooth" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <Text>Bluetooth</Text>
-                        </Body>
-                        <Right>
-                            <Text>On</Text>
-                            <Icon active name="arrow-forward" />
-                        </Right>
-                    </ListItem>
+                    {
+                        currentUser === true && currentUser !== null
+                            ? <ListItem icon>
+                                <Left>
+                                    <Button style={{ backgroundColor: "red" }}
+                                        onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                        <Icon active name="ios-power" />
+                                    </Button>
+                                </Left>
+                                <Body>
+                                    <TouchableOpacity
+                                        onPress={() => { this.logout() }}>
+                                        <Text>Logout</Text>
+                                    </TouchableOpacity>
+                                </Body>
+                            </ListItem>
+                            : null
+                    }
+
                 </Content>
                 <Footer style={{ backgroundColor: "white" }}>
                     <ListItem icon>

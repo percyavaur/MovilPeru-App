@@ -16,9 +16,8 @@ export default class Home3 extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    top: "35%"
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center',
   }
 });

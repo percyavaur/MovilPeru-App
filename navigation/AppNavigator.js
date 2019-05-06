@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import Icon from '@expo/vector-icons/Ionicons';
 import {
   createSwitchNavigator,
@@ -7,22 +8,20 @@ import {
   createBottomTabNavigator,
   createStackNavigator
 } from 'react-navigation';
-import { connect } from 'react-redux';
-import HomeScreen from "../screens/homeStack/HomeScreen";
-import TestScreen from "../screens/testStack/TestScreen";
 import DrawerContent from "../components/DrawerContent";
-import Home2 from "../screens/homeStack/Home2"
-import Home3 from "../screens/homeStack/Home3"
 import { NavigationOptions2 } from "./NavigationOptions";
+import * as screen from "../screens";
 
-const Home2Redux = connect(state => ({ count: state.count }))(Home2);
-const Home3Redux = connect(state => ({ count: state.count }))(Home3);
+const Home2Redux = connect(state => ({ count: state.count }))(screen.Home2);
+const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
+const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
+const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
 
 export default class AppNavigator extends Component {
 
   render() {
     const HomeStack = createStackNavigator({
-      Home: { screen: HomeScreen },
+      Home: { screen: screen.HomeScreen },
       Home2: { screen: Home2Redux, navigationOptions: NavigationOptions2 },
       Home3: { screen: Home3Redux, navigationOptions: NavigationOptions2 }
     });
@@ -39,7 +38,7 @@ export default class AppNavigator extends Component {
     }
 
     const TestStack = createStackNavigator({
-      Test: { screen: TestScreen }
+      Test: { screen: screen.TestScreen }
     });
 
     TestStack.navigationOptions = {
@@ -58,6 +57,7 @@ export default class AppNavigator extends Component {
         Home: HomeStack,
         Test: TestStack,
       }, {
+        initialRouteName: "Home",
         navigationOptions: () => {
           return {
             header: null,
@@ -66,7 +66,7 @@ export default class AppNavigator extends Component {
         tabBarOptions: {
           showIcon: true,
           style: {
-            backgroundColor: "#fecc00",
+            backgroundColor: "#f7c600",
           },
           activeTintColor: "#848D70",
           inactiveTintColor: "#16161E",
@@ -74,17 +74,26 @@ export default class AppNavigator extends Component {
       },
     );
 
-    const DashboardStackNavigator = createStackNavigator({
-      DashboardTabNavigator: DashboardTabNavigator
-    });
+    const DashboardStackNavigator = createStackNavigator(
+      {
+        DashboardTabNavigator: DashboardTabNavigator,
+        LoginModal: { screen: LoginRedux }
+      },
+      {
+        mode: 'modal',
+        headerMode: 'none',
+      });
 
     const AppDrawerNavigator = createDrawerNavigator({
       Dashboard: {
         screen: DashboardStackNavigator
       },
     }, {
-        contentComponent: DrawerContent,
+        contentComponent: DrawerRedux,
         drawerPosition: "right",
+        navigationOptions: {
+          drawerLockMode: 'locked-closed'
+        }
       });
 
     const AppSwitchNavigator = createSwitchNavigator({

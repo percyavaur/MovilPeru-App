@@ -21,7 +21,7 @@ export const NavigationOptions = (navigation) => {
       flex: 1
     },
     headerStyle: {
-      backgroundColor: "#fecc00",
+      backgroundColor: "#f7c600",
     }
   };
 };
@@ -43,7 +43,7 @@ export const NavigationOptions2 = ({navigation}) => {
       flex: 1
     },
     headerStyle: {
-      backgroundColor: "#fecc00",
+      backgroundColor: "#f7c600",
       textAlign: 'center',
     }
   };
