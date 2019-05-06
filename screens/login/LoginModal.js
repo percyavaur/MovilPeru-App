@@ -7,6 +7,7 @@ import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
 import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../../utils/asyncStorage/removeAsyncStorage";
 import { BlurView } from 'expo';
+import Toast, { DURATION } from 'react-native-easy-toast'
 const { width, height } = Dimensions.get('window');
 
 const headerHeight =
@@ -26,14 +27,26 @@ export default class LoginModal extends Component {
     this.setState({ [name]: value })
   }
 
-  loginValidation = () => {
-    const { username, password } = this.state;
-    this.setState({ loading: true })
+  stateToStorage = (username, password) => {
     _SetAsyncStorage("username", username);
     _SetAsyncStorage("password", password);
     this.props.dispatch({ type: 'LOGIN' })
-    this.setState({ username: "", password: "", loading: false });
-    this.props.navigation.navigate("Home");
+  }
+
+  loginValidation = () => {
+    const { username, password } = this.state;
+    if (!username || !password) {
+      this.refs.toast.show('¡Completa los campos!', 1000);
+    } else {
+      this.setState({ loading: true })
+      this.stateToStorage(username, password);
+      this.setState({
+        username: "",
+        password: "",
+        loading: false
+      });
+      this.props.navigation.navigate("Home");
+    }
   }
 
   render() {
@@ -72,6 +85,12 @@ export default class LoginModal extends Component {
             </TouchableOpacity>
           </Form>
         </Content>
+        <Toast
+          ref="toast"
+          style={{ backgroundColor: 'red', width: "70%", display: "flex", alignItems: "center", justifyContent: "center" }}
+          position='top'
+          opacity={0.8}
+        />
         {this.state.loading &&
           <BlurView tint="light" intensity={50} style={StyleSheet.absoluteFill}>
             <ActivityIndicator size='large' style={styles.loading} />
