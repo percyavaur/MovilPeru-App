@@ -78,7 +78,7 @@ export default class DrawerContent extends Component {
                             </Button>
                         </Left>
                         <Body>
-                            {this.getUserName()}
+                            {/* {this.getUserName()} this is the error lagging*/}
                             <Text>{this.state.username}</Text>
                         </Body>
                     </ListItem>
