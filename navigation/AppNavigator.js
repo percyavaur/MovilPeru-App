@@ -14,8 +14,8 @@ import * as screen from "../screens";
 
 const Home2Redux = connect(state => ({ count: state.count }))(screen.Home2);
 const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
-const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
-const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
+const LoginRedux = connect(state => ({ currentUser: state.currentUser, username: state.username }))(screen.LoginModal);
+const DrawerRedux = connect(state => ({ currentUser: state.currentUser, username: state.username }))(DrawerContent);
 
 export default class AppNavigator extends Component {
 

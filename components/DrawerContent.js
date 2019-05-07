@@ -17,25 +17,33 @@ export default class DrawerContent extends Component {
         username: "",
         loading: false
     }
+    componentDidMount() {
+        _GetAsyncStorage("username").then(data => {
+            this.props.dispatch({ type: 'addUsername', user: { username: data } })
+        });
+    }
 
     logout = () => {
+        this.setState({ loading: true })
         Alert.alert(
             'Log Out',
             'Are you sure you want to log out?',
             [
                 {
                     text: 'Cancel',
-                    onPress: () => null,
+                    onPress: () => {
+                        this.setState({ loading: false });
+                    },
                     style: 'cancel',
                 },
                 {
                     text: 'OK', onPress: () => {
-
-                        this.setState({ loading: true })
                         this.props.dispatch({ type: 'LOGOUT' })
+                        this.props.dispatch({ type: 'removeUsername' })
+                        this.setState({ username: "" })
                         _RemoveStorage("username");
                         _RemoveStorage("password");
-                        this.setState({ loading: false })
+                        this.setState({ loading: false });
                         this.props.navigation.closeDrawer();
                     }
                 },
@@ -45,43 +53,45 @@ export default class DrawerContent extends Component {
     }
 
     getUserName = () => {
-        _GetAsyncStorage("username").then(data => {
-            this.setState({ "username": data })
-        })
+        this.props.dispatch({ type: 'addUsername' });
     }
 
     render() {
-        const currentUser = this.props.currentUser._55;
+        const currentUser = this.props.username;
         return (
             <Container>
                 <View style={{ backgroundColor: "#f7c600", height: drawerHeaderHeight }}>
                 </View>
                 <Content style={{ flex: 1, height: "100%" }}>
-                    <ListItem icon>
-                        <Left>
-                            <Button style={{ backgroundColor: "#25d366" }}
-                                onPress={() => { this.props.navigation.navigate('LoginModal') }}>
-                                <Icon active name="ios-contact" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <TouchableOpacity
-                                onPress={() => { this.props.navigation.navigate('LoginModal') }}>
-                                <Text>Login</Text>
-                            </TouchableOpacity>
-                        </Body>
-                    </ListItem>
-                    <ListItem style={{ display: "none" }} icon>
-                        <Left>
-                            <Button style={{ backgroundColor: "#25d366" }}>
-                                <Icon active name="ios-contact" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            {/* {this.getUserName()} this is the error lagging*/}
-                            <Text>{this.state.username}</Text>
-                        </Body>
-                    </ListItem>
+                    {currentUser ? null :
+                        <ListItem icon>
+                            <Left>
+                                <Button style={{ backgroundColor: "#25d366" }}
+                                    onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                    <Icon active name="ios-contact" />
+                                </Button>
+                            </Left>
+                            <Body>
+                                <TouchableOpacity
+                                    onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                    <Text>Login</Text>
+                                </TouchableOpacity>
+                            </Body>
+                        </ListItem>
+                    }
+                    {currentUser ?
+                        <ListItem icon>
+                            <Left>
+                                <Button style={{ backgroundColor: "#25d366" }}>
+                                    <Icon active name="ios-contact" />
+                                </Button>
+                            </Left>
+                            <Body>
+                                <Text>{currentUser}</Text>
+                            </Body>
+                        </ListItem>
+                        : null
+                    }
                     <ListItem icon>
                         <Left>
                             <Button style={{ backgroundColor: "blue" }}>
@@ -95,7 +105,8 @@ export default class DrawerContent extends Component {
                             </TouchableOpacity>
                         </Body>
                     </ListItem>
-                    <ListItem icon>
+                    {currentUser ? 
+                        <ListItem icon>
                         <Left>
                             <Button style={{ backgroundColor: "red" }}
                                 onPress={() => { this.props.navigation.navigate('LoginModal') }}>
@@ -109,6 +120,8 @@ export default class DrawerContent extends Component {
                             </TouchableOpacity>
                         </Body>
                     </ListItem>
+                    :null
+                    }
                 </Content>
                 <Footer style={{ backgroundColor: "white" }}>
                     <ListItem icon>

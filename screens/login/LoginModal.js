@@ -7,7 +7,7 @@ import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
 import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../../utils/asyncStorage/removeAsyncStorage";
 import { BlurView } from 'expo';
-import Toast, { DURATION } from 'react-native-easy-toast'
+import Toast from 'react-native-easy-toast'
 const { width, height } = Dimensions.get('window');
 
 const headerHeight =
@@ -30,7 +30,8 @@ export default class LoginModal extends Component {
   stateToStorage = (username, password) => {
     _SetAsyncStorage("username", username);
     _SetAsyncStorage("password", password);
-    this.props.dispatch({ type: 'LOGIN' })
+    this.props.dispatch({ type: 'LOGIN' });
+    this.props.dispatch({ type: 'addUsername', user: { username: username } })
   }
 
   loginValidation = () => {
@@ -42,9 +43,9 @@ export default class LoginModal extends Component {
       this.stateToStorage(username, password);
       this.setState({
         username: "",
-        password: "",
-        loading: false
+        password: ""
       });
+      this.setState({ loading: false });
       this.props.navigation.navigate("Home");
     }
   }
@@ -53,7 +54,7 @@ export default class LoginModal extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TouchableOpacity
-          style={{ top: headerHeight, left: "5%" }}
+          style={{ top: headerHeight, left: "5%", height: "10%", width: "10%" }}
           onPress={() => { this.props.navigation.goBack() }}
         >
           <Icon active name="md-arrow-round-back" />
