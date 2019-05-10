@@ -16,6 +16,7 @@ export default class DrawerContent extends Component {
     state = {
         loading: false
     }
+    
     logout = () => {
         this.setState({ loading: true })
         Alert.alert(
@@ -31,8 +32,7 @@ export default class DrawerContent extends Component {
                 },
                 {
                     text: 'OK', onPress: () => {
-                        this.props.dispatch({ type: 'LOGOUT' })
-                        _RemoveStorage("jwt");
+                        this.props.dispatch({ type: 'LOGOUT' });
                         this.setState({ loading: false });
                         this.props.navigation.closeDrawer();
                     }

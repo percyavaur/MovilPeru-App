@@ -1,4 +1,6 @@
 import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
+import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
+
 export function counter(state, action) {
   if (typeof state === "undefined") {
     return 0;
@@ -26,6 +28,7 @@ export async function currentUser(state, action) {
     return state;
   } else {
     switch (action.type) {
+
       case 'LOGIN':
         const user = await fetchValidateToken(action.jwt)
           .then((response) => { return response.json() })
@@ -33,11 +36,16 @@ export async function currentUser(state, action) {
         state = user ? user : null;
         return state;
         break;
+
       case 'LOGOUT':
-        return null;
+        _RemoveStorage("jwt");
+        state = null;
+        return state;
         break;
+
       default:
         return state;
+        break;
     }
   }
 };

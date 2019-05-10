@@ -101,7 +101,7 @@ export default class LoginModal extends Component {
         </Content>
         <Toast
           ref="toast"
-          style={{ backgroundColor: 'red', width: "70%", display: "flex", alignItems: "center", justifyContent: "center" }}
+          style={styles.toast}
           position='top'
           opacity={0.8}
         />
@@ -150,5 +150,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
+  }, toast: {
+    backgroundColor: 'red',
+    width: "70%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
