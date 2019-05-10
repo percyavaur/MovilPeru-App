@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator } from "react-native"
+import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard } from "react-native"
 import { Input, Label, Content, Form, Item, Icon, Button } from "native-base";
 import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
@@ -17,8 +17,6 @@ const headerHeight =
 export default class LoginModal extends Component {
 
   state = {
-    username: "",
-    password: "",
     loading: false,
   }
 
@@ -89,7 +87,10 @@ export default class LoginModal extends Component {
                 secureTextEntry={true} />
             </Item>
             <Button style={styles.Button}
-              onPress={() => this.loginValidation()}
+              onPress={() => {
+                Keyboard.dismiss();
+                this.loginValidation()
+              }}
             >
               <Text style={styles.buttonLoginText}>Iniciar Sesion</Text>
             </Button>
