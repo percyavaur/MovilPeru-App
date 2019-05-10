@@ -14,15 +14,8 @@ const drawerHeaderHeight =
 export default class DrawerContent extends Component {
 
     state = {
-        username: "",
         loading: false
     }
-    componentDidMount() {
-        _GetAsyncStorage("username").then(data => {
-            this.props.dispatch({ type: 'addUsername', user: { username: data } })
-        });
-    }
-
     logout = () => {
         this.setState({ loading: true })
         Alert.alert(
@@ -39,10 +32,7 @@ export default class DrawerContent extends Component {
                 {
                     text: 'OK', onPress: () => {
                         this.props.dispatch({ type: 'LOGOUT' })
-                        this.props.dispatch({ type: 'removeUsername' })
-                        this.setState({ username: "" })
-                        _RemoveStorage("username");
-                        _RemoveStorage("password");
+                        _RemoveStorage("jwt");
                         this.setState({ loading: false });
                         this.props.navigation.closeDrawer();
                     }
@@ -52,12 +42,8 @@ export default class DrawerContent extends Component {
         );
     }
 
-    getUserName = () => {
-        this.props.dispatch({ type: 'addUsername' });
-    }
-
     render() {
-        const currentUser = this.props.username;
+        const currentUser = this.props.currentUser._55 === null ? null : this.props.currentUser._55.username;
         return (
             <Container>
                 <View style={{ backgroundColor: "#f7c600", height: drawerHeaderHeight }}>
@@ -105,22 +91,22 @@ export default class DrawerContent extends Component {
                             </TouchableOpacity>
                         </Body>
                     </ListItem>
-                    {currentUser ? 
+                    {currentUser ?
                         <ListItem icon>
-                        <Left>
-                            <Button style={{ backgroundColor: "red" }}
-                                onPress={() => { this.props.navigation.navigate('LoginModal') }}>
-                                <Icon active name="ios-power" />
-                            </Button>
-                        </Left>
-                        <Body>
-                            <TouchableOpacity
-                                onPress={() => { this.logout() }}>
-                                <Text>Logout</Text>
-                            </TouchableOpacity>
-                        </Body>
-                    </ListItem>
-                    :null
+                            <Left>
+                                <Button style={{ backgroundColor: "red" }}
+                                    onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                    <Icon active name="ios-power" />
+                                </Button>
+                            </Left>
+                            <Body>
+                                <TouchableOpacity
+                                    onPress={() => { this.logout() }}>
+                                    <Text>Logout</Text>
+                                </TouchableOpacity>
+                            </Body>
+                        </ListItem>
+                        : null
                     }
                 </Content>
                 <Footer style={{ backgroundColor: "white" }}>

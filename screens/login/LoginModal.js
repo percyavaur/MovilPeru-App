@@ -5,9 +5,8 @@ import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
 import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
 import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
-import { _RemoveStorage } from "../../utils/asyncStorage/removeAsyncStorage";
 import { BlurView } from 'expo';
-import Toast from 'react-native-easy-toast'
+import Toast from 'react-native-easy-toast';
 const { width, height } = Dimensions.get('window');
 
 const headerHeight =
@@ -23,31 +22,44 @@ export default class LoginModal extends Component {
     loading: false,
   }
 
-  handleChange = (name, value) => {
+  handleChange(name, value) {
     this.setState({ [name]: value })
   }
 
-  stateToStorage = (username, password) => {
-    _SetAsyncStorage("username", username);
-    _SetAsyncStorage("password", password);
-    this.props.dispatch({ type: 'LOGIN' });
-    this.props.dispatch({ type: 'addUsername', user: { username: username } })
-  }
-
-  loginValidation = () => {
+  loginValidation() {
     const { username, password } = this.state;
     if (!username || !password) {
       this.refs.toast.show('¡Completa los campos!', 1000);
     } else {
-      this.setState({ loading: true })
-      this.stateToStorage(username, password);
-      this.setState({
-        username: "",
-        password: ""
-      });
-      this.setState({ loading: false });
-      this.props.navigation.navigate("Home");
+      this.setState({ loading: true });
+      this.fetchLoginValidation(username, password);
     }
+  }
+
+  fetchLoginValidation = async (username, password) => {
+    await fetch('http://35.236.27.209/php_api_jwt/api/login.php', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: username, password: password })
+    }).then(response => { return response.json() })
+      .then(data => { data.jwt ? _SetAsyncStorage("jwt", data.jwt) : null });
+    this.confirmAccess();
+  }
+
+  confirmAccess() {
+    _GetAsyncStorage("jwt").then(jwt => {
+      if (jwt) {
+        this.props.dispatch({ type: 'LOGIN', jwt });
+        this.props.navigation.navigate("Home");
+      } else {
+        this.refs.toast.show('¡Usuario o contraseña incorrecto!', 1000);
+      }
+    }).then(() => {
+      this.setState({ loading: false });
+    });
   }
 
   render() {

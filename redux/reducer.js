@@ -18,17 +18,23 @@ export function counter(state, action) {
 
 export async function currentUser(state, action) {
   if (typeof state === "undefined") {
-    const username = await _GetAsyncStorage("username");
-    const password = await _GetAsyncStorage("password");
-    username && password ? state = true : state = false;
+    const jwt = await _GetAsyncStorage("jwt");
+    const user = await fetchValidateToken(jwt)
+      .then((response) => { return response.json() })
+      .then(user => { return user.data });
+    state = user ? user : null;
     return state;
   } else {
     switch (action.type) {
       case 'LOGIN':
-        return true;
+        const user = await fetchValidateToken(action.jwt)
+          .then((response) => { return response.json() })
+          .then(user => { return user.data });
+        state = user ? user : null;
+        return state;
         break;
       case 'LOGOUT':
-        return false;
+        return null;
         break;
       default:
         return state;
@@ -36,21 +42,14 @@ export async function currentUser(state, action) {
   }
 };
 
-export function username(state, action) {
-  if (typeof state === "undefined") {
-    return null;
-  } else {
-    switch (action.type) {
-      case 'addUsername':
-        state = action.user.username;
-        return state;
-        break;
-      case 'removeUsername':
-        state = null;
-        return state;
-        break;
-      default:
-        return state;
-    }
-  }
-};
+
+fetchValidateToken = async (jwt) => {
+  return await fetch('http://35.236.27.209/php_api_jwt/api/validate_token.php', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ jwt: jwt })
+  });
+}
