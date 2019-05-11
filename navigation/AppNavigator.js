@@ -15,6 +15,7 @@ import * as screen from "../screens";
 const Home2Redux = connect(state => ({ count: state.count }))(screen.Home2);
 const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
 const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
+const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
 const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
 
 export default class AppNavigator extends Component {
@@ -77,7 +78,8 @@ export default class AppNavigator extends Component {
     const DashboardStackNavigator = createStackNavigator(
       {
         DashboardTabNavigator: DashboardTabNavigator,
-        LoginModal: { screen: LoginRedux }
+        LoginModal: { screen: LoginRedux },
+        RegisterModal: {screen: RegisterRedux}
       },
       {
         mode: 'modal',

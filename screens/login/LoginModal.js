@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard } from "react-native"
+import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard , KeyboardAvoidingView} from "react-native"
 import { Input, Label, Content, Form, Item, Icon, Button } from "native-base";
 import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
@@ -17,6 +17,10 @@ const headerHeight =
 export default class LoginModal extends Component {
 
   state = {
+    username: "",
+    usernameError: false,
+    password: "",
+    passwordError: false,
     loading: false,
   }
 
@@ -26,8 +30,13 @@ export default class LoginModal extends Component {
 
   loginValidation() {
     const { username, password } = this.state;
+    this.setState({
+      usernameError: !username ? true : false,
+      passwordError: !password ? true : false
+    });
+
     if (!username || !password) {
-      this.refs.toast.show('¡Completa los campos!', 1000);
+      this.refs.toast.show('¡Por favor, completa los campos!', 1000);
     } else {
       this.setState({ loading: true });
       this.fetchLoginValidation(username, password);
@@ -61,29 +70,32 @@ export default class LoginModal extends Component {
   }
 
   render() {
+
+    const { usernameError, passwordError, username, password } = this.state;
+
     return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "white" }} behavior="padding" enabled>
         <TouchableOpacity
-          style={{ top: headerHeight, left: "5%", height: "10%", width: "10%" }}
+          style={{ top: headerHeight, height: "8%", width: "17%" }}
           onPress={() => { this.props.navigation.goBack() }}
         >
-          <Icon active name="md-arrow-round-back" />
+          <Icon active name="md-arrow-round-back" style={{ left: "20%" }} />
         </TouchableOpacity>
-        <Content style={{ top: "25%", marginHorizontal: "10%" }}>
+        <Content style={{ top: "22.5%", marginHorizontal: "10%" }}>
           <Form>
-            <Item floatingLabel>
+            <Item floatingLabel error={usernameError}>
               <Icon active name='ios-person' />
               <Label >Username</Label>
               <Input
                 onChangeText={(value) => { this.handleChange("username", value) }}
-                value={this.state.username} />
+                value={username} />
             </Item>
-            <Item floatingLabel >
+            <Item floatingLabel error={passwordError}>
               <Icon active name='md-lock' />
               <Label >Password</Label>
               <Input
                 onChangeText={(value) => { this.handleChange("password", value) }}
-                value={this.state.password}
+                value={password}
                 secureTextEntry={true} />
             </Item>
             <Button style={styles.Button}
@@ -94,8 +106,9 @@ export default class LoginModal extends Component {
             >
               <Text style={styles.buttonLoginText}>Iniciar Sesion</Text>
             </Button>
-            <TouchableOpacity>
-              <Text style={styles.newAccountText}>Crear Cuenta</Text>
+            <TouchableOpacity
+              onPress={() => { this.props.navigation.navigate("RegisterModal"); }}>
+              <Text style={styles.newAccountText}> Crear Cuenta </Text>
             </TouchableOpacity>
           </Form>
         </Content>
@@ -110,7 +123,7 @@ export default class LoginModal extends Component {
             <ActivityIndicator size='large' style={styles.loading} />
           </BlurView>
         }
-      </View >
+      </KeyboardAvoidingView >
     );
   }
 }
