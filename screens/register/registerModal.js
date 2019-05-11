@@ -3,8 +3,6 @@ import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platfo
 import { Input, Label, Content, Form, Item, Icon, Button } from "native-base";
 import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
-import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
-import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
 import { BlurView } from 'expo';
 import Toast from 'react-native-easy-toast';
 const { width, height } = Dimensions.get('window');
@@ -72,7 +70,7 @@ export default class RegisterModal extends Component {
     }).then(response => { return response.json() })
       .then(data => {
         if (data.message === "User was created.") {
-          this.refs.accept.show(data.message, 1000, ()=>{
+          this.refs.accept.show(data.message, 1000, () => {
             this.setState({ loading: false });
             this.props.navigation.navigate("LoginModal");
           });
@@ -81,7 +79,7 @@ export default class RegisterModal extends Component {
           this.setState({ loading: false });
         }
       });
-    
+
   }
 
   render() {
@@ -141,7 +139,10 @@ export default class RegisterModal extends Component {
                 value={confirmPassword}
                 secureTextEntry={true} />
             </Item>
-            <Button style={styles.Button} onPress={() => { this.registerValidation() }}>
+            <Button style={styles.Button} onPress={() => {
+              Keyboard.dismiss();
+              this.registerValidation()
+            }}>
               <Text style={styles.buttonRegisterText}>Registrarse</Text>
             </Button>
           </Form>
