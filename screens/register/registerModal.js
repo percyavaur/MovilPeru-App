@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, KeyboardAvoidingView, Keyboard } from "react-native"
+import {
+  View, Dimensions, StyleSheet, Text,
+  TouchableOpacity, StatusBar, Platform,
+  ActivityIndicator, KeyboardAvoidingView, Keyboard
+} from "react-native"
 import { Input, Label, Content, Form, Item, Icon, Button } from "native-base";
 import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
@@ -60,7 +64,7 @@ export default class RegisterModal extends Component {
   }
 
   fetchRegisterValidation = async (firstName, lastName, username, password) => {
-    await fetch('http://35.236.27.209/php_api_jwt/api/create_user.php', {
+    await fetch('http://35.236.27.209/php_api_jwt/api/controller/create_user.php', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -69,13 +73,13 @@ export default class RegisterModal extends Component {
       body: JSON.stringify({ firstname: firstName, lastname: lastName, username: username, password: password })
     }).then(response => { return response.json() })
       .then(data => {
-        if (data.message === "User was created.") {
+        if (data.success) {
           this.refs.accept.show(data.message, 1000, () => {
             this.setState({ loading: false });
             this.props.navigation.navigate("LoginModal");
           });
         } else {
-          this.refs.warning.show(data.message, 1000);
+          this.refs.warning.show(data.message, 3000);
           this.setState({ loading: false });
         }
       });
@@ -104,14 +108,14 @@ export default class RegisterModal extends Component {
           <Form>
             <Item floatingLabel error={firstNameError} >
               <Icon active name='ios-person' />
-              <Label >First firstName</Label>
+              <Label >First Name</Label>
               <Input
                 onChangeText={(value) => { this.handleChange("firstName", value) }}
                 value={firstName} />
             </Item>
             <Item floatingLabel error={lastNameError}>
               <Icon active name='ios-person' />
-              <Label >Last firstName</Label>
+              <Label >Last Name</Label>
               <Input
                 onChangeText={(value) => { this.handleChange("lastName", value) }}
                 value={lastName} />

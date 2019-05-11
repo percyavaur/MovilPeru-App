@@ -23,7 +23,7 @@ export async function currentUser(state, action) {
     const jwt = await _GetAsyncStorage("jwt");
     const user = await fetchValidateToken(jwt)
       .then((response) => { return response.json() })
-      .then(user => { return user.data });
+      .then(userJson => { return userJson.data });
     state = user ? user : null;
     return state;
   } else {
@@ -32,7 +32,7 @@ export async function currentUser(state, action) {
       case 'LOGIN':
         const user = await fetchValidateToken(action.jwt)
           .then((response) => { return response.json() })
-          .then(user => { return user.data });
+          .then(userJson => { return userJson.data });
         state = user ? user : null;
         return state;
         break;
@@ -52,7 +52,7 @@ export async function currentUser(state, action) {
 
 
 fetchValidateToken = async (jwt) => {
-  return await fetch('http://35.236.27.209/php_api_jwt/api/validate_token.php', {
+  return await fetch('http://35.236.27.209/php_api_jwt/api/model/functions/validate_token.php', {
     method: "POST",
     headers: {
       'Accept': 'application/json',
