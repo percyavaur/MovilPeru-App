@@ -53,12 +53,28 @@ export default class AppNavigator extends Component {
       )
     }
 
+    const TripsStack = createStackNavigator({
+      Trips: { screen: screen.TripsScreen }
+    });
+
+    TripsStack.navigationOptions = {
+      tabBarLabel: "Trips",
+      tabBarIcon: ({ focused }) => (
+        <Icon
+          color={focused ? "#848D70" : "#16161E"}
+          size={30}
+          name="ios-apps"
+        />
+      )
+    }
+
     const DashboardTabNavigator = createBottomTabNavigator(
       {
+        Trips: TripsStack,
         Home: HomeStack,
         Test: TestStack,
       }, {
-        initialRouteName: "Home",
+        initialRouteName: "Trips",
         navigationOptions: () => {
           return {
             header: null,
