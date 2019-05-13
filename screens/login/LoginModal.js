@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard, KeyboardAvoidingView } from "react-native"
+import { Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard, KeyboardAvoidingView } from "react-native"
 import { Input, Label, Content, Form, Item, Icon, Button } from "native-base";
 import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
@@ -60,7 +60,7 @@ export default class LoginModal extends Component {
     _GetAsyncStorage("jwt").then(jwt => {
       if (jwt) {
         this.props.dispatch({ type: 'LOGIN', jwt });
-        this.props.navigation.navigate("Home");
+        this.props.navigation.navigate("Trips");
       } else {
         this.refs.toast.show('¡Usuario o contraseña incorrecto!', 1000);
       }

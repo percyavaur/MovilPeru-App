@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
 import { View } from "native-base"
 import { NavigationOptions } from "../../navigation/NavigationOptions";
-import IdaVuelta from "../../components/screens/TripStack/IdaVuelta"
+import IdaVuelta from "../../components/screens/TripStack/IdaVuelta";
+import SoloIda from "../../components/screens/TripStack/SoloIda";
+import LabelText from "../../components/utils/LabelText"
 
 export default class TripsScreen extends React.Component {
 
@@ -59,7 +61,7 @@ export default class TripsScreen extends React.Component {
                             : null
                         }
                         {this.state.selectedTab === 1 ?
-                            <Text>Viaje 2</Text>
+                            <SoloIda/>
                             : null
                         }
                     </View>
