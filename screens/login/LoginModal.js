@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard , KeyboardAvoidingView} from "react-native"
+import { View, Dimensions, StyleSheet, Text, TouchableOpacity, StatusBar, Platform, ActivityIndicator, Keyboard, KeyboardAvoidingView } from "react-native"
 import { Input, Label, Content, Form, Item, Icon, Button } from "native-base";
 import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";

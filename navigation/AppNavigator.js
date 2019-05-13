@@ -31,7 +31,7 @@ export default class AppNavigator extends Component {
       tabBarLabel: "Home",
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "#848D70" : "#16161E"}
+          color={focused ? "#52606D" : "#855425"}
           size={30}
           name="md-home"
         />
@@ -46,7 +46,7 @@ export default class AppNavigator extends Component {
       tabBarLabel: "Test",
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "#848D70" : "#16161E"}
+          color={focused ? "#52606D" : "#855425"}
           size={30}
           name="ios-apps"
         />
@@ -54,15 +54,14 @@ export default class AppNavigator extends Component {
     }
 
     const TripsStack = createStackNavigator({
-      Trips: { screen: screen.TripsScreen },
-      TripScreen1: { screen: screen.TripScreen1,navigationOptions: NavigationOptions2 }
+      Trips: { screen: screen.TripsScreen }
     });
 
     TripsStack.navigationOptions = {
       tabBarLabel: "Trips",
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "#848D70" : "#16161E"}
+          color={focused ? "#52606D" : "#855425"}
           size={30}
           name="ios-airplane"
         />
@@ -86,8 +85,8 @@ export default class AppNavigator extends Component {
           style: {
             backgroundColor: "#f7c600",
           },
-          activeTintColor: "#848D70",
-          inactiveTintColor: "#16161E",
+          activeTintColor: "#52606D",
+          inactiveTintColor: "#855425",
         },
       },
     );
@@ -96,7 +95,7 @@ export default class AppNavigator extends Component {
       {
         DashboardTabNavigator: DashboardTabNavigator,
         LoginModal: { screen: LoginRedux },
-        RegisterModal: {screen: RegisterRedux}
+        RegisterModal: { screen: RegisterRedux }
       },
       {
         mode: 'modal',
