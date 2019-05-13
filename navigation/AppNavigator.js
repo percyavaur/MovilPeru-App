@@ -54,7 +54,8 @@ export default class AppNavigator extends Component {
     }
 
     const TripsStack = createStackNavigator({
-      Trips: { screen: screen.TripsScreen }
+      Trips: { screen: screen.TripsScreen },
+      TripScreen1: { screen: screen.TripScreen1,navigationOptions: NavigationOptions2 }
     });
 
     TripsStack.navigationOptions = {
@@ -63,7 +64,7 @@ export default class AppNavigator extends Component {
         <Icon
           color={focused ? "#848D70" : "#16161E"}
           size={30}
-          name="ios-apps"
+          name="ios-airplane"
         />
       )
     }

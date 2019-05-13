@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text,Button } from 'react-native';
 import { NavigationOptions } from "../../navigation/NavigationOptions";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
@@ -27,11 +27,14 @@ export default class TripsScreen extends React.Component {
                     onTabPress={this.handleIndexChange}
                 />
                 {this.state.selectedIndex === 0 ?
-                    <View><Text>View 1</Text></View>
+                    <View><Text>Viaje 1</Text></View>
                     : null
                 }
                 {this.state.selectedIndex === 1 ?
-                    <View><Text>View 2</Text></View>
+                    <Button
+                    title="Go to List of Trips"
+                    onPress={() => this.props.navigation.navigate('TripScreen1')}
+                    ><Text>Viaje 2</Text></Button>
                     : null
                 }
             </View>
@@ -42,5 +45,6 @@ export default class TripsScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
+        height: '80%'
     }
 });
