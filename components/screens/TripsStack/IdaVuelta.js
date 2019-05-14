@@ -1,7 +1,7 @@
 import React from "react"
 import { Content, View, Button } from "native-base";
 import LabelText from "../../utils/LabelText";
-import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 // import Icon from '@expo/vector-icons'

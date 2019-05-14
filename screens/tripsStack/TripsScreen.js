@@ -2,9 +2,8 @@ import React from 'react';
 import { Text, StyleSheet, TouchableHighlight, ImageBackground } from "react-native";
 import { View } from "native-base"
 import { NavigationOptions } from "../../navigation/NavigationOptions";
-import IdaVuelta from "../../components/screens/TripStack/IdaVuelta";
-import SoloIda from "../../components/screens/TripStack/SoloIda";
-import LabelText from "../../components/utils/LabelText"
+import IdaVuelta from "../../components/screens/TripsStack/IdaVuelta";
+import SoloIda from "../../components/screens/TripsStack/SoloIda";
 
 export default class TripsScreen extends React.Component {
 
