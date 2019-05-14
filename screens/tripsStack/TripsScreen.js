@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, ImageBackground } from "react-native";
+import { Text, StyleSheet, TouchableHighlight, ImageBackground } from "react-native";
 import { View } from "native-base"
 import { NavigationOptions } from "../../navigation/NavigationOptions";
 import IdaVuelta from "../../components/screens/TripStack/IdaVuelta";
@@ -34,7 +34,8 @@ export default class TripsScreen extends React.Component {
                             }}
                         >
                             <View style={{ display: "flex", flexDirection: "row", width: "100%", height: "100%" }}>
-                                <TouchableOpacity
+                                <TouchableHighlight
+                                    underlayColor="white"
                                     onPress={() => { this.handleTabChange(0) }}
                                     style={
                                         [styles.activeTabButton, {
@@ -42,8 +43,9 @@ export default class TripsScreen extends React.Component {
                                             borderStartColor: selectedTab === 0 ? "#f7c600" : "#FFFFFF80",
                                         }]
                                     }
-                                ><Text style={{ color: "#52606D" }}>Ida y Vuelta</Text></TouchableOpacity>
-                                <TouchableOpacity
+                                ><Text style={{ color: "#52606D" }}>Ida y Vuelta</Text></TouchableHighlight>
+                                <TouchableHighlight
+                                    underlayColor="white"
                                     onPress={() => { this.handleTabChange(1) }}
                                     style={
                                         [styles.activeTabButton, {
@@ -51,17 +53,17 @@ export default class TripsScreen extends React.Component {
                                             borderStartColor: selectedTab === 1 ? "#f7c600" : "#FFFFFF80",
                                         }]
                                     }
-                                ><Text style={{ color: "#52606D" }}>Solo Ida</Text></TouchableOpacity>
+                                ><Text style={{ color: "#52606D" }}>Solo Ida</Text></TouchableHighlight>
                             </View>
                         </View>
                     </View>
                     <View style={{ backgroundColor: "white", height: "100%" }}>
                         {this.state.selectedTab === 0 ?
-                            <IdaVuelta />
+                            <IdaVuelta navigation={this.props.navigation} />
                             : null
                         }
                         {this.state.selectedTab === 1 ?
-                            <SoloIda/>
+                            <SoloIda />
                             : null
                         }
                     </View>

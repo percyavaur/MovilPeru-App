@@ -9,7 +9,9 @@ export default class IdaVuelta extends React.Component {
     render() {
         return (
             <Content>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("TripScreen1");
+                }}>
                     <LabelText
                         icon="md-pin"
                         label="Destino"
