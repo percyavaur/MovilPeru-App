@@ -54,7 +54,8 @@ export default class AppNavigator extends Component {
     }
 
     const TripsStack = createStackNavigator({
-      Trips: { screen: screen.TripsScreen }
+      Trips: { screen: screen.TripsScreen },
+      TripScreen1: { screen: screen.TripScreen1,navigationOptions: NavigationOptions2 }
     });
 
     TripsStack.navigationOptions = {

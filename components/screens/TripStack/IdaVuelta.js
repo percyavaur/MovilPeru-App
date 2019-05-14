@@ -4,8 +4,7 @@ import LabelText from "../../utils/LabelText";
 import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
-// import Icon from '@expo/vector-icons';
-
+// import Icon from '@expo/vector-icons'
 export default class IdaVuelta extends React.Component {
     render() {
         return (
