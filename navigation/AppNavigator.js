@@ -11,6 +11,7 @@ import {
 import DrawerContent from "../components/DrawerContent";
 import { NavigationOptions2 } from "./NavigationOptions";
 import * as screen from "../screens";
+import { NativeViewGestureHandler } from "react-native-gesture-handler";
 
 const Home2Redux = connect(state => ({ count: state.count }))(screen.Home2);
 const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
@@ -55,7 +56,11 @@ export default class AppNavigator extends Component {
 
     const TripsStack = createStackNavigator({
       Trips: { screen: screen.TripsScreen },
-      TripScreen1: { screen: screen.TripScreen1,navigationOptions: NavigationOptions2 }
+      TripScreen1: { screen: screen.TripScreen1,navigationOptions: NavigationOptions2 },
+      DestinoScreen2:{screen: screen.DestinoScreen2,navigationOptions: NavigationOptions2},
+      PasajerosScreen:{screen: screen.PasajerosScreen,navigationOptions: NavigationOptions2},
+      CalendarScreen1:{screen: screen.CalendarScreen1,navigationOptions: NavigationOptions2},
+      CalendarScreen2:{screen: screen.CalendarScreen2,navigationOptions: NavigationOptions2}
     });
 
     TripsStack.navigationOptions = {

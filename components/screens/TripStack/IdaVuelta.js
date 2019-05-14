@@ -18,14 +18,18 @@ export default class IdaVuelta extends React.Component {
                         value={"Ingresa una ciudad o terminal"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("PasajerosScreen");
+                }}>
                     <LabelText
                         icon="md-people"
                         label="Pasajeros"
                         value={"0 Adulto, 0 Niños"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity  onPress={()=>{
+                    this.props.navigation.navigate("DestinoScreen2");
+                }}>
                     <LabelText
                         icon="md-bus"
                         label="Ruta"
@@ -33,14 +37,18 @@ export default class IdaVuelta extends React.Component {
                     />
                 </TouchableOpacity>
                 <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "4%" }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>{
+                    this.props.navigation.navigate("CalendarScreen1");
+                }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"
                             value={"DD/MM/AA"}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>{
+                    this.props.navigation.navigate("CalendarScreen2");
+                }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Vuelta"
