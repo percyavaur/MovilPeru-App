@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View, Button, } from 'react-native';
 import {ListItem,Input} from 'native-base';
 import { Header } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-export default class CalendarScreen1 extends React.Component {
+export default class IdaCalendarScreen extends React.Component {
   render() {
     return (
       <View >

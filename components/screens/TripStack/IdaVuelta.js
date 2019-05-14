@@ -10,7 +10,7 @@ export default class IdaVuelta extends React.Component {
         return (
             <Content>
                 <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("TripScreen1");
+                    this.props.navigation.navigate("DestinosScreen");
                 }}>
                     <LabelText
                         icon="md-pin"
@@ -38,7 +38,7 @@ export default class IdaVuelta extends React.Component {
                 </TouchableOpacity>
                 <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "4%" }}>
                     <TouchableOpacity  onPress={()=>{
-                    this.props.navigation.navigate("CalendarScreen1");
+                    this.props.navigation.navigate("IdaCalendarScreen");
                 }}>
                         <LabelText
                             icon="ios-calendar"
@@ -47,7 +47,7 @@ export default class IdaVuelta extends React.Component {
                         />
                     </TouchableOpacity>
                     <TouchableOpacity  onPress={()=>{
-                    this.props.navigation.navigate("CalendarScreen2");
+                    this.props.navigation.navigate("VueltaCalendarScreen");
                 }}>
                         <LabelText
                             icon="ios-calendar"
