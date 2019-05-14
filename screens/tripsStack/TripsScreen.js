@@ -62,7 +62,7 @@ export default class TripsScreen extends React.Component {
                             : null
                         }
                         {this.state.selectedTab === 1 ?
-                            <SoloIda />
+                            <SoloIda navigation={this.props.navigation} />
                             : null
                         }
                     </View>

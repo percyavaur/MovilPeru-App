@@ -10,21 +10,27 @@ export default class SoloIda extends React.Component {
     render() {
         return (
             <Content>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("DestinoScreen2");
+                }}>
                     <LabelText
                         icon="md-pin"
                         label="Destino"
                         value={"Ingresa una ciudad o terminal"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("PasajerosScreen");
+                }}>
                     <LabelText
                         icon="md-people"
                         label="Pasajeros"
                         value={"0 Adulto, 0 Niños"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("TripScreen1");
+                }}>
                     <LabelText
                         icon="md-bus"
                         label="Ruta"
@@ -32,7 +38,9 @@ export default class SoloIda extends React.Component {
                     />
                 </TouchableOpacity>
                 <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "4%" }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{
+                    this.props.navigation.navigate("CalendarScreen1");
+                }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"

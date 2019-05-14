@@ -5,4 +5,7 @@ export {default as Home3} from "./homeStack/Home3";
 export {default as LoginModal} from "./login/LoginModal";
 export {default as RegisterModal} from "./register/registerModal";
 export {default as TripsScreen} from "./tripsStack/TripsScreen";
-export {default as TripScreen1} from "./tripsStack/TripScreen1";
+export {default as DestinosScreen} from "./tripsStack/DestinosScreen/DestinosScreen";
+export {default as PasajerosScreen} from "./tripsStack/PasajerosScreen/PasajerosScreen";
+export {default as IdaCalendarScreen} from "./tripsStack/CalendarScreen/IdaCalendarScreen";
+export {default as VueltaCalendarScreen} from "./tripsStack/CalendarScreen/vueltaCalendarScreen";
