@@ -15,11 +15,13 @@ export const NavigationOptions = (navigation) => {
       />
     ),
     headerTitle: "Movil Peru",
+    headerTintColor: 'white',
     headerLeft: (<View />),
     headerTitleStyle: {
       textAlign: "center",
       flex: 1,
-      color: "white"
+      color: "white",
+      fontFamily: "NeoSans"
     },
     headerStyle: {
       backgroundColor: "#1B0088",
@@ -27,7 +29,7 @@ export const NavigationOptions = (navigation) => {
   };
 };
 
-export const NavigationOptions2 = ({ navigation }) => {
+export const NavigationOptions2 = ({navigation}) => {
   return {
     headerRight: (
       <Icon
@@ -39,10 +41,12 @@ export const NavigationOptions2 = ({ navigation }) => {
       />
     ),
     headerTitle: "Movil Peru",
+    headerTintColor: 'white',
     headerTitleStyle: {
       textAlign: "center",
       flex: 1,
-      color: "white"
+      color: "white",
+      fontFamily: "NeoSans"
     },
     headerStyle: {
       backgroundColor: "#1B0088",

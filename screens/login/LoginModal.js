@@ -75,6 +75,9 @@ export default class LoginModal extends Component {
 
     return (
       <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "white" }} behavior="padding" enabled>
+        <StatusBar
+          barStyle="dark-content"
+        />
         <TouchableOpacity
           style={{ top: headerHeight, height: "8%", width: "17%" }}
           onPress={() => { this.props.navigation.goBack() }}

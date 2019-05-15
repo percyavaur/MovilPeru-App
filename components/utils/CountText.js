@@ -18,8 +18,14 @@ export default class CountText extends React.Component {
                 <View style={{ display: "flex", flexDirection: "row", position: "relative" }}>
                     {/* Seccion para el titulo y la informacion */}
                     <View style={{ display: "flex", flexDirection: "column", position: "absolute", left: "7%" }}>
-                        <Text style={{ fontSize: RF(2.7), color: "#52606D" }}>{this.props.title}</Text>
-                        <Text style={{ fontSize: RF(2.4), color: "grey" }}>{this.props.info}</Text>
+                        <Text style={{
+                            fontSize: RF(2.7), color: "#52606D",
+                            fontFamily: "NeoSans"
+                        }}>{this.props.title}</Text>
+                        <Text style={{
+                            fontSize: RF(2.4), color: "grey",
+                            fontFamily: "NeoSans"
+                        }}>{this.props.info}</Text>
                     </View>
                     {/* Seccion para  los botones y el contador */}
                     <View style={{
@@ -34,21 +40,24 @@ export default class CountText extends React.Component {
                                 height: "60%",
                                 width: "30%",
                                 marginHorizontal: 20,
-                                marginTop: "5%",
+                                marginTop: "3%",
                             }} >
-                            <Icon.Entypo name={"minus"} size={RF(2.5)} style={{ marginLeft:RF(2), marginTop:RF(0.5) }} />
+                            <Icon.Entypo name={"minus"} size={RF(2.5)} style={{ marginLeft: RF(2), marginTop: RF(0.1) }} />
                         </TouchableOpacity>
-                        <Text style={{ fontSize: RF(4), color: "#52606D" }}>{value}</Text>
+                        <Text style={{
+                            fontSize: RF(4), color: "#52606D",
+                            fontFamily: "NeoSans"
+                        }}>{value}</Text>
                         <TouchableOpacity
                             onPress={() => { this.handleChange(name, value + 1) }}
                             style={{
                                 height: "60%",
                                 width: "30%",
                                 marginHorizontal: 20,
-                                marginTop: "5%",
+                                marginTop: "3%",
                             }}>
-                            <Icon.Entypo name={"plus"} size={RF(2.5)} style={{marginLeft:RF(2), marginTop:RF(0.5) }} 
-                            color={"#ED1650"} />
+                            <Icon.Entypo name={"plus"} size={RF(2.5)} style={{ marginLeft: RF(2), marginTop: RF(0.1) }}
+                                color={"#ED1650"} />
                         </TouchableOpacity>
                     </View>
                 </View>

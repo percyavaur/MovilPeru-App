@@ -13,7 +13,7 @@ export default class LabelText extends React.Component {
                     flexDirection: "column",
                     marginHorizontal: "7%",
                     borderBottomWidth: 1,
-                    borderBottomColor: "grey"
+                    borderBottomColor: "grey",
                 }}>
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         <Icon name={this.props.icon} color={"#ED1650"} size={RF(2.8)} />
@@ -21,14 +21,16 @@ export default class LabelText extends React.Component {
                             style={{
                                 color: "grey",
                                 fontSize: RF(2.4),
-                                marginLeft: RF(1)
+                                marginLeft: RF(1),
+                                fontFamily: "NeoSans"
                             }}
                         >{this.props.label}</Text>
                     </View>
-                    <View style={{ marginTop: RF(0.5) }}>
+                    <View style={{ marginTop: RF(1) }}>
                         <Text style={{
-                            color: "grey",
-                            fontSize: RF(2.5),
+                            color: "#bababa",
+                            fontSize: RF(2.3),
+                            fontFamily: "NeoSans"
                         }}>{this.props.value}</Text>
                     </View>
                 </View>

@@ -42,7 +42,10 @@ export default class TripsScreen extends React.Component {
                                             borderStartColor: selectedTab === 0 ? "#ED1650" : "#FFFFFF80",
                                         }]
                                     }
-                                ><Text style={{ color: "#52606D" }}>Ida y Vuelta</Text></TouchableHighlight>
+                                ><Text style={{
+                                    color: "#52606D",
+                                    fontFamily: "NeoSans"
+                                }}>Ida y Vuelta</Text></TouchableHighlight>
                                 <TouchableHighlight
                                     underlayColor="white"
                                     onPress={() => { this.handleTabChange(1) }}
@@ -52,7 +55,10 @@ export default class TripsScreen extends React.Component {
                                             borderStartColor: selectedTab === 1 ? "#ED1650" : "#FFFFFF80",
                                         }]
                                     }
-                                ><Text style={{ color: "#52606D" }}>Solo Ida</Text></TouchableHighlight>
+                                ><Text style={{
+                                    color: "#52606D",
+                                    fontFamily: "NeoSans"
+                                }}>Solo Ida</Text></TouchableHighlight>
                             </View>
                         </View>
                     </View>
