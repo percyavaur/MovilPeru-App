@@ -4,32 +4,52 @@ import {ListItem,Input} from 'native-base';
 import { Header } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 export default class IdaCalendarScreen extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.onDayPress = this.onDayPress.bind(this);
+  }
+  onDayPress(day) {
+    this.setState({
+      selected: day.dateString
+    });
+  }
   render() {
     return (
-      <View >
+      <View style={{  flex: 1 }}>
         <Text>{this.props.count}</Text>
-        <CalendarList
-           // Callback which gets executed when visible months change in scroll view. Default = undefined
-           onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
-           // Max amount of months allowed to scroll to the past. Default = 50
-           pastScrollRange={50}
-           // Max amount of months allowed to scroll to the future. Default = 50
-           futureScrollRange={50}
-           // Enable or disable scrolling of calendar list
-           scrollEnabled={true}
-           // Enable or disable vertical scroll indicator. Default = false
-           showScrollIndicator={true}
-           minDate={'2019-05-13'}
-      />
       <Calendar
+      horizontal
+      pagingEnabled
       // Collection of dates that have to be marked. Default = {}
-      markedDates={{
-      '2019-05-16': {selected: true, marked: true, selectedColor: 'blue'},
-      '2019-05-17': {marked: true},
-      '2019-05-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-      '2019-05-19': {disabled: true, disableTouchEvent: true}
-  }}
-/>
+      theme={{
+        monthTextColor: '#165c96',
+        arrowColor: '#165c96',
+        todayTextColor: '#33a8e2',
+        selectedDayTextColor: 'white',
+        selectedDayBackgroundColor: '#165c96',
+        }}
+        // Max amount of months allowed to scroll to the past. Default = 50
+        pastScrollRange={30}
+        // Max amount of months allowed to scroll to the future. Default = 50
+        futureScrollRange={30}
+        // Enable or disable scrolling of calendar list
+        scrollEnabled={true}
+        // Enable or disable vertical scroll indicator. Default = false
+        showScrollIndicator={true}
+        minDate={new Date()}
+
+        onDayPress={this.onDayPress}
+       
+        markedDates={{
+        [this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'blue'},
+         '2019-05-17': {marked: true},
+         '2019-05-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+         '2019-05-19': {disabled: true, disableTouchEvent: true},
+         
+        }}
+        />
       </View>
     );
 
