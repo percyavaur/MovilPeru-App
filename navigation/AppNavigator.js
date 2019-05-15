@@ -30,7 +30,6 @@ export default class AppNavigator extends Component {
 
     HomeStack.navigationOptions = {
       tabBarLabel: "Home",
-      headerTintColor: 'white',
       tabBarIcon: ({ focused }) => (
         <Icon
           color={focused ? "#ED1650" : "white"}
@@ -46,7 +45,6 @@ export default class AppNavigator extends Component {
 
     TestStack.navigationOptions = {
       tabBarLabel: "Test",
-      headerTintColor: 'white',
       tabBarIcon: ({ focused }) => (
         <Icon
           color={focused ? "#ED1650" : "white"}
@@ -58,10 +56,10 @@ export default class AppNavigator extends Component {
 
     const TripsStack = createStackNavigator({
       Trips: { screen: screen.TripsScreen },
-      DestinosScreen: { screen: screen.DestinosScreen, navigationOptions: NavigationOptions2 },
-      PasajerosScreen: { screen: screen.PasajerosScreen, navigationOptions: NavigationOptions2 },
-      IdaCalendarScreen: { screen: screen.IdaCalendarScreen, navigationOptions: NavigationOptions2 },
-      VueltaCalendarScreen: { screen: screen.VueltaCalendarScreen, navigationOptions: NavigationOptions2 }
+      DestinosScreen:{screen: screen.DestinosScreen,navigationOptions: NavigationOptions2},
+      PasajerosScreen:{screen: screen.PasajerosScreen,navigationOptions: NavigationOptions2},
+      IdaCalendarScreen:{screen: screen.IdaCalendarScreen,navigationOptions: NavigationOptions2},
+      VueltaCalendarScreen:{screen: screen.VueltaCalendarScreen,navigationOptions: NavigationOptions2}
     });
 
     TripsStack.navigationOptions = {

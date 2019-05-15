@@ -1,12 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, Button } from 'react-native';
-import { NavigationOptions2 } from "../../navigation/NavigationOptions";
 
 export default class Home2 extends React.Component {
-
-  static navigationOptions = ({ navigation }) => {
-    return NavigationOptions2(navigation, "¿Quienes Iran?");
-  };
 
   render() {
     return (

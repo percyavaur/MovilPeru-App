@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: "25%"
+        marginLeft: "25%",
+        fontFamily: "NeoSans"
     },
     buttonLoginText: {
         color: "white",

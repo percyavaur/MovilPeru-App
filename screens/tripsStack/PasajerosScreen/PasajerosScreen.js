@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: "25%",
+    fontFamily: "NeoSans"
   },
   buttonLoginText: {
     color: "white",
