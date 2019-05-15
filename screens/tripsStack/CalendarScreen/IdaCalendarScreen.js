@@ -30,7 +30,6 @@ export default class IdaCalendarScreen extends React.Component {
         selectedDayTextColor: 'white',
         selectedDayBackgroundColor: '#165c96',
         }}
-        onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
         // Max amount of months allowed to scroll to the past. Default = 50
         pastScrollRange={30}
         // Max amount of months allowed to scroll to the future. Default = 50
