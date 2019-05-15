@@ -19,7 +19,7 @@ export default class LabelText extends React.Component {
                         <Icon name={this.props.icon} color={"#ED1650"} size={RF(2.8)} />
                         <Text
                             style={{
-                                color: "grey",
+                                color: "#52606D",
                                 fontSize: RF(2.4),
                                 marginLeft: RF(1),
                                 fontFamily: "NeoSans"
@@ -28,7 +28,7 @@ export default class LabelText extends React.Component {
                     </View>
                     <View style={{ marginTop: RF(1) }}>
                         <Text style={{
-                            color: "#bababa",
+                            color: "grey",
                             fontSize: RF(2.3),
                             fontFamily: "NeoSans"
                         }}>{this.props.value}</Text>
