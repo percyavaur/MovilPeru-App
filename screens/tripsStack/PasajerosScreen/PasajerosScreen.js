@@ -1,11 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Button } from "native-base";
-import Icon from '@expo/vector-icons';
 import CountText from "../../../components/utils/CountText";
 import RF from "react-native-responsive-fontsize";
-const { width, height } = Dimensions.get('window');
-
 export default class PasajerosScreen extends React.Component {
 
   state = {
