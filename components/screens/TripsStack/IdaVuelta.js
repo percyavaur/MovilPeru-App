@@ -8,7 +8,7 @@ const { width, height } = Dimensions.get('window');
 export default class IdaVuelta extends React.Component {
     render() {
         return (
-            <Content>
+            <Content style={{ marginTop: "2%" }}>
                 <TouchableOpacity onPress={()=>{
                     this.props.navigation.navigate("DestinosScreen");
                 }}>

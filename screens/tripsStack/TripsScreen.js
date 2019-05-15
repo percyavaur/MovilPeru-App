@@ -62,7 +62,7 @@ export default class TripsScreen extends React.Component {
                             </View>
                         </View>
                     </View>
-                    <View style={{ backgroundColor: "white", height: "100%" }}>
+                    <View style={{ backgroundColor: "white", height: "100%"}}>
                         {this.state.selectedTab === 0 ?
                             <IdaVuelta navigation={this.props.navigation} />
                             : null

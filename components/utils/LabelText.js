@@ -7,7 +7,7 @@ const Icon = Ionicons;
 export default class LabelText extends React.Component {
     render() {
         return (
-            <View style={{ width: "100%", marginTop: RF(3) }}>
+            <View style={{ width: "100%", marginVertical: RF(2) }}>
                 <View style={{
                     display: "flex",
                     flexDirection: "column",
@@ -28,8 +28,8 @@ export default class LabelText extends React.Component {
                     </View>
                     <View style={{ marginTop: RF(1) }}>
                         <Text style={{
-                            color: "grey",
-                            fontSize: RF(2.3),
+                            color: "#bababa",
+                            fontSize: RF(2.2),
                             fontFamily: "NeoSans"
                         }}>{this.props.value}</Text>
                     </View>
