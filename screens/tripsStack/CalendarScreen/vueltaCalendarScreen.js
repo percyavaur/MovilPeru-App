@@ -1,37 +1,81 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View, Button, } from 'react-native';
-import {ListItem,Input} from 'native-base';
+import { Image, StyleSheet, Text, Dimensions } from 'react-native';
+import { Content, View, Button } from "native-base";
 import { Header } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import RF from "react-native-responsive-fontsize";
+const { width, height } = Dimensions.get('window');
 export default class VueltaCalendarScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.onDayPress = this.onDayPress.bind(this);
+  }
+  onDayPress(day) {
+    this.setState({
+      selected: day.dateString
+    });
+  }
   render() {
     return (
-      <View >
+      <View style={{  flex: 1 }}>
         <Text>{this.props.count}</Text>
-        <CalendarList
-           // Callback which gets executed when visible months change in scroll view. Default = undefined
-           onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
-           // Max amount of months allowed to scroll to the past. Default = 50
-           pastScrollRange={50}
-           // Max amount of months allowed to scroll to the future. Default = 50
-           futureScrollRange={50}
-           // Enable or disable scrolling of calendar list
-           scrollEnabled={true}
-           // Enable or disable vertical scroll indicator. Default = false
-           showScrollIndicator={true}
-           minDate={'2019-05-13'}
-      />
-      <Calendar
+      <CalendarList
+      horizontal
+      pagingEnabled
       // Collection of dates that have to be marked. Default = {}
-      markedDates={{
-      '2019-05-16': {selected: true, marked: true, selectedColor: 'blue'},
-      '2019-05-17': {marked: true},
-      '2019-05-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-      '2019-05-19': {disabled: true, disableTouchEvent: true}
-  }}
-/>
+      theme={{
+        monthTextColor: '#165c96',
+        arrowColor: '#165c96',
+        todayTextColor: '#33a8e2',
+        selectedDayTextColor: 'white',
+        selectedDayBackgroundColor: '#165c96',
+        }}
+        onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
+        // Max amount of months allowed to scroll to the past. Default = 50
+        pastScrollRange={30}
+        // Max amount of months allowed to scroll to the future. Default = 50
+        futureScrollRange={30}
+        // Enable or disable scrolling of calendar list
+        scrollEnabled={true}
+        // Enable or disable vertical scroll indicator. Default = false
+        showScrollIndicator={true}
+        minDate={new Date()}
+
+        onDayPress={this.onDayPress}
+       
+        markedDates={{
+        [this.state.selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'blue'},
+         '2019-05-17': {marked: true},
+         '2019-05-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+         '2019-05-19': {disabled: true, disableTouchEvent: true},
+         
+        }}
+        />
+        <Button style={styles.Button}>
+                    <Text style={styles.buttonLoginText}>Continuar</Text>
+                </Button>
       </View>
     );
 
   }
 }
+const styles = StyleSheet.create({
+  Button: {
+      backgroundColor: "#69A3AF",
+      width: "50%",
+      height: height * 0.065,
+      marginTop: "1%",
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: "25%",
+      marginVertical: "10%"
+  },
+  buttonLoginText: {
+    color: "white",
+    fontSize: RF(2.8),
+    bottom: "1%"
+}
+
+});
