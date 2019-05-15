@@ -46,7 +46,7 @@ export default class DrawerContent extends Component {
         const currentUser = this.props.currentUser._55 === null ? null : this.props.currentUser._55.username;
         return (
             <Container>
-                <View style={{ backgroundColor: "#f7c600", height: drawerHeaderHeight }}>
+                <View style={{ backgroundColor: "#1B0088", height: drawerHeaderHeight }}>
                 </View>
                 <Content style={{ flex: 1, height: "100%" }}>
                     {currentUser ? null :

@@ -39,7 +39,7 @@ export default class TripsScreen extends React.Component {
                                     style={
                                         [styles.activeTabButton, {
                                             backgroundColor: selectedTab === 0 ? "#FFFFFF" : "#FFFFFF80",
-                                            borderStartColor: selectedTab === 0 ? "#f7c600" : "#FFFFFF80",
+                                            borderStartColor: selectedTab === 0 ? "#ED1650" : "#FFFFFF80",
                                         }]
                                     }
                                 ><Text style={{ color: "#52606D" }}>Ida y Vuelta</Text></TouchableHighlight>
@@ -49,7 +49,7 @@ export default class TripsScreen extends React.Component {
                                     style={
                                         [styles.activeTabButton, {
                                             backgroundColor: selectedTab === 1 ? "#FFFFFF" : "#FFFFFF80",
-                                            borderStartColor: selectedTab === 1 ? "#f7c600" : "#FFFFFF80",
+                                            borderStartColor: selectedTab === 1 ? "#ED1650" : "#FFFFFF80",
                                         }]
                                     }
                                 ><Text style={{ color: "#52606D" }}>Solo Ida</Text></TouchableHighlight>

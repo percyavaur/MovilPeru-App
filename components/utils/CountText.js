@@ -47,7 +47,8 @@ export default class CountText extends React.Component {
                                 marginHorizontal: 20,
                                 marginTop: "5%",
                             }}>
-                            <Icon.Entypo name={"plus"} size={RF(2.5)} style={{marginLeft:RF(2), marginTop:RF(0.5) }} color={"#f7c600"} />
+                            <Icon.Entypo name={"plus"} size={RF(2.5)} style={{marginLeft:RF(2), marginTop:RF(0.5) }} 
+                            color={"#ED1650"} />
                         </TouchableOpacity>
                     </View>
                 </View>

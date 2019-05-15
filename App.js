@@ -10,7 +10,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <StatusBar
-          barStyle="dark-content"
+          barStyle="light-content"
         />
         <AppNavigator />
       </Provider>

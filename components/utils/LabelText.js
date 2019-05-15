@@ -16,7 +16,7 @@ export default class LabelText extends React.Component {
                     borderBottomColor: "grey"
                 }}>
                     <View style={{ display: "flex", flexDirection: "row" }}>
-                        <Icon name={this.props.icon} color={"#f7c600"} size={RF(2.8)} />
+                        <Icon name={this.props.icon} color={"#ED1650"} size={RF(2.8)} />
                         <Text
                             style={{
                                 color: "grey",

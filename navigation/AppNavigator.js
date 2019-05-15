@@ -32,8 +32,8 @@ export default class AppNavigator extends Component {
       tabBarLabel: "Home",
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "#52606D" : "#855425"}
-          size={30}
+          color={focused ? "#ED1650" : "white"}
+          size={25}
           name="md-home"
         />
       )
@@ -47,8 +47,8 @@ export default class AppNavigator extends Component {
       tabBarLabel: "Test",
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "#52606D" : "#855425"}
-          size={30}
+          color={focused ? "#ED1650" : "white"}
+          size={25}
           name="ios-apps"
         />
       )
@@ -66,9 +66,9 @@ export default class AppNavigator extends Component {
       tabBarLabel: "Trips",
       tabBarIcon: ({ focused }) => (
         <Icon
-          color={focused ? "#52606D" : "#855425"}
-          size={30}
-          name="ios-airplane"
+          color={focused ? "#ED1650" : "white"}
+          size={25}
+          name="md-bus"
         />
       )
     }
@@ -88,10 +88,10 @@ export default class AppNavigator extends Component {
         tabBarOptions: {
           showIcon: true,
           style: {
-            backgroundColor: "#f7c600",
+            backgroundColor: "#1B0088",
           },
-          activeTintColor: "#52606D",
-          inactiveTintColor: "#855425",
+          activeTintColor: "#ED1650",
+          inactiveTintColor: "white",
         },
       },
     );

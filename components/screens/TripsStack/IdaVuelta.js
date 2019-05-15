@@ -67,7 +67,7 @@ export default class IdaVuelta extends React.Component {
 
 const styles = StyleSheet.create({
     Button: {
-        backgroundColor: "#69A3AF",
+        backgroundColor: "#ED1650",
         width: "50%",
         height: height * 0.065,
         marginTop: "10%",

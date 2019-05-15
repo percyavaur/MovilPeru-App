@@ -10,40 +10,42 @@ export const NavigationOptions = (navigation) => {
         style={{ paddingRight: 10 }}
         onPress={() => navigation.openDrawer()}
         name="md-menu"
-        color="#16161E"
-        size={30}
+        color="white"
+        size={25}
       />
     ),
     headerTitle: "Movil Peru",
     headerLeft: (<View />),
     headerTitleStyle: {
       textAlign: "center",
-      flex: 1
+      flex: 1,
+      color: "white"
     },
     headerStyle: {
-      backgroundColor: "#f7c600",
+      backgroundColor: "#1B0088",
     }
   };
 };
 
-export const NavigationOptions2 = ({navigation}) => {
+export const NavigationOptions2 = ({ navigation }) => {
   return {
     headerRight: (
       <Icon
         style={{ paddingRight: 10 }}
         onPress={() => navigation.openDrawer()}
         name="md-menu"
-        color="#16161E"
-        size={30}
+        color="white"
+        size={25}
       />
     ),
     headerTitle: "Movil Peru",
     headerTitleStyle: {
       textAlign: "center",
-      flex: 1
+      flex: 1,
+      color: "white"
     },
     headerStyle: {
-      backgroundColor: "#f7c600",
+      backgroundColor: "#1B0088",
       textAlign: 'center',
     }
   };
