@@ -1,17 +1,16 @@
 import React from "react"
 import { Content, View, Button } from "native-base";
 import LabelText from "../../utils/LabelText";
-import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
-// import Icon from '@expo/vector-icons';
-
-export default class SoloIda extends React.Component {
+// import Icon from '@expo/vector-icons'
+export default class IdaVuelta extends React.Component {
     render() {
         return (
             <Content style={{ marginTop: "2%" }}>
                 <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("DestinoScreen2");
+                    this.props.navigation.navigate("DestinosScreen");
                 }}>
                     <LabelText
                         icon="md-pin"
@@ -28,8 +27,8 @@ export default class SoloIda extends React.Component {
                         value={"0 Adulto, 0 Niños"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("TripScreen1");
+                <TouchableOpacity  onPress={()=>{
+                    this.props.navigation.navigate("DestinoScreen2");
                 }}>
                     <LabelText
                         icon="md-bus"
@@ -37,13 +36,22 @@ export default class SoloIda extends React.Component {
                         value={"Ingresar una ruta"}
                     />
                 </TouchableOpacity>
-                <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "4%" }}>
-                    <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate("CalendarScreen1");
+                <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "5%" }}>
+                    <TouchableOpacity  onPress={()=>{
+                    this.props.navigation.navigate("IdaCalendarScreen");
                 }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"
+                            value={"DD/MM/AA"}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>{
+                    this.props.navigation.navigate("VueltaCalendarScreen");
+                }}>
+                        <LabelText
+                            icon="ios-calendar"
+                            label="Vuelta"
                             value={"DD/MM/AA"}
                         />
                     </TouchableOpacity>

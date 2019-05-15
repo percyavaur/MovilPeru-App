@@ -3,7 +3,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 import { View } from "react-native";
 
 
-export const NavigationOptions = (navigation) => {
+export const NavigationOptions = (navigation, Title) => {
   return {
     headerRight: (
       <Icon
@@ -14,7 +14,7 @@ export const NavigationOptions = (navigation) => {
         size={25}
       />
     ),
-    headerTitle: "Movil Peru",
+    headerTitle: Title ? Title : "Movil Peru",
     headerTintColor: 'white',
     headerLeft: (<View />),
     headerTitleStyle: {
@@ -29,7 +29,7 @@ export const NavigationOptions = (navigation) => {
   };
 };
 
-export const NavigationOptions2 = ({navigation}) => {
+export const NavigationOptions2 = (navigation, Title) => {
   return {
     headerRight: (
       <Icon
@@ -40,7 +40,7 @@ export const NavigationOptions2 = ({navigation}) => {
         size={25}
       />
     ),
-    headerTitle: "Movil Peru",
+    headerTitle: Title ? Title : "Movil Peru",
     headerTintColor: 'white',
     headerTitleStyle: {
       textAlign: "center",

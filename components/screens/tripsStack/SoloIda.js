@@ -5,7 +5,8 @@ import { TouchableOpacity, Text, StyleSheet, Dimensions, TouchableWithoutFeedbac
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 // import Icon from '@expo/vector-icons'
-export default class IdaVuelta extends React.Component {
+
+export default class SoloIda extends React.Component {
     render() {
         return (
             <Content style={{ marginTop: "2%" }}>
@@ -36,22 +37,13 @@ export default class IdaVuelta extends React.Component {
                         value={"Ingresar una ruta"}
                     />
                 </TouchableOpacity>
-                <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "4%" }}>
+                <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "5%" }}>
                     <TouchableOpacity  onPress={()=>{
                     this.props.navigation.navigate("IdaCalendarScreen");
                 }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"
-                            value={"DD/MM/AA"}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity  onPress={()=>{
-                    this.props.navigation.navigate("VueltaCalendarScreen");
-                }}>
-                        <LabelText
-                            icon="ios-calendar"
-                            label="Vuelta"
                             value={"DD/MM/AA"}
                         />
                     </TouchableOpacity>

@@ -18,13 +18,9 @@ export default class App extends React.Component {
   };
   
   async _loadAssetsAsync() {
-
     await Expo.Font.loadAsync({
       NeoSans: require("./assets/fonts/NeoSans.ttf"),
     });
-    const fontAssets = cacheFonts([Ionicons.font]);
-
-    await Promise.all([...fontAssets]);
   }
 
   render() {

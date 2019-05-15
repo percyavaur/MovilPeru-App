@@ -3,7 +3,13 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Button } from "native-base";
 import CountText from "../../../components/utils/CountText";
 import RF from "react-native-responsive-fontsize";
+import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
+
 export default class PasajerosScreen extends React.Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return NavigationOptions2(navigation, "Pasajeros");
+  };
 
   state = {
     adultos: 1,
