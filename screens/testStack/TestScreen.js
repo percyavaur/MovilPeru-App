@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { NavigationOptions } from "../../navigation/NavigationOptions";
+import TestAlert from "../../components/alerts/TestAlert";
 
 export default class HomeScreen extends React.Component {
 
@@ -12,8 +13,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require("../../assets/images/robot-dev.png")} />
-        <Text> TEST Screen </Text>
+        <TestAlert></TestAlert>
       </View>
     );
   }
