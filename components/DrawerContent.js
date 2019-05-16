@@ -68,7 +68,8 @@ export default class DrawerContent extends Component {
                     {currentUser ?
                         <ListItem icon>
                             <Left>
-                                <Button style={{ backgroundColor: "#25d366" }}>
+                                <Button style={{ backgroundColor: "#25d366" }}
+                                onPress={()=>{this.props.navigation.navigate("Profile")}}>
                                     <Icon active name="ios-contact" />
                                 </Button>
                             </Left>

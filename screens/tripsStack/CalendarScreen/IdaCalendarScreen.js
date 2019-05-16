@@ -43,7 +43,7 @@ export default class IdaCalendarScreen extends React.Component {
           onChange={(date) => { this.handleChange("date", date) }}
         />
         <View style={{
-          height: !date ? "40%" : "20%"
+          height: !date ? "40%" : "25%"
         }}>
           <Button style={styles.Button}>
             <Text style={styles.buttonLoginText}>Continuar</Text>

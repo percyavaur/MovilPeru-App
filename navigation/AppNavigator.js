@@ -100,7 +100,8 @@ export default class AppNavigator extends Component {
       {
         DashboardTabNavigator: DashboardTabNavigator,
         LoginModal: { screen: LoginRedux },
-        RegisterModal: { screen: RegisterRedux }
+        RegisterModal: { screen: RegisterRedux },
+        Profile: {screen: screen.ProfileScreen}
       },
       {
         mode: 'modal',
@@ -114,9 +115,6 @@ export default class AppNavigator extends Component {
     }, {
         contentComponent: DrawerRedux,
         drawerPosition: "right",
-        navigationOptions: {
-          drawerLockMode: 'locked-closed'
-        }
       });
 
     const AppSwitchNavigator = createSwitchNavigator({

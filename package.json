@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "expo": "^32.0.0",
+    "galio-framework": "^0.5.1",
     "native-base": "^2.12.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
@@ -21,7 +22,7 @@
     "react-native-responsive-fontsize": "^0.1.8",
     "react-native-scl-alert": "^1.2.1",
     "react-native-segmented-control-tab": "^3.4.0",
-    "react-navigation": "^3.0.9",
+    "react-navigation": "^3.9.2",
     "react-navigation-transitions": "^1.0.10",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1"

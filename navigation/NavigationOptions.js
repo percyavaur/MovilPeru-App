@@ -21,14 +21,14 @@ export const NavigationOptions = (navigation, Title) => {
       textAlign: "center",
       flex: 1,
       color: "white",
-      fontFamily: "NeoSans"
     },
     headerStyle: {
       backgroundColor: "#1B0088",
       elevation: 0,
       shadowOpacity: 0,
       borderBottomWidth: 0,
-    }
+    },
+    headerBackTitle: null,
   };
 };
 
@@ -49,7 +49,6 @@ export const NavigationOptions2 = (navigation, Title) => {
       textAlign: "center",
       flex: 1,
       color: "white",
-      fontFamily: "NeoSans"
     },
     headerStyle: {
       backgroundColor: "#1B0088",
@@ -57,6 +56,7 @@ export const NavigationOptions2 = (navigation, Title) => {
       elevation: 0,
       shadowOpacity: 0,
       borderBottomWidth: 0,
-    }
+    },
+    headerBackTitle: null,
   };
 };
