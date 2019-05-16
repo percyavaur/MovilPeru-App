@@ -43,7 +43,7 @@ export default class VueltaCalendarScreen extends React.Component {
           onChange={(date) => { this.handleChange("date", date) }}
         />
         <View style={{
-          height: !date ? "40%" : "25%"
+          height: !date ? "40%" : "20%"
         }}>
           <Button style={styles.Button}>
             <Text style={styles.buttonLoginText}>Continuar</Text>
