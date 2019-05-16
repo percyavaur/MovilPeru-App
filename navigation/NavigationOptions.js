@@ -25,6 +25,9 @@ export const NavigationOptions = (navigation, Title) => {
     },
     headerStyle: {
       backgroundColor: "#1B0088",
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
     }
   };
 };
@@ -51,6 +54,9 @@ export const NavigationOptions2 = (navigation, Title) => {
     headerStyle: {
       backgroundColor: "#1B0088",
       textAlign: 'center',
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,
     }
   };
 };

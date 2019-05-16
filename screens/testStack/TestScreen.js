@@ -13,7 +13,6 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TestAlert></TestAlert>
       </View>
     );
   }

@@ -6,7 +6,8 @@ import RF from "react-native-responsive-fontsize";
 import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
 import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
 import { BlurView } from 'expo';
-import Toast from 'react-native-easy-toast';
+import TestAlert from "../../components/alerts/TestAlert";
+import Toast from 'react-native-easy-toast'
 const { width, height } = Dimensions.get('window');
 
 const headerHeight =
@@ -22,6 +23,7 @@ export default class LoginModal extends Component {
     password: "",
     passwordError: false,
     loading: false,
+    show: false
   }
 
   handleChange(name, value) {
@@ -52,26 +54,31 @@ export default class LoginModal extends Component {
       },
       body: JSON.stringify({ username: username, password: password })
     }).then(response => { return response.json() })
-      .then(data => { data.jwt ? _SetAsyncStorage("jwt", data.jwt) : null });
-    this.confirmAccess();
+      .then(
+        (data) => {
+          data.success
+            ? this.confirmAccess(data.jwt)
+            : this.cancelAccess();
+        });
   }
 
-  confirmAccess() {
-    _GetAsyncStorage("jwt").then(jwt => {
-      if (jwt) {
-        this.props.dispatch({ type: 'LOGIN', jwt });
-        this.props.navigation.navigate("Trips");
-      } else {
-        this.refs.toast.show('¡Usuario o contraseña incorrecto!', 1000);
-      }
+  confirmAccess(jwt) {
+    _SetAsyncStorage("jwt", jwt).then(() => {
+      this.props.dispatch({ type: 'LOGIN', jwt });
+      this.props.navigation.navigate("Trips");
     }).then(() => {
       this.setState({ loading: false });
     });
   }
 
+  cancelAccess() {
+    this.setState({ loading: false, show: true });
+    this.refs.toast.show('¡Usuario o contraseña incorrecto!', 1000);
+  }
+
   render() {
 
-    const { usernameError, passwordError, username, password } = this.state;
+    const { usernameError, passwordError, username, password, show } = this.state;
 
     return (
       <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "white" }} behavior="padding" enabled>
@@ -126,6 +133,13 @@ export default class LoginModal extends Component {
             <ActivityIndicator size='large' style={styles.loading} />
           </BlurView>
         }
+        <TestAlert
+          theme="danger"
+          show={show}
+          title="Test"
+          content="Test"
+          onClose={() => { this.setState({ show: false }) }}
+        />
       </KeyboardAvoidingView >
     );
   }
