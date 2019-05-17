@@ -17,6 +17,12 @@ const headerHeight =
 
 export default class LoginModal extends Component {
 
+  static navigationOptions = {
+    header: {
+      visible: false,
+    }
+  };
+
   state = {
     username: "",
     usernameError: false,
@@ -87,7 +93,7 @@ export default class LoginModal extends Component {
         />
         <TouchableOpacity
           style={{ top: headerHeight, height: "8%", width: "17%" }}
-          onPress={() => { this.props.navigation.goBack() }}
+          onPress={() => { this.props.navigation.popToTop(); }}
         >
           <Icon active name="md-arrow-round-back" style={{ left: "20%" }} />
         </TouchableOpacity>

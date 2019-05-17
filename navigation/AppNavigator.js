@@ -22,6 +22,26 @@ const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(Drawe
 export default class AppNavigator extends Component {
 
   render() {
+
+    const TripsStack = createStackNavigator({
+      Trips: { screen: screen.TripsScreen },
+      DestinosScreen: { screen: screen.DestinosScreen },
+      PasajerosScreen: { screen: screen.PasajerosScreen },
+      IdaCalendarScreen: { screen: screen.IdaCalendarScreen },
+      VueltaCalendarScreen: { screen: screen.VueltaCalendarScreen }
+    });
+
+    TripsStack.navigationOptions = {
+      tabBarLabel: "Trips",
+      tabBarIcon: ({ focused }) => (
+        <Icon
+          color={focused ? "#ED1650" : "white"}
+          size={25}
+          name="md-bus"
+        />
+      )
+    }
+
     const HomeStack = createStackNavigator({
       Home: { screen: screen.HomeScreen },
       Home2: { screen: Home2Redux, navigationOptions: NavigationOptions2 },
@@ -54,24 +74,36 @@ export default class AppNavigator extends Component {
       )
     }
 
-    const TripsStack = createStackNavigator({
-      Trips: { screen: screen.TripsScreen },
-      DestinosScreen:{screen: screen.DestinosScreen},
-      PasajerosScreen:{screen: screen.PasajerosScreen},
-      IdaCalendarScreen:{screen: screen.IdaCalendarScreen},
-      VueltaCalendarScreen:{screen: screen.VueltaCalendarScreen}
-    });
+    const ModalStack = createStackNavigator({
+      LoginModal: { screen: LoginRedux },
+      RegisterModal: { screen: RegisterRedux },
+    },
+      {
+        mode: 'modal',
+        headerMode: 'none',
+      });
 
-    TripsStack.navigationOptions = {
-      tabBarLabel: "Trips",
-      tabBarIcon: ({ focused }) => (
-        <Icon
-          color={focused ? "#ED1650" : "white"}
-          size={25}
-          name="md-bus"
-        />
-      )
+    ModalStack.navigationOptions = {
+      header: null
     }
+
+    const ProfileStack = createStackNavigator({
+      Profile: { screen: screen.ProfileScreen }
+    }, {
+        headerMode: 'none',
+      });
+
+    ProfileStack.navigationOptions = {
+      headerStyle: {
+        backgroundColor: "#1B0088",
+        textAlign: 'center',
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      },
+      headerTintColor: 'white',
+    }
+
 
     const DashboardTabNavigator = createBottomTabNavigator(
       {
@@ -99,19 +131,16 @@ export default class AppNavigator extends Component {
     const DashboardStackNavigator = createStackNavigator(
       {
         DashboardTabNavigator: DashboardTabNavigator,
-        LoginModal: { screen: LoginRedux },
-        RegisterModal: { screen: RegisterRedux },
-        Profile: {screen: screen.ProfileScreen}
-      },
-      {
-        mode: 'modal',
-        headerMode: 'none',
+        ModalStack: ModalStack,
+        ProfileStack: ProfileStack
       });
 
     const AppDrawerNavigator = createDrawerNavigator({
       Dashboard: {
         screen: DashboardStackNavigator
       },
+      Profile: { screen: screen.ProfileScreen }
+      ,
     }, {
         contentComponent: DrawerRedux,
         drawerPosition: "right",

@@ -9,4 +9,4 @@ export {default as DestinosScreen} from "./tripsStack/DestinosScreen/DestinosScr
 export {default as PasajerosScreen} from "./tripsStack/PasajerosScreen/PasajerosScreen";
 export {default as IdaCalendarScreen} from "./tripsStack/CalendarScreen/IdaCalendarScreen";
 export {default as VueltaCalendarScreen} from "./tripsStack/CalendarScreen/vueltaCalendarScreen";
-export {default as ProfileScreen} from "./profile/Profile";
+export {default as ProfileScreen} from "./profile/ProfileScreen";
