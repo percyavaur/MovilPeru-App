@@ -88,14 +88,14 @@ export default class ProfileScreen extends React.Component {
                                 </View>
                             </View>
                         </View>
-                        <View style={{
-                            backgroundColor: "white",
-                            height: 400,
-                            borderRadius: 15,
-                            marginHorizontal: "5%",
-                            marginTop: width * 0.1,
-                        }}>
-                        </View>
+                    </View>
+                    <View style={{
+                        backgroundColor: "white",
+                        height: 400,
+                        borderRadius: 15,
+                        marginHorizontal: "5%",
+                        marginTop: width * 0.1,
+                    }}>
                     </View>
                 </View>
             </ScrollView >
