@@ -19,9 +19,13 @@ export function counter(state, action) {
 };
 
 export async function currentUser(state, action) {
+
+  var jwt = "";
+  var user = "";
+
   if (typeof state === "undefined") {
-    const jwt = await _GetAsyncStorage("jwt");
-    const user = await fetchValidateToken(jwt)
+    jwt = await _GetAsyncStorage("jwt");
+    user = await fetchValidateToken(jwt)
       .then((response) => { return response.json() })
       .then(userJson => { return userJson.data });
     state = user ? user : null;
@@ -30,7 +34,7 @@ export async function currentUser(state, action) {
     switch (action.type) {
 
       case 'LOGIN':
-        const user = await fetchValidateToken(action.jwt)
+        user = await fetchValidateToken(action.jwt)
           .then((response) => { return response.json() })
           .then(userJson => { return userJson.data });
         state = user ? user : null;
@@ -40,6 +44,15 @@ export async function currentUser(state, action) {
       case 'LOGOUT':
         _RemoveStorage("jwt");
         state = null;
+        return state;
+        break;
+
+      case 'UPDATE':
+        jwt = await _GetAsyncStorage("jwt");
+        user = await fetchValidateToken(jwt)
+          .then((response) => { return response.json() })
+          .then(userJson => { return userJson.data });
+        state = user ? user : null;
         return state;
         break;
 

@@ -4,6 +4,10 @@ import { Button } from "native-base"
 import RF from "react-native-responsive-fontsize";
 import UserProfile from "../../components/screens/profile/UserProfile";
 import InputText from "../../components/utils/InputText";
+import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
+import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
+import { _RemoveStorage } from "../../utils/asyncStorage/removeAsyncStorage";
+
 const { width, height } = Dimensions.get('window');
 
 export default class ProfileScreen extends React.Component {
@@ -17,8 +21,9 @@ export default class ProfileScreen extends React.Component {
         editable: false,
     }
 
-    componentDidMount() {
-        this.props.currentUser._55 ? this.propsToState(this.props.currentUser._55) : null;
+    componentDidMount = async () => {
+        const currentUser = await this.props.currentUser
+        currentUser ? this.propsToState(currentUser) : null;
     }
 
     propsToState(data) {
@@ -35,31 +40,49 @@ export default class ProfileScreen extends React.Component {
         this.setState({ [name]: value })
     }
 
-    stateToFetch() {
-
+    updateUser() {
+        this.dataToFetch();
     }
 
-    fetchRegisterValidation = async (firstName, lastName, username, password) => {
-        await fetch('http://35.236.27.209/php_api_jwt/api/controller/create_user.php', {
+    dataToFetch = async () => {
+        const { id, firstname, lastname, username } = this.state;
+        const jwt = await _GetAsyncStorage("jwt");
+        this.fetchUpdateUser(id, firstname, lastname, username, jwt);
+    }
+
+    fetchUpdateUser = async (id, firstname, lastname, username, jwt) => {
+        await fetch('http://35.236.27.209/php_api_jwt/api/controller/update_user.php', {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ firstname: firstName, lastname: lastName, username: username, password: password })
+            body: JSON.stringify({
+                id: id,
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                jwt: jwt
+            })
         }).then(response => { return response.json() })
             .then(data => {
-                if (data.success) {
-                    this.refs.accept.show(data.message, 1000, () => {
-                        this.setState({ loading: false });
-                        this.props.navigation.navigate("LoginModal");
-                    });
-                } else {
-                    this.refs.warning.show(data.message, 3000);
-                    this.setState({ loading: false });
-                }
+                this.updateJWT(data.jwt);
             });
     }
+
+    updateJWT(jwt) {
+        _RemoveStorage("jwt");
+        _SetAsyncStorage("jwt", jwt).then(
+            this.props.dispatch({ type: 'UPDATE' })
+        );
+    }
+
+    onCancelUpdate = async () => {
+        const currentUser = await this.props.currentUser
+        this.setState({ editable: false });
+        currentUser ? this.propsToState(currentUser) : null;
+    }
+
 
     render() {
 
@@ -80,12 +103,34 @@ export default class ProfileScreen extends React.Component {
                             position: "relative",
                         }}>
                             <Text style={styles.tittleContainerHeader}>My Account</Text>
-                            <Button style={styles.buttonContainerHeader}
-                                onPress={() => {
-                                    this.setState({ editable: !editable })
-                                }}>
-                                <Text style={{ color: "white" }}>Edit</Text>
-                            </Button>
+                            {
+                                !editable
+                                    ?
+                                    <Button style={styles.buttonContainerHeader}
+                                        onPress={() => {
+                                            this.setState({ editable: true })
+                                        }}>
+                                        <Text style={{ color: "white" }}>Edit</Text>
+                                    </Button>
+                                    :
+                                    <View style={styles.containerUpdate}>
+                                        <Button
+                                            onPress={() => {
+                                                this.updateUser();
+                                            }}>
+                                            <Text style={{ color: "white" }}>Save</Text>
+                                        </Button>
+
+                                        <Button
+                                            onPress={() => {
+                                                this.onCancelUpdate();
+                                            }}>
+                                            <Text style={{ color: "white" }}>Cancel</Text>
+                                        </Button>
+                                    </View>
+                            }
+
+
                         </View>
                     </View>
                     <View style={{ display: "flex", flexDirection: "column" }}>
@@ -245,5 +290,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 7,
         height: width * 0.1,
+    },
+    containerUpdate: {
+        display: "flex",
+        flexDirection: "row",
+        position: "absolute",
+        right: width * 0.07
     }
 });
