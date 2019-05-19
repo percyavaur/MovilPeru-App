@@ -122,8 +122,9 @@ export default class UserProfile extends React.Component {
                                 color: "#38325d",
                                 fontFamily: "NeoSans",
                                 fontSize: RF(2.7),
-                                marginVertical: RF(2)
-                            }}>Percy Avalos, 22</Text>
+                                marginVertical: RF(2),
+                                fontWeight: "bold"
+                            }}>{this.props.firstname} {this.props.lastname}</Text>
                             <Text style={{
                                 color: "#38325d",
                                 fontFamily: "NeoSans",

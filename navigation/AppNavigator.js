@@ -18,6 +18,7 @@ const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
 const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
 const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
 const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
+const ProfileRedux = connect(state => ({ currentUser: state.currentUser }))(screen.ProfileScreen);
 
 export default class AppNavigator extends Component {
 
@@ -88,7 +89,7 @@ export default class AppNavigator extends Component {
     }
 
     const ProfileStack = createStackNavigator({
-      Profile: { screen: screen.ProfileScreen }
+      Profile: { screen: ProfileRedux }
     }, {
         headerMode: 'none',
       });

@@ -11,14 +11,19 @@ export default class InputText extends Component {
     }
 
     render() {
+
+        const { label, placeholder, value, editable } = this.props
+
         return (
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>{this.props.label}</Text>
+                <Text style={styles.inputLabel}>{label}</Text>
                 <TextInput
-                    placeholder={this.props.placeholder}
-                    style={styles.input}
-                    value={this.props.value}
+                    placeholder={placeholder}
+                    style={[styles.input, { color: editable ? "black" : "#b9bbd1" }]}
+                    value={value}
                     onChangeText={(value) => { this.handleChange(value) }}
+                    editable={editable}
+                    selectTextOnFocus={editable}
                 />
             </View>
         )
@@ -28,7 +33,7 @@ export default class InputText extends Component {
 const styles = StyleSheet.create({
     inputContainer: {
         marginHorizontal: " 7%",
-        marginVertical: width*0.04
+        marginVertical: width * 0.04
     },
     inputLabel: {
         fontWeight: "bold",
