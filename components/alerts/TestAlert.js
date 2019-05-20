@@ -20,8 +20,8 @@ export default class TestAlert extends React.Component {
     }
 
     handleClose = () => {
-        this.props.onClose(false)
-        this.setState({ show: false })
+        this.props.onClose(false);
+        this.setState({ show: false });
     }
 
     render() {
@@ -36,6 +36,7 @@ export default class TestAlert extends React.Component {
                     title={title}
                     subtitle={content}
                     overlayStyle={{ height: "150%" }}
+                    subtitleContainerStyle={{}}
                     onRequestClose={() => { }}
                 >
                     <SCLAlertButton theme={theme} onPress={this.handleClose}>Ok</SCLAlertButton>

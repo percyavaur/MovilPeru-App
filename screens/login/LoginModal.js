@@ -29,7 +29,10 @@ export default class LoginModal extends Component {
     password: "",
     passwordError: false,
     loading: false,
-    show: false
+    alertShow: false,
+    alertTheme: "danger",
+    alertTitle: "",
+    alertContent: "",
   }
 
   handleChange(name, value) {
@@ -44,7 +47,13 @@ export default class LoginModal extends Component {
     });
 
     if (!username || !password) {
-      this.refs.toast.show('¡Por favor, completa los campos!', 1000);
+      this.setState({
+        loading: false,
+        alertShow: true,
+        alertTheme: "danger",
+        alertTitle: "Incorrecto",
+        alertContent: "¡Complete todos los campos!"
+      });
     } else {
       this.setState({ loading: true });
       this.fetchLoginValidation(username, password);
@@ -64,7 +73,7 @@ export default class LoginModal extends Component {
         (data) => {
           data.success
             ? this.confirmAccess(data.jwt)
-            : this.cancelAccess();
+            : this.deniedAccess(data.message);
         });
   }
 
@@ -72,19 +81,23 @@ export default class LoginModal extends Component {
     _SetAsyncStorage("jwt", jwt).then(() => {
       this.props.dispatch({ type: 'LOGIN', jwt });
       this.props.navigation.navigate("Trips");
-    }).then(() => {
-      this.setState({ loading: false });
-    });
+    }).then(() => { this.setState({ loading: false }); });
   }
 
-  cancelAccess() {
-    this.setState({ loading: false, show: true });
-    this.refs.toast.show('¡Usuario o contraseña incorrecto!', 1000);
+  deniedAccess(message) {
+    this.setState({
+      loading: false,
+      alertShow: true,
+      alertTheme: "danger",
+      alertTitle: "Incorrecto",
+      alertContent: message
+    });
   }
 
   render() {
 
-    const { usernameError, passwordError, username, password, show } = this.state;
+    const { usernameError, passwordError, username, password } = this.state;
+    const { alertShow, alertTheme, alertTitle, alertContent } = this.state;
 
     return (
       <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "white" }} behavior="padding" enabled>
@@ -140,11 +153,11 @@ export default class LoginModal extends Component {
           </BlurView>
         }
         <TestAlert
-          theme="danger"
-          show={show}
-          title="Test"
-          content="Test"
-          onClose={() => { this.setState({ show: false }) }}
+          theme={alertTheme}
+          show={alertShow}
+          title={alertTitle}
+          content={alertContent}
+          onClose={() => { this.handleChange("alertShow", false) }}
         />
       </KeyboardAvoidingView >
     );
