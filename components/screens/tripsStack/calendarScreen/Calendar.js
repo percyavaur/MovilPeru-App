@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-export default class IdaCalendarScreen extends React.Component {
+export default class CalendarScreen extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ export default class IdaCalendarScreen extends React.Component {
         const { selected } = this.state;
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1}}>
                 <Calendar
                     horizontal
                     pagingEnabled

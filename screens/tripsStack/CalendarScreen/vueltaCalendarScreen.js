@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Button } from "native-base";
 import Calendar from "../../../components/screens/tripsStack/calendarScreen/Calendar";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 
+const { width, height } = Dimensions.get('window');
 const mySpanishDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 const mySpanishMonths = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 export default class VueltaCalendarScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
-    return NavigationOptions2(navigation, "Fecha de Vuelta");
+    return NavigationOptions2(navigation, "Fecha de Regreso");
   };
 
   state = {
@@ -39,12 +40,12 @@ export default class VueltaCalendarScreen extends React.Component {
           </View>
           : null
         }
-        <Calendar
-          onChange={(date) => { this.handleChange("date", date) }}
-        />
-        <View style={{
-          height: !date ? "40%" : "20%"
-        }}>
+        <View style={{ height: 365 }}>
+          <Calendar
+            onChange={(date) => { this.handleChange("date", date) }}
+          />
+        </View>
+        <View>
           <Button style={styles.Button}>
             <Text style={styles.buttonLoginText}>Continuar</Text>
           </Button>
