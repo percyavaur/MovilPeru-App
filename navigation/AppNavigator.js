@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import Icon from '@expo/vector-icons/Ionicons';
+import Icon from '@expo/vector-icons';
 import {
   createSwitchNavigator,
   createAppContainer,
@@ -9,12 +9,9 @@ import {
   createStackNavigator
 } from 'react-navigation';
 import DrawerContent from "../components/DrawerContent";
-import { NavigationOptions2 } from "./NavigationOptions";
 import * as screen from "../screens";
 import { NativeViewGestureHandler } from "react-native-gesture-handler";
 
-const Home2Redux = connect(state => ({ count: state.count }))(screen.Home2);
-const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
 const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
 const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
 const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
@@ -35,7 +32,7 @@ export default class AppNavigator extends Component {
     TripsStack.navigationOptions = {
       tabBarLabel: "Trips",
       tabBarIcon: ({ focused }) => (
-        <Icon
+        <Icon.Ionicons
           color={focused ? "#ED1650" : "white"}
           size={25}
           name="md-bus"
@@ -45,14 +42,12 @@ export default class AppNavigator extends Component {
 
     const HomeStack = createStackNavigator({
       Home: { screen: screen.HomeScreen },
-      Home2: { screen: Home2Redux, navigationOptions: NavigationOptions2 },
-      Home3: { screen: Home3Redux, navigationOptions: NavigationOptions2 }
     });
 
     HomeStack.navigationOptions = {
       tabBarLabel: "Home",
       tabBarIcon: ({ focused }) => (
-        <Icon
+        <Icon.Ionicons
           color={focused ? "#ED1650" : "white"}
           size={25}
           name="md-home"
@@ -60,17 +55,17 @@ export default class AppNavigator extends Component {
       )
     }
 
-    const TestStack = createStackNavigator({
-      Test: { screen: screen.TestScreen }
+    const GraphStack = createStackNavigator({
+      Graph: { screen: screen.GraphScreen }
     });
 
-    TestStack.navigationOptions = {
-      tabBarLabel: "Test",
+    GraphStack.navigationOptions = {
+      tabBarLabel: "Graph",
       tabBarIcon: ({ focused }) => (
-        <Icon
+        <Icon.Foundation
           color={focused ? "#ED1650" : "white"}
           size={25}
-          name="ios-apps"
+          name="graph-pie"
         />
       )
     }
@@ -108,9 +103,9 @@ export default class AppNavigator extends Component {
 
     const DashboardTabNavigator = createBottomTabNavigator(
       {
+        Graph: GraphStack,
         Trips: TripsStack,
         Home: HomeStack,
-        Test: TestStack,
       }, {
         initialRouteName: "Trips",
         navigationOptions: () => {
