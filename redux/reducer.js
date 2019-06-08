@@ -1,23 +1,6 @@
 import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
 
-export function counter(state, action) {
-  if (typeof state === "undefined") {
-    return 0;
-  } else {
-    switch (action.type) {
-      case 'INCREMENT':
-        return state + 1;
-        break;
-      case 'DECREMENT':
-        return state - 1;
-        break;
-      default:
-        return state;
-    }
-  }
-};
-
 export async function currentUser(state, action) {
 
   var jwt = "";
