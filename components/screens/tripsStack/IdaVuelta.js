@@ -10,7 +10,7 @@ export default class IdaVuelta extends React.Component {
         return (
             <Content style={{ marginTop: "2%" }}>
                 <TouchableOpacity onPress={() => {
-                    this.props.navigation.navigate("DestinosScreen");
+                    this.props.navigation.navigate("OrigenScreen");
                 }}>
                     <LabelText
                         icon="md-pin"

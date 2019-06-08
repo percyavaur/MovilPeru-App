@@ -26,7 +26,8 @@ export default class AppNavigator extends Component {
       DestinosScreen: { screen: screen.DestinosScreen },
       PasajerosScreen: { screen: screen.PasajerosScreen },
       IdaCalendarScreen: { screen: screen.IdaCalendarScreen },
-      VueltaCalendarScreen: { screen: screen.VueltaCalendarScreen }
+      VueltaCalendarScreen: { screen: screen.VueltaCalendarScreen },
+      OrigenScreen: { screen: screen.OrigenScreen}
     });
 
     TripsStack.navigationOptions = {
