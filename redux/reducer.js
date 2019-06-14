@@ -1,6 +1,34 @@
 import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
 
+export function currentTrip(state, action) {
+  var trip = {
+    idOrigen: "",
+    origen: "",
+    idDestino: "",
+    destino: "",
+    cantPasajeros: "",
+    fechaIda: "",
+    fechaVuelta: ""
+  };
+
+  if (typeof state === "undefined") {
+    state = trip;
+    return state;
+
+  } else {
+    switch (action.type) {
+      case 'SAVETRIP':
+        console.log("savetrip",state);
+        return Object.assign(state,action.trip);
+        break;
+      default:
+        return state;
+        break;
+    }
+  }
+}
+
 export async function currentUser(state, action) {
 
   var jwt = "";

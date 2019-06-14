@@ -6,7 +6,12 @@ import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 // import Icon from '@expo/vector-icons'
 export default class IdaVuelta extends React.Component {
+
+
     render() {
+        const {currentTrip} = this.props;
+        console.log("idavuelta" ,this.props.currentTrip);
+
         return (
             <Content style={{ marginTop: "2%" }}>
                 <TouchableOpacity onPress={() => {
@@ -15,7 +20,7 @@ export default class IdaVuelta extends React.Component {
                     <LabelText
                         icon="md-pin"
                         label="Origen"
-                        value={"Ingresa una ciudad de origen"}
+                        value={this.props.currentTrip.origen ? this.props.currentTrip.origen : "Ingresa una ciudad de origen"}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -24,7 +29,7 @@ export default class IdaVuelta extends React.Component {
                     <LabelText
                         icon="md-pin"
                         label="Destino"
-                        value={"Ingresa una ciudad o terminal"}
+                        value={currentTrip.destino ? currentTrip.destino : "Ingresa una ciudad o terminal"}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -33,18 +38,10 @@ export default class IdaVuelta extends React.Component {
                     <LabelText
                         icon="md-people"
                         label="Pasajeros"
-                        value={"0 Adulto, 0 Niños"}
+                        value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros : "0 Adulto, 0 Niños"}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    this.props.navigation.navigate("DestinoScreen2");
-                }}>
-                    <LabelText
-                        icon="md-bus"
-                        label="Ruta"
-                        value={"Ingresar una ruta"}
-                    />
-                </TouchableOpacity>
+            
                 <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "5%" }}>
                     <TouchableOpacity onPress={() => {
                         this.props.navigation.navigate("IdaCalendarScreen");
@@ -52,7 +49,7 @@ export default class IdaVuelta extends React.Component {
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"
-                            value={"DD/MM/AA"}
+                            value={currentTrip.fechaIda ? currentTrip.fechaIda :"DD/MM/AA"}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
@@ -61,7 +58,7 @@ export default class IdaVuelta extends React.Component {
                         <LabelText
                             icon="ios-calendar"
                             label="Vuelta"
-                            value={"DD/MM/AA"}
+                            value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "DD/MM/AA"}
                         />
                     </TouchableOpacity>
                 </View>
