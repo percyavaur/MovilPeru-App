@@ -9,8 +9,7 @@ export default class IdaVuelta extends React.Component {
 
 
     render() {
-        const {currentTrip} = this.props;
-        console.log(this.props.currentTrip);
+        const { currentTrip } = this.props;
 
         return (
             <Content style={{ marginTop: "2%" }}>
@@ -20,7 +19,8 @@ export default class IdaVuelta extends React.Component {
                     <LabelText
                         icon="md-pin"
                         label="Origen"
-                        value={this.props.currentTrip.origen ? this.props.currentTrip.origen : "Ingresa una ciudad de origen"}
+                        value={currentTrip.origen ? currentTrip.origen : "Ingresa una ciudad de origen"}
+                        style={currentTrip.origen ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -38,10 +38,10 @@ export default class IdaVuelta extends React.Component {
                     <LabelText
                         icon="md-people"
                         label="Pasajeros"
-                        value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros : "0 Adulto, 0 Niños"}
+                        value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros + " Pasajeros" : "1 Adulto, 0 Niños, 0 bebes"}
                     />
                 </TouchableOpacity>
-            
+
                 <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "5%" }}>
                     <TouchableOpacity onPress={() => {
                         this.props.navigation.navigate("IdaCalendarScreen");
@@ -49,7 +49,7 @@ export default class IdaVuelta extends React.Component {
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"
-                            value={currentTrip.fechaIda ? currentTrip.fechaIda :"DD/MM/AA"}
+                            value={currentTrip.fechaIda ? currentTrip.fechaIda : "aaaa-mm-dd"}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
@@ -58,7 +58,8 @@ export default class IdaVuelta extends React.Component {
                         <LabelText
                             icon="ios-calendar"
                             label="Vuelta"
-                            value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "DD/MM/AA"}
+                            value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "aaaa-mm-dd"}
+                            style={{}}
                         />
                     </TouchableOpacity>
                 </View>

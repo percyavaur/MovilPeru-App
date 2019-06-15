@@ -20,6 +20,8 @@ export default class TripsScreen extends React.Component {
     };
     render() {
         const { selectedTab } = this.state;
+        console.log(this.props.currentTrip);
+
         return (
             <View style={styles.container}>
                 <ImageBackground source={require("../../assets/images/back.jpg")} style={{ backgroundColor: "#52606D", height: "100%" }}>

@@ -27,11 +27,11 @@ export default class LabelText extends React.Component {
                         >{this.props.label}</Text>
                     </View>
                     <View style={{ marginTop: RF(1) }}>
-                        <Text style={{
+                        <Text style={[{
                             color: "#bababa",
                             fontSize: RF(2.2),
                             fontFamily: "NeoSans"
-                        }}>{this.props.value}</Text>
+                        }, this.props.style]}>{this.props.value}</Text>
                     </View>
                 </View>
             </View>

@@ -35,11 +35,10 @@ export default class OrigenScreen extends React.Component {
         })
     }
 
-    saveStorage(idOrigen, origen, distrito) {
-        const trip = this.props.currentTrip;
-        trip.idOrigen = idOrigen;
-        trip.origen = origen + ", " + distrito;
-        this.props.dispatch({ type: 'SAVETRIP', trip });
+    saveStorage(idOrigen, departamento, distrito) {
+        const origen = departamento+", "+distrito;
+        this.props.dispatch({ type: 'SAVEIDORIGEN', idOrigen });
+        this.props.dispatch({ type: 'SAVEORIGEN', origen });
         this.props.navigation.navigate("Trips");
     }
 

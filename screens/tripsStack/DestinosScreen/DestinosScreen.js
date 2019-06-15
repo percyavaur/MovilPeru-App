@@ -76,6 +76,14 @@ export default class DestinosScreen extends React.Component {
     })
   }
 
+  saveStorage(idDestino, departamento, distrito) {
+    const destino = departamento + ", " + distrito;
+    this.props.dispatch({ type: 'SAVEIDDESTINO', idDestino });
+    this.props.dispatch({ type: 'SAVEDESTINO', destino });
+    this.props.navigation.navigate("Trips");
+  }
+
+
   render() {
 
     const { dataSource } = this.state;
@@ -92,7 +100,7 @@ export default class DestinosScreen extends React.Component {
           data={dataSource}
           vertical={true}
           renderItem={({ item }) => (
-            <ListItem onPress={() => { alert(item.id) }}>
+            <ListItem onPress={() => { this.saveStorage(item.id, item.departamento, item.distrito) }}>
               <Text>{item.departamento} , {item.distrito}</Text>
             </ListItem>
           )}

@@ -2,25 +2,53 @@ import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
 
 export function currentTrip(state, action) {
-  var trip = {
-    idOrigen: "",
-    origen: "",
-    idDestino: "",
-    destino: "",
-    cantPasajeros: "",
-    fechaIda: "",
-    fechaVuelta: ""
-  };
+  var trip = {};
 
   if (typeof state === "undefined") {
     state = trip;
     return state;
   } else {
     switch (action.type) {
-      case 'SAVETRIP':
+      case 'SAVEIDORIGEN':
         return Object.assign({}, state, {
-          visibilityFilter: action.trip
+          idOrigen: action.idOrigen
         })
+        break;
+      case 'SAVEORIGEN':
+        return Object.assign({}, state, {
+          origen: action.origen
+        })
+        break;
+      case 'SAVEIDDESTINO':
+        return Object.assign({}, state, {
+          idDestino: action.idDestino
+        })
+        break;
+      case 'SAVEDESTINO':
+        return Object.assign({}, state, {
+          destino: action.destino
+        })
+        break;
+      case 'CANTPASAJEROS':
+        return Object.assign({}, state, {
+          cantPasajeros: action.cantPasajeros
+        })
+        break;
+      case 'DESCPASAJEROS':
+        return Object.assign({}, state, {
+          descPasajeros: action.descPasajeros
+        })
+        break;
+      case 'FECHAIDA':
+        return Object.assign({}, state, {
+          fechaIda: action.fechaIda
+        })
+        break;
+      case 'FECHAVUELTA':
+        return Object.assign({}, state, {
+          fechaVuelta: action.fechaVuelta
+        })
+        break;
       default:
         return state
     }

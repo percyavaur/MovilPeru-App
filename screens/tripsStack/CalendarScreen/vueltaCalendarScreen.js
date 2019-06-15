@@ -23,6 +23,13 @@ export default class VueltaCalendarScreen extends React.Component {
     this.setState({ [name]: value });
   }
 
+  saveStorage() {
+    const { date } = this.state;
+    const fechaVuelta = date.year + "-" + date.month + "-" + date.day;
+    this.props.dispatch({ type: 'FECHAVUELTA', fechaVuelta });
+    this.props.navigation.navigate("Trips");
+  }
+
   render() {
     const { date } = this.state;
     const ts = date.timestamp ? new Date(date.timestamp) : null;
@@ -46,7 +53,7 @@ export default class VueltaCalendarScreen extends React.Component {
           />
         </View>
         <View>
-          <Button style={styles.Button}>
+          <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={ !date ? true : false}>
             <Text style={styles.buttonLoginText}>Continuar</Text>
           </Button>
         </View>
