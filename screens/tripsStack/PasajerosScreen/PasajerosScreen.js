@@ -4,7 +4,6 @@ import { Button } from "native-base";
 import CountText from "../../../components/utils/CountText";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-
 export default class PasajerosScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -17,7 +16,17 @@ export default class PasajerosScreen extends React.Component {
     bebes: 0
   }
 
-  handleChange = (name, value) => {
+  validateTotal(name, value) {
+    const totalPassengers = 0;
+    const { adultos, niños, bebes } = this.state;
+
+    if (name == "adultos") { totalPassengers = value + bebes + niños; console.log(totalPassengers); }
+    else if (name == "niños") { totalPassengers = value + bebes + niños; console.log(totalPassengers); }
+    else if (name == "bebes") { totalPassengers = value + bebes + niños; console.log(totalPassengers); }
+    handleChange(name, value);
+  }
+
+  handleChange(name, value) {
     this.setState({ [name]: value })
   }
 

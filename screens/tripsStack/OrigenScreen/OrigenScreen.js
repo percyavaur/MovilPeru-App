@@ -6,9 +6,9 @@ const { width, height } = Dimensions.get('window');
 
 const cities = [
     { id: "1", departamento: "lima", distrito: "los olivos" },
-  { id: "2", departamento: "lima", distrito: "lima" },
-  { id: "3", departamento: "lima", distrito: "churin" },
-  { id: "4", departamento: "trujillo", distrito: "trujillo" }
+    { id: "2", departamento: "lima", distrito: "lima" },
+    { id: "3", departamento: "lima", distrito: "churin" },
+    { id: "4", departamento: "trujillo", distrito: "trujillo" }
 ]
 
 export default class OrigenScreen extends React.Component {
@@ -40,23 +40,23 @@ export default class OrigenScreen extends React.Component {
         const { dataSource } = this.state;
 
         return (
-            <View  style={{ flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <ListItem>
                     <Item style={{ borderBottomColor: "red" }}>
                         <Input placeholder='Ingresa una ciudad o destino' onChangeText={(text) => { this.filterSearch(text) }} />
                         <Icon name='close-circle' color={"grey"} />
                     </Item>
                 </ListItem>
-                        <FlatList
-                            inset={true}
-                            data={dataSource}
-                            renderItem={({ item }) => (
-                                <ListItem onPress={() => { alert(item.id) }}>
-                                    <Text>{item.departamento} , {item.distrito}</Text>
-                                </ListItem>
-                            )}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
+                <FlatList
+                    inset={true}
+                    data={dataSource}
+                    renderItem={({ item }) => (
+                        <ListItem onPress={() => { alert(item.id) }}>
+                            <Text>{item.departamento} , {item.distrito}</Text>
+                        </ListItem>
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                />
             </View>
         );
 

@@ -81,7 +81,7 @@ export default class DestinosScreen extends React.Component {
     const { dataSource } = this.state;
 
     return (
-      <View style={{flex : 1}}>
+      <View style={{ flex: 1 }}>
         <ListItem>
           <Item style={{ borderBottomColor: "red" }}>
             <Input placeholder='Ingresa una ciudad o destino' onChangeText={(text) => { this.filterSearch(text) }} />
