@@ -15,16 +15,14 @@ export function currentTrip(state, action) {
   if (typeof state === "undefined") {
     state = trip;
     return state;
-
   } else {
     switch (action.type) {
       case 'SAVETRIP':
-        console.log("savetrip",state);
-        return Object.assign(state,action.trip);
-        break;
+        return Object.assign({}, state, {
+          visibilityFilter: action.trip
+        })
       default:
-        return state;
-        break;
+        return state
     }
   }
 }
@@ -73,7 +71,6 @@ export async function currentUser(state, action) {
     }
   }
 };
-
 
 fetchValidateToken = async (jwt) => {
   return await fetch('http://35.236.27.209/php_api_jwt/api/model/functions/validate_token.php', {

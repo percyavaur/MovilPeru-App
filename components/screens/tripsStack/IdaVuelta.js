@@ -10,7 +10,7 @@ export default class IdaVuelta extends React.Component {
 
     render() {
         const {currentTrip} = this.props;
-        console.log("idavuelta" ,this.props.currentTrip);
+        console.log(this.props.currentTrip);
 
         return (
             <Content style={{ marginTop: "2%" }}>

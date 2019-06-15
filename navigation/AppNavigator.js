@@ -16,20 +16,20 @@ const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen
 const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
 const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
 const ProfileRedux = connect(state => ({ currentUser: state.currentUser }))(screen.ProfileScreen);
-const TripsRedux = connect( state => ({ currentTrip: state.currentTrip }))(screen.TripsScreen);
-const DestinosRedux = connect( state => ({ currentTrip: state.currentTrip }))(screen.DestinosScreen);
-const PasajerosRedux = connect( state => ({ currentTrip: state.currentTrip }))(screen.PasajerosScreen);
-const IdaCalendarRedux = connect( state => ({ currentTrip: state.currentTrip }))(screen.IdaCalendarScreen);
-const VueltaCalendarRedux = connect( state => ({ currentTrip: state.currentTrip }))(screen.VueltaCalendarScreen);
-const OrigenRedux = connect( state => ({ currentTrip: state.currentTrip }))(screen.OrigenScreen);
+const TripsRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.TripsScreen);
+const DestinosRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.DestinosScreen);
+const PasajerosRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.PasajerosScreen);
+const IdaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.IdaCalendarScreen);
+const VueltaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.VueltaCalendarScreen);
+const OrigenRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.OrigenScreen);
 export default class AppNavigator extends Component {
 
   render() {
 
     const TripsStack = createStackNavigator({
       Trips: { screen: TripsRedux },
-      OrigenScreen: { screen: OrigenRedux},
-      DestinosScreen: { screen: DestinosRedux},
+      OrigenScreen: { screen: OrigenRedux },
+      DestinosScreen: { screen: DestinosRedux },
       PasajerosScreen: { screen: PasajerosRedux },
       IdaCalendarScreen: { screen: IdaCalendarRedux },
       VueltaCalendarScreen: { screen: VueltaCalendarRedux }
@@ -109,8 +109,8 @@ export default class AppNavigator extends Component {
 
     const DashboardTabNavigator = createBottomTabNavigator(
       {
-        Graph: GraphStack,
         Trips: TripsStack,
+        Graph: GraphStack,
         Home: HomeStack,
       }, {
         initialRouteName: "Trips",
