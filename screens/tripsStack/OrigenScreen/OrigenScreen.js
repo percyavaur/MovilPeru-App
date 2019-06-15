@@ -35,10 +35,17 @@ export default class OrigenScreen extends React.Component {
         })
     }
 
+    saveStorage(idOrigen, origen, distrito) {
+        const trip = this.props.currentTrip;
+        trip.idOrigen = idOrigen;
+        trip.origen = origen + ", " + distrito;
+        this.props.dispatch({ type: 'SAVETRIP', trip });
+        this.props.navigation.navigate("Trips");
+    }
+
     render() {
 
         const { dataSource } = this.state;
-
         return (
             <View style={{ flex: 1 }}>
                 <ListItem>
@@ -51,7 +58,7 @@ export default class OrigenScreen extends React.Component {
                     inset={true}
                     data={dataSource}
                     renderItem={({ item }) => (
-                        <ListItem onPress={() => { alert(item.id) }}>
+                        <ListItem onPress={() => { this.saveStorage(item.id, item.departamento, item.distrito) }}>
                             <Text>{item.departamento} , {item.distrito}</Text>
                         </ListItem>
                     )}

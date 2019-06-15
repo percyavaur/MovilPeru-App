@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from "redux";
-import { currentUser } from "./reducer";
-
+import { currentUser,currentTrip } from "./reducer";
 export const store =
     createStore(combineReducers(
         {
-            currentUser: currentUser
+            currentUser: currentUser,
+            currentTrip: currentTrip
         }
     ));
