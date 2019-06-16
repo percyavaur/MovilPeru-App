@@ -20,7 +20,6 @@ export default class TripsScreen extends React.Component {
     };
     render() {
         const { selectedTab } = this.state;
-        console.log(this.props.currentTrip);
 
         return (
             <View style={styles.container}>
