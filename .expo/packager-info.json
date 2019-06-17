@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://if-iy2.percyavaur.movil-peru-app.exp.direct",
   "packagerNgrokUrl": "https://packager.if-iy2.percyavaur.movil-peru-app.exp.direct",
-  "ngrokPid": 5467,
+  "ngrokPid": 2248,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 5391
+  "packagerPid": 2125
 }
