@@ -19,7 +19,7 @@ export default class InputText extends Component {
                 <Text style={styles.inputLabel}>{label}</Text>
                 <TextInput
                     placeholder={placeholder}
-                    style={[styles.input, { color: editable ? "black" : "#b9bbd1" }]}
+                    style={[styles.input, { color: value ? "black" : "#b9bbd1" }]}
                     value={value}
                     onChangeText={(value) => { this.handleChange(value) }}
                     editable={editable}
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
         fontSize: RF(2.5),
-        paddingLeft: RF(1.5)
+        paddingLeft: RF(1.5),
+        width: width*0.775
     }
 });

@@ -272,30 +272,30 @@ export default class ProfileScreen extends React.Component {
                             </View>
                             {
                                 editable
-                                ? <View style={styles.inputContainer}>
-                                    <Text style={styles.inputLabel}>Fecha de nacimiento</Text>
-                                    <View style={[styles.input,{paddingTop: RF(1), paddingLeft: -RF(1)}]}>
-                                        <DatePicker
-                                            disabled={!editable}
-                                            locale={"en"}
-                                            timeZoneOffsetInMinutes={undefined}
-                                            modalTransparent={false}
-                                            animationType={"fade"}
-                                            androidMode={"default"}
-                                            placeHolderText="Fecha de nacimiento"
-                                            textStyle={{ color: "black" }}
-                                            placeHolderTextStyle={{ color: "grey" }}
-                                            onDateChange={(value) => { this.handleChange("fecNac", value) }}
-                                        />
+                                    ? <View style={styles.inputContainer}>
+                                        <Text style={styles.inputLabel}>Fecha de nacimiento</Text>
+                                        <View style={[styles.input, { paddingTop: RF(1), paddingLeft: -RF(1) }]}>
+                                            <DatePicker
+                                                placeHolderText={fecNac}
+                                                disabled={!editable}
+                                                locale={"en"}
+                                                timeZoneOffsetInMinutes={undefined}
+                                                modalTransparent={false}
+                                                animationType={"fade"}
+                                                androidMode={"default"}
+                                                textStyle={{ color: "black" }}
+                                                placeHolderTextStyle={{ color: "grey" }}
+                                                onDateChange={(value) => { this.handleChange("fecNac", value) }}
+                                            />
+                                        </View>
                                     </View>
-                                </View>
-                                :<InputText
-                                    label={"Fecha de nacimiento"}
-                                    placeholder={"Fecha de nacimiento"}
-                                    value={fecNac}
-                                    editable={editable}
-                                    onChange={(value) => { this.handleChange("fecNac", value) }}
-                                />
+                                    : <InputText
+                                        label={"Fecha de nacimiento"}
+                                        placeholder={"Fecha de nacimiento"}
+                                        value={fecNac}
+                                        editable={editable}
+                                        onChange={(value) => { this.handleChange("fecNac", value) }}
+                                    />
                             }
                             <View style={styles.inputContainer}>
                                 <Text style={styles.inputLabel}>Tipo Documento</Text>
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
         paddingLeft: RF(1.5),
-        width: width*0.77
+        width: width * 0.775
     },
     separator: {
         borderBottomWidth: 1,
