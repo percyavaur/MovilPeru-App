@@ -371,24 +371,26 @@ export default class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
     inputContainer: {
         marginHorizontal: " 7%",
+        marginVertical: width * 0.04
     },
     inputLabel: {
         fontWeight: "bold",
         fontFamily: "NeoSans",
         fontSize: RF(2.5),
         color: "#525f7f",
-        marginVertical: RF(1)
+        marginBottom: 7
     },
     input: {
         backgroundColor: "white",
         height: width * 0.15,
         borderRadius: 7,
         shadowColor: '#000',
-        shadowOffset: { width: 10, height: 10 },
+        shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 1,
-        paddingLeft: RF(1.5)
+        paddingLeft: RF(1.5),
+        width: width*0.75
     },
     separator: {
         borderBottomWidth: 1,
