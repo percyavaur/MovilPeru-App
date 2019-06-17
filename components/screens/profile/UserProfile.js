@@ -136,7 +136,7 @@ export default class UserProfile extends React.Component {
                                 fontFamily: "NeoSans",
                                 fontSize: RF(2.7),
                                 marginVertical: RF(2)
-                            }}>Universidad Cesar Vallejo</Text>
+                            }}>Universidad Ricardo Palma</Text>
                             <View style={{ borderBottomWidth: 1, borderBottomColor: "#b9bbd1", width: width * 0.8, }} />
                             <Text style={{
                                 color: "#5e8cf2",

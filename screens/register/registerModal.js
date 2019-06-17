@@ -99,7 +99,7 @@ export default class RegisterModal extends Component {
   }
 
   fetchRegisterValidation = async (username, password, nombres, apellidos, genero, fecNac, tipoDocumento, numDocumento, correoElectronico, telefono) => {
-    await fetch('http://192.168.1.61/movilPeru/api/controller/create_user.php', {
+    await fetch('http://35.236.27.209/movilPeru/api/controller/create_user.php', {
       method: "POST",
       headers: {
         'Accept': 'application/json',

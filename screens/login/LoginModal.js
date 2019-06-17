@@ -61,7 +61,7 @@ export default class LoginModal extends Component {
   }
 
   fetchLoginValidation = async (username, password) => {
-    await fetch('http://35.236.27.209/php_api_jwt/api/controller/login.php', {
+    await fetch('http://35.236.27.209/movilPeru/api/controller/login.php', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
