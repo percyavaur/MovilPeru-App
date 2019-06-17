@@ -40,7 +40,6 @@ export default class ProfileScreen extends React.Component {
     componentDidMount = async () => {
         const currentUser = await this.props.currentUser
         currentUser ? this.propsToState(currentUser) : null;
-        console.log(currentUser);
     }
 
     propsToState(data) {
