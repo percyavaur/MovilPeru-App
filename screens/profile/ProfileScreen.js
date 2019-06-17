@@ -54,12 +54,18 @@ export default class ProfileScreen extends React.Component {
             numDocumento: data.numDocumento,
             correoElectronico: data.correoElectronico,
             telefono: data.telefono,
-            direccion: data.direccion
+            direccion: data.direccion,
+            imagen: data.imagen
         });
     }
 
     handleChange(name, value) {
         this.setState({ [name]: value })
+    }
+
+    handleImage(imageUri) {
+        this.setState({ imagen: imageUri });
+        this.dataToFetch();
     }
 
     updateUser() {
@@ -182,6 +188,9 @@ export default class ProfileScreen extends React.Component {
                     <UserProfile
                         firstname={nombres}
                         lastname={apellidos}
+                        image={imagen}
+                        uploading={(value)=>{this.handleChange("loading",value)}}
+                        handleImage={(value)=>{this.handleImage(value)}}
                     />
                     <View style={styles.container}>
                         <View style={styles.containerHeader}>
