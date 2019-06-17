@@ -1,15 +1,49 @@
 import React from "react";
-import { View, Dimensions, Image, ScrollView, Text, StyleSheet } from "react-native";
-import { Button } from "native-base"
+import { View, Dimensions, Image, ScrollView, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { Button } from "native-base";
+import { ImagePicker, Permissions, Constants } from 'expo';
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 
 export default class UserProfile extends React.Component {
 
+    state = {
+        image: null,
+    };
+
+    componentDidMount() {
+        this.getPermissionAsync();
+    }
+
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios) {
+            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+            }
+        }
+    }
+
+    _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            this.setState({ image: result.uri });
+        }
+    };
+
     render() {
+
+        const { image } = this.state;
         return (
             <View style={{ width: "100%" }}>
-                <View style={{
+                <TouchableHighlight style={{
                     width: width * 0.5,
                     height: width * 0.5,
                     borderRadius: width * 0.5 / 2,
@@ -17,13 +51,14 @@ export default class UserProfile extends React.Component {
                     zIndex: 2,
                     marginTop: -width * 0.25,
                     top: width * 0.3,
-                    marginLeft: width * 0.25,
-                }} >
+                    marginLeft: width * 0.25
+                }}
+                    onPress={this._pickImage}>
                     <Image
                         style={{ width: width * 0.5, height: width * 0.5, flex: 1, borderRadius: width * 0.5 / 2, }}
-                        source={{ uri: 'https://demos.creative-tim.com/argon-dashboard-react/static/media/team-4-800x800.23007132.jpg' }}
+                        source={{ uri: image ? image : 'https://demos.creative-tim.com/argon-dashboard-react/static/media/team-4-800x800.23007132.jpg' }}
                     />
-                </View>
+                </TouchableHighlight>
                 <View style={{
                     backgroundColor: "white",
                     borderRadius: 15,
