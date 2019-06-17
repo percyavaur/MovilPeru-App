@@ -38,7 +38,7 @@ export default class SoloIda extends React.Component {
                     <LabelText
                         icon="md-people"
                         label="Pasajeros"
-                        value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros : "0 Adulto, 0 Niños"}
+                        value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros  + " Pasajeros" : "0 Adulto, 0 Niños"}
                         style={currentTrip.cantPasajeros ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>

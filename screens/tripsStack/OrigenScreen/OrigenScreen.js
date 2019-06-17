@@ -5,10 +5,10 @@ import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 const { width, height } = Dimensions.get('window');
 
 const cities = [
-    { id: "1", departamento: "lima", distrito: "los olivos" },
-    { id: "2", departamento: "lima", distrito: "lima" },
-    { id: "3", departamento: "lima", distrito: "churin" },
-    { id: "4", departamento: "trujillo", distrito: "trujillo" }
+    { id: "1", departamento: "Lima", distrito: "Los Olivos" },
+    { id: "2", departamento: "Lima", distrito: "Lima" },
+    { id: "3", departamento: "Lima", distrito: "Churin" },
+    { id: "4", departamento: "Trujillo", distrito: "Trujillo" }
 ]
 
 export default class OrigenScreen extends React.Component {
