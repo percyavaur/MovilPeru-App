@@ -16,7 +16,7 @@ export default class DrawerContent extends Component {
     state = {
         loading: false
     }
-    
+
     logout = () => {
         this.setState({ loading: true })
         Alert.alert(
@@ -68,12 +68,16 @@ export default class DrawerContent extends Component {
                     {currentUser ?
                         <ListItem icon>
                             <Left>
-                                <Button style={{ backgroundColor: "#25d366" }}>
+                                <Button style={{ backgroundColor: "#25d366" }}
+                                    onPress={() => { this.props.navigation.navigate("Profile") }}>
                                     <Icon active name="ios-contact" />
                                 </Button>
                             </Left>
                             <Body>
-                                <Text>{currentUser}</Text>
+                                <TouchableOpacity
+                                    onPress={() => { this.props.navigation.navigate("Profile") }}>
+                                    <Text>{currentUser}</Text>
+                                </TouchableOpacity>
                             </Body>
                         </ListItem>
                         : null

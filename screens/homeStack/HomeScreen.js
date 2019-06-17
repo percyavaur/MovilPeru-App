@@ -16,18 +16,6 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          style={styles.Button}
-          onPress={() => { this.props.navigation.navigate('Home2') }}
-          success>
-          <Text style={{ color: "white" }}>Home 2</Text>
-        </Button>
-        <Button
-          style={styles.Button}
-          onPress={() => { this.props.navigation.navigate('Home3') }}
-          warning>
-          <Text style={{ color: "white" }}>Home 3</Text>
-        </Button>
       </View>
     );
   }
@@ -36,12 +24,5 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    display: "flex",
-    flexDirection: "row",
-    alignSelf: 'center',
-    top: "70%"
-  },
-  Button: {
-    marginHorizontal: "3%"
   }
 });

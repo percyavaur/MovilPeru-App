@@ -7,6 +7,17 @@ import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 
 export default class PasajerosScreen extends React.Component {
 
+  componentDidMount() {
+    var { currentTrip } = this.props;
+    currentTrip.descPasajeros
+      ? this.setState({
+        adultos: currentTrip.descPasajeros.adultos,
+        niños: currentTrip.descPasajeros.niños,
+        bebes: currentTrip.descPasajeros.bebes
+      })
+      : null
+  }
+
   static navigationOptions = ({ navigation }) => {
     return NavigationOptions2(navigation, "Pasajeros");
   };
@@ -17,8 +28,37 @@ export default class PasajerosScreen extends React.Component {
     bebes: 0
   }
 
-  handleChange = (name, value) => {
+  validateTotal(name, value) {
+    var totalPassengers = 0;
+    const { adultos, niños, bebes } = this.state;
+
+    if (name == "adultos") {
+      totalPassengers = value + bebes + niños;
+      totalPassengers <= 9 && value >= 1 ? this.handleChange(name, value) : null;
+    }
+    else if (name == "niños") {
+      totalPassengers = value + bebes + adultos;
+      totalPassengers <= 9 && value >= 0 ? this.handleChange(name, value) : null;
+    }
+    else if (name == "bebes") {
+      totalPassengers = value + niños + adultos;
+      totalPassengers <= 9 && value >= 0 ? this.handleChange(name, value) : null;
+    }
+
+  }
+
+  handleChange(name, value) {
     this.setState({ [name]: value })
+  }
+
+  saveStorage() {
+    const { adultos, niños, bebes } = this.state;
+    const cantPasajeros = adultos + niños + bebes;
+    const descPasajeros = { adultos, niños, bebes };
+
+    this.props.dispatch({ type: 'CANTPASAJEROS', cantPasajeros });
+    this.props.dispatch({ type: 'DESCPASAJEROS', descPasajeros });
+    this.props.navigation.navigate("Trips");
   }
 
   render() {
@@ -29,7 +69,7 @@ export default class PasajerosScreen extends React.Component {
           title={"Adultos"}
           info={"12 años a mas"}
           value={this.state.adultos}
-          onChange={(name, value) => { this.handleChange(name, value) }}
+          onChange={(name, value) => { this.validateTotal(name, value) }}
         />
         <View style={{ borderBottomColor: "#d3d3d3", borderBottomWidth: 1, marginTop: "10%", marginHorizontal: "6%" }} />
         <CountText
@@ -37,7 +77,7 @@ export default class PasajerosScreen extends React.Component {
           title={"Niños"}
           info={"2 a 11 años"}
           value={this.state.niños}
-          onChange={(name, value) => { this.handleChange(name, value) }}
+          onChange={(name, value) => { this.validateTotal(name, value) }}
         />
         <View style={{ borderBottomColor: "#d3d3d3", borderBottomWidth: 1, marginTop: "10%", marginHorizontal: "6%" }} />
         <CountText
@@ -45,9 +85,9 @@ export default class PasajerosScreen extends React.Component {
           title={"Bebes"}
           info={"0 a 23 meses"}
           value={this.state.bebes}
-          onChange={(name, value) => { this.handleChange(name, value) }}
+          onChange={(name, value) => { this.validateTotal(name, value) }}
         />
-        <Button style={styles.Button}>
+        <Button style={styles.Button} onPress={() => { this.saveStorage() }}>
           <Text style={styles.buttonLoginText}>Listo</Text>
         </Button>
       </View>

@@ -20,6 +20,7 @@ export default class TripsScreen extends React.Component {
     };
     render() {
         const { selectedTab } = this.state;
+
         return (
             <View style={styles.container}>
                 <ImageBackground source={require("../../assets/images/back.jpg")} style={{ backgroundColor: "#52606D", height: "100%" }}>
@@ -45,7 +46,8 @@ export default class TripsScreen extends React.Component {
                                 ><Text style={{
                                     color: "#52606D",
                                     fontFamily: "NeoSans"
-                                }}>Ida y Vuelta</Text></TouchableHighlight>
+                                }}>Ida y Vuelta</Text>
+                                </TouchableHighlight>
                                 <TouchableHighlight
                                     underlayColor="white"
                                     onPress={() => { this.handleTabChange(1) }}
@@ -58,17 +60,18 @@ export default class TripsScreen extends React.Component {
                                 ><Text style={{
                                     color: "#52606D",
                                     fontFamily: "NeoSans"
-                                }}>Solo Ida</Text></TouchableHighlight>
+                                }}>Solo Ida</Text>
+                                </TouchableHighlight>
                             </View>
                         </View>
                     </View>
-                    <View style={{ backgroundColor: "white", height: "100%"}}>
+                    <View style={{ backgroundColor: "white", height: "100%" }}>
                         {this.state.selectedTab === 0 ?
-                            <IdaVuelta navigation={this.props.navigation} />
+                            <IdaVuelta navigation={this.props.navigation} currentTrip={this.props.currentTrip} />
                             : null
                         }
                         {this.state.selectedTab === 1 ?
-                            <SoloIda navigation={this.props.navigation} />
+                            <SoloIda navigation={this.props.navigation} currentTrip={this.props.currentTrip} />
                             : null
                         }
                     </View>

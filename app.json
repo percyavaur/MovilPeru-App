@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fecc00"
+      "backgroundColor": "#6C24AA"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,7 +23,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      
+      "supportsTablet": false
     },
     "android": {
       "package": "movil.peru.app"

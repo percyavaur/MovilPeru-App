@@ -20,32 +20,28 @@ export default class TestAlert extends React.Component {
     }
 
     handleClose = () => {
-        this.setState({ show: false })
+        this.props.onClose(false);
+        this.setState({ show: false });
     }
 
     render() {
+
+        const { show, theme, title, content } = this.props;
+
         return (
-            <View style={styles.container}>
-                <Button title="Show" onPress={this.handleOpen} />
+            <View>
                 <SCLAlert
-                    theme="danger"
-                    show={this.state.show}
-                    title="Lorem"
-                    subtitle="Lorem ipsum dolor"
+                    theme={theme}
+                    show={show}
+                    title={title}
+                    subtitle={content}
+                    overlayStyle={{ height: "150%" }}
+                    subtitleContainerStyle={{}}
                     onRequestClose={() => { }}
                 >
-                    <SCLAlertButton theme="danger" onPress={this.handleClose}>Done</SCLAlertButton>
+                    <SCLAlertButton theme={theme} onPress={this.handleClose}>Ok</SCLAlertButton>
                 </SCLAlert>
             </View >
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import Icon from '@expo/vector-icons/Ionicons';
+import Icon from '@expo/vector-icons';
 import {
   createSwitchNavigator,
   createAppContainer,
@@ -9,63 +9,36 @@ import {
   createStackNavigator
 } from 'react-navigation';
 import DrawerContent from "../components/DrawerContent";
-import { NavigationOptions2 } from "./NavigationOptions";
 import * as screen from "../screens";
 import { NativeViewGestureHandler } from "react-native-gesture-handler";
 
-const Home2Redux = connect(state => ({ count: state.count }))(screen.Home2);
-const Home3Redux = connect(state => ({ count: state.count }))(screen.Home3);
 const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
 const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
 const DrawerRedux = connect(state => ({ currentUser: state.currentUser }))(DrawerContent);
-
+const ProfileRedux = connect(state => ({ currentUser: state.currentUser }))(screen.ProfileScreen);
+const TripsRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.TripsScreen);
+const DestinosRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.DestinosScreen);
+const PasajerosRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.PasajerosScreen);
+const IdaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.IdaCalendarScreen);
+const VueltaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.VueltaCalendarScreen);
+const OrigenRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.OrigenScreen);
 export default class AppNavigator extends Component {
 
   render() {
-    const HomeStack = createStackNavigator({
-      Home: { screen: screen.HomeScreen },
-      Home2: { screen: Home2Redux, navigationOptions: NavigationOptions2 },
-      Home3: { screen: Home3Redux, navigationOptions: NavigationOptions2 }
-    });
-
-    HomeStack.navigationOptions = {
-      tabBarLabel: "Home",
-      tabBarIcon: ({ focused }) => (
-        <Icon
-          color={focused ? "#ED1650" : "white"}
-          size={25}
-          name="md-home"
-        />
-      )
-    }
-
-    const TestStack = createStackNavigator({
-      Test: { screen: screen.TestScreen }
-    });
-
-    TestStack.navigationOptions = {
-      tabBarLabel: "Test",
-      tabBarIcon: ({ focused }) => (
-        <Icon
-          color={focused ? "#ED1650" : "white"}
-          size={25}
-          name="ios-apps"
-        />
-      )
-    }
 
     const TripsStack = createStackNavigator({
-      Trips: { screen: screen.TripsScreen },
-      DestinosScreen:{screen: screen.DestinosScreen},
-      PasajerosScreen:{screen: screen.PasajerosScreen},
-      IdaCalendarScreen:{screen: screen.IdaCalendarScreen},
-      VueltaCalendarScreen:{screen: screen.VueltaCalendarScreen}
+      Trips: { screen: TripsRedux },
+      OrigenScreen: { screen: OrigenRedux },
+      DestinosScreen: { screen: DestinosRedux },
+      PasajerosScreen: { screen: PasajerosRedux },
+      IdaCalendarScreen: { screen: IdaCalendarRedux },
+      VueltaCalendarScreen: { screen: VueltaCalendarRedux }
     });
 
     TripsStack.navigationOptions = {
       tabBarLabel: "Trips",
       tabBarIcon: ({ focused }) => (
-        <Icon
+        <Icon.Ionicons
           color={focused ? "#ED1650" : "white"}
           size={25}
           name="md-bus"
@@ -73,11 +46,72 @@ export default class AppNavigator extends Component {
       )
     }
 
+    const HomeStack = createStackNavigator({
+      Home: { screen: screen.HomeScreen },
+    });
+
+    HomeStack.navigationOptions = {
+      tabBarLabel: "Home",
+      tabBarIcon: ({ focused }) => (
+        <Icon.Ionicons
+          color={focused ? "#ED1650" : "white"}
+          size={25}
+          name="md-home"
+        />
+      )
+    }
+
+    const GraphStack = createStackNavigator({
+      Graph: { screen: screen.GraphScreen }
+    });
+
+    GraphStack.navigationOptions = {
+      tabBarLabel: "Graph",
+      tabBarIcon: ({ focused }) => (
+        <Icon.Foundation
+          color={focused ? "#ED1650" : "white"}
+          size={25}
+          name="graph-pie"
+        />
+      )
+    }
+
+    const ModalStack = createStackNavigator({
+      LoginModal: { screen: LoginRedux },
+      RegisterModal: { screen: RegisterRedux },
+    },
+      {
+        mode: 'modal',
+        headerMode: 'none',
+      });
+
+    ModalStack.navigationOptions = {
+      header: null
+    }
+
+    const ProfileStack = createStackNavigator({
+      Profile: { screen: ProfileRedux }
+    }, {
+        headerMode: 'none',
+      });
+
+    ProfileStack.navigationOptions = {
+      headerStyle: {
+        backgroundColor: "#1B0088",
+        textAlign: 'center',
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
+      },
+      headerTintColor: 'white',
+    }
+
+
     const DashboardTabNavigator = createBottomTabNavigator(
       {
         Trips: TripsStack,
+        Graph: GraphStack,
         Home: HomeStack,
-        Test: TestStack,
       }, {
         initialRouteName: "Trips",
         navigationOptions: () => {
@@ -99,24 +133,19 @@ export default class AppNavigator extends Component {
     const DashboardStackNavigator = createStackNavigator(
       {
         DashboardTabNavigator: DashboardTabNavigator,
-        LoginModal: { screen: LoginRedux },
-        RegisterModal: { screen: RegisterRedux }
-      },
-      {
-        mode: 'modal',
-        headerMode: 'none',
+        ModalStack: ModalStack,
+        ProfileStack: ProfileStack
       });
 
     const AppDrawerNavigator = createDrawerNavigator({
       Dashboard: {
         screen: DashboardStackNavigator
       },
+      Profile: { screen: screen.ProfileScreen }
+      ,
     }, {
         contentComponent: DrawerRedux,
         drawerPosition: "right",
-        navigationOptions: {
-          drawerLockMode: 'locked-closed'
-        }
       });
 
     const AppSwitchNavigator = createSwitchNavigator({

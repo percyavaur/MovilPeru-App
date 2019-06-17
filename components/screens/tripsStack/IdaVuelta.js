@@ -1,63 +1,75 @@
 import React from "react"
 import { Content, View, Button } from "native-base";
 import LabelText from "../../utils/LabelText";
-import { TouchableOpacity, Text, StyleSheet, Dimensions, TouchableWithoutFeedback} from "react-native";
+import { TouchableOpacity, Text, StyleSheet, Dimensions, TouchableWithoutFeedback } from "react-native";
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 // import Icon from '@expo/vector-icons'
 export default class IdaVuelta extends React.Component {
+
+
     render() {
+        const { currentTrip } = this.props;
+
         return (
             <Content style={{ marginTop: "2%" }}>
-                <TouchableOpacity onPress={()=>{
+                <TouchableOpacity onPress={() => {
+                    this.props.navigation.navigate("OrigenScreen");
+                }}>
+                    <LabelText
+                        icon="md-pin"
+                        label="Origen"
+                        value={currentTrip.origen ? currentTrip.origen : "Ingresa una ciudad de origen"}
+                        style={currentTrip.origen ? { color: "blue", fontFamily: "NeoSans"} : null }
+                       
+                    /> 
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
                     this.props.navigation.navigate("DestinosScreen");
                 }}>
                     <LabelText
                         icon="md-pin"
                         label="Destino"
-                        value={"Ingresa una ciudad o terminal"}
+                        value={currentTrip.destino ? currentTrip.destino : "Ingresa una ciudad o terminal"}
+                        style={currentTrip.destino ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{
+                <TouchableOpacity onPress={() => {
                     this.props.navigation.navigate("PasajerosScreen");
                 }}>
                     <LabelText
                         icon="md-people"
                         label="Pasajeros"
-                        value={"0 Adulto, 0 Niños"}
+                        value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros + " Pasajeros" : "1 Adulto, 0 Niños, 0 bebes"}
+                        style={currentTrip.cantPasajeros ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity  onPress={()=>{
-                    this.props.navigation.navigate("DestinoScreen2");
-                }}>
-                    <LabelText
-                        icon="md-bus"
-                        label="Ruta"
-                        value={"Ingresar una ruta"}
-                    />
-                </TouchableOpacity>
+
                 <View style={{ display: "flex", flexDirection: "row", width: "100%", marginLeft: "5%" }}>
-                    <TouchableOpacity  onPress={()=>{
-                    this.props.navigation.navigate("IdaCalendarScreen");
-                }}>
+                    <TouchableOpacity onPress={() => {
+                        this.props.navigation.navigate("IdaCalendarScreen");
+                    }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Ida"
-                            value={"DD/MM/AA"}
+                            value={currentTrip.fechaIda ? currentTrip.fechaIda : "aaaa-mm-dd"}
+                            style={currentTrip.fechaIda ? { color: "blue" } : null}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity  onPress={()=>{
-                    this.props.navigation.navigate("VueltaCalendarScreen");
-                }}>
+                    <TouchableOpacity onPress={() => {
+                        this.props.navigation.navigate("VueltaCalendarScreen");
+                    }}>
                         <LabelText
                             icon="ios-calendar"
                             label="Vuelta"
-                            value={"DD/MM/AA"}
+                            value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "aaaa-mm-dd"}
+                            style={currentTrip.fechaVuelta ? { color: "blue" } : null}
                         />
                     </TouchableOpacity>
                 </View>
                 <Button style={styles.Button}>
                     <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
+                    
                 </Button>
             </Content>
         )

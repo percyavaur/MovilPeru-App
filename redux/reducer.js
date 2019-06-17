@@ -1,27 +1,68 @@
 import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
 
-export function counter(state, action) {
+export function currentTrip(state, action) {
+  var trip = {};
+
   if (typeof state === "undefined") {
-    return 0;
+    state = trip;
+    return state;
   } else {
     switch (action.type) {
-      case 'INCREMENT':
-        return state + 1;
+      case 'SAVEIDORIGEN':
+        return Object.assign({}, state, {
+          idOrigen: action.idOrigen
+        })
         break;
-      case 'DECREMENT':
-        return state - 1;
+      case 'SAVEORIGEN':
+        return Object.assign({}, state, {
+          origen: action.origen
+        })
+        break;
+      case 'SAVEIDDESTINO':
+        return Object.assign({}, state, {
+          idDestino: action.idDestino
+        })
+        break;
+      case 'SAVEDESTINO':
+        return Object.assign({}, state, {
+          destino: action.destino
+        })
+        break;
+      case 'CANTPASAJEROS':
+        return Object.assign({}, state, {
+          cantPasajeros: action.cantPasajeros
+        })
+        break;
+      case 'DESCPASAJEROS':
+        return Object.assign({}, state, {
+          descPasajeros: action.descPasajeros
+        })
+        break;
+      case 'FECHAIDA':
+        return Object.assign({}, state, {
+          fechaIda: action.fechaIda
+        })
+        break;
+      case 'FECHAVUELTA':
+        return Object.assign({}, state, {
+          fechaVuelta: action.fechaVuelta
+        })
         break;
       default:
-        return state;
+        return state
     }
   }
-};
+}
 
 export async function currentUser(state, action) {
+
+  var jwt = "";
+  var user = "";
+
   if (typeof state === "undefined") {
-    const jwt = await _GetAsyncStorage("jwt");
-    const user = await fetchValidateToken(jwt)
+    jwt = await _GetAsyncStorage("jwt");
+    user = await fetchValidateToken(jwt)
       .then((response) => { return response.json() })
       .then(userJson => { return userJson.data });
     state = user ? user : null;
@@ -30,7 +71,7 @@ export async function currentUser(state, action) {
     switch (action.type) {
 
       case 'LOGIN':
-        const user = await fetchValidateToken(action.jwt)
+        user = await fetchValidateToken(action.jwt)
           .then((response) => { return response.json() })
           .then(userJson => { return userJson.data });
         state = user ? user : null;
@@ -43,13 +84,21 @@ export async function currentUser(state, action) {
         return state;
         break;
 
+      case 'UPDATE':
+        jwt = await _GetAsyncStorage("jwt");
+        user = await fetchValidateToken(jwt)
+          .then((response) => { return response.json() })
+          .then(userJson => { return userJson.data });
+        state = user ? user : null;
+        return state;
+        break;
+
       default:
         return state;
         break;
     }
   }
 };
-
 
 fetchValidateToken = async (jwt) => {
   return await fetch('http://35.236.27.209/php_api_jwt/api/model/functions/validate_token.php', {

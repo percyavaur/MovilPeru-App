@@ -6,7 +6,8 @@ import RF from "react-native-responsive-fontsize";
 import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
 import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
 import { BlurView } from 'expo';
-import Toast from 'react-native-easy-toast';
+import TestAlert from "../../components/alerts/TestAlert";
+import Toast from 'react-native-easy-toast'
 const { width, height } = Dimensions.get('window');
 
 const headerHeight =
@@ -16,12 +17,22 @@ const headerHeight =
 
 export default class LoginModal extends Component {
 
+  static navigationOptions = {
+    header: {
+      visible: false,
+    }
+  };
+
   state = {
     username: "",
     usernameError: false,
     password: "",
     passwordError: false,
     loading: false,
+    alertShow: false,
+    alertTheme: "danger",
+    alertTitle: "",
+    alertContent: "",
   }
 
   handleChange(name, value) {
@@ -36,7 +47,13 @@ export default class LoginModal extends Component {
     });
 
     if (!username || !password) {
-      this.refs.toast.show('¡Por favor, completa los campos!', 1000);
+      this.setState({
+        loading: false,
+        alertShow: true,
+        alertTheme: "danger",
+        alertTitle: "Incorrecto",
+        alertContent: "¡Complete todos los campos!"
+      });
     } else {
       this.setState({ loading: true });
       this.fetchLoginValidation(username, password);
@@ -44,7 +61,7 @@ export default class LoginModal extends Component {
   }
 
   fetchLoginValidation = async (username, password) => {
-    await fetch('http://35.236.27.209/php_api_jwt/api/controller/login.php', {
+    await fetch('http://35.236.27.209/movilPeru/api/controller/login.php', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -52,26 +69,35 @@ export default class LoginModal extends Component {
       },
       body: JSON.stringify({ username: username, password: password })
     }).then(response => { return response.json() })
-      .then(data => { data.jwt ? _SetAsyncStorage("jwt", data.jwt) : null });
-    this.confirmAccess();
+      .then(
+        (data) => {
+          data.success
+            ? this.confirmAccess(data.jwt)
+            : this.deniedAccess(data.message);
+        });
   }
 
-  confirmAccess() {
-    _GetAsyncStorage("jwt").then(jwt => {
-      if (jwt) {
-        this.props.dispatch({ type: 'LOGIN', jwt });
-        this.props.navigation.navigate("Trips");
-      } else {
-        this.refs.toast.show('¡Usuario o contraseña incorrecto!', 1000);
-      }
-    }).then(() => {
-      this.setState({ loading: false });
+  confirmAccess(jwt) {
+    _SetAsyncStorage("jwt", jwt).then(() => {
+      this.props.dispatch({ type: 'LOGIN', jwt });
+      this.props.navigation.navigate("Trips");
+    }).then(() => { this.setState({ loading: false }); });
+  }
+
+  deniedAccess(message) {
+    this.setState({
+      loading: false,
+      alertShow: true,
+      alertTheme: "danger",
+      alertTitle: "Incorrecto",
+      alertContent: message
     });
   }
 
   render() {
 
     const { usernameError, passwordError, username, password } = this.state;
+    const { alertShow, alertTheme, alertTitle, alertContent } = this.state;
 
     return (
       <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "white" }} behavior="padding" enabled>
@@ -80,7 +106,7 @@ export default class LoginModal extends Component {
         />
         <TouchableOpacity
           style={{ top: headerHeight, height: "8%", width: "17%" }}
-          onPress={() => { this.props.navigation.goBack() }}
+          onPress={() => { this.props.navigation.popToTop(); }}
         >
           <Icon active name="md-arrow-round-back" style={{ left: "20%" }} />
         </TouchableOpacity>
@@ -126,6 +152,13 @@ export default class LoginModal extends Component {
             <ActivityIndicator size='large' style={styles.loading} />
           </BlurView>
         }
+        <TestAlert
+          theme={alertTheme}
+          show={alertShow}
+          title={alertTitle}
+          content={alertContent}
+          onClose={() => { this.handleChange("alertShow", false) }}
+        />
       </KeyboardAvoidingView >
     );
   }
