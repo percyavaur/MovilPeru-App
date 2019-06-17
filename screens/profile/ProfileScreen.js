@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
         paddingLeft: RF(1.5),
-        width: width*0.75
+        width: width*0.77
     },
     separator: {
         borderBottomWidth: 1,
