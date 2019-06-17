@@ -20,8 +20,9 @@ export default class IdaVuelta extends React.Component {
                         icon="md-pin"
                         label="Origen"
                         value={currentTrip.origen ? currentTrip.origen : "Ingresa una ciudad de origen"}
-                        style={currentTrip.origen ? { color: "blue" } : null}
-                    />
+                        style={currentTrip.origen ? { color: "blue", fontFamily: "NeoSans"} : null }
+                       
+                    /> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     this.props.navigation.navigate("DestinosScreen");
@@ -30,6 +31,7 @@ export default class IdaVuelta extends React.Component {
                         icon="md-pin"
                         label="Destino"
                         value={currentTrip.destino ? currentTrip.destino : "Ingresa una ciudad o terminal"}
+                        style={currentTrip.destino ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -39,6 +41,7 @@ export default class IdaVuelta extends React.Component {
                         icon="md-people"
                         label="Pasajeros"
                         value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros + " Pasajeros" : "1 Adulto, 0 Niños, 0 bebes"}
+                        style={currentTrip.cantPasajeros ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
 
@@ -50,6 +53,7 @@ export default class IdaVuelta extends React.Component {
                             icon="ios-calendar"
                             label="Ida"
                             value={currentTrip.fechaIda ? currentTrip.fechaIda : "aaaa-mm-dd"}
+                            style={currentTrip.fechaIda ? { color: "blue" } : null}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
@@ -59,12 +63,13 @@ export default class IdaVuelta extends React.Component {
                             icon="ios-calendar"
                             label="Vuelta"
                             value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "aaaa-mm-dd"}
-                            style={{}}
+                            style={currentTrip.fechaVuelta ? { color: "blue" } : null}
                         />
                     </TouchableOpacity>
                 </View>
                 <Button style={styles.Button}>
                     <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
+                    
                 </Button>
             </Content>
         )

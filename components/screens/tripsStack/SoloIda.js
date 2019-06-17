@@ -19,6 +19,7 @@ export default class SoloIda extends React.Component {
                         icon="md-pin"
                         label="Origen"
                         value={currentTrip.origen ? currentTrip.origen :"Ingresa una ciudad de origen"}
+                        style={currentTrip.origen ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -28,6 +29,7 @@ export default class SoloIda extends React.Component {
                         icon="md-pin"
                         label="Destino"
                         value={currentTrip.destino ? currentTrip.destino :"Ingresa una ciudad de destino"}
+                        style={currentTrip.destino ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
@@ -37,6 +39,7 @@ export default class SoloIda extends React.Component {
                         icon="md-people"
                         label="Pasajeros"
                         value={currentTrip.cantPasajeros ? currentTrip.cantPasajeros : "0 Adulto, 0 Niños"}
+                        style={currentTrip.cantPasajeros ? { color: "blue" } : null}
                     />
                 </TouchableOpacity>
               
@@ -48,6 +51,7 @@ export default class SoloIda extends React.Component {
                             icon="ios-calendar"
                             label="Ida"
                             value={currentTrip.fechaIda ? currentTrip.fechaIda : "DD/MM/AA"}
+                            style={currentTrip.fechaIda ? { color: "blue" } : null}
                         />
                     </TouchableOpacity>
                 </View>
