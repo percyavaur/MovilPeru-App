@@ -30,9 +30,6 @@ export default class UserProfile extends React.Component {
             allowsEditing: true,
             aspect: [4, 4],
         });
-
-        console.log(result);
-
         if (!result.cancelled) {
             this.setState({ image: result.uri });
         }
