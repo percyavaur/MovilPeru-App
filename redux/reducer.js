@@ -101,7 +101,7 @@ export async function currentUser(state, action) {
 };
 
 fetchValidateToken = async (jwt) => {
-  return await fetch('http://35.236.27.209/php_api_jwt/api/model/functions/validate_token.php', {
+  return await fetch('http://35.236.27.209/movilPeru/api/model/functions/validate_token.php', {
     method: "POST",
     headers: {
       'Accept': 'application/json',

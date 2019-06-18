@@ -22,6 +22,20 @@ export default class OrigenScreen extends React.Component {
         dataSource: cities
     }
 
+    componentDidMount() {
+        this.fetchGetOrigenes();
+    }
+
+    fetchGetOrigenes = async () => {
+        await fetch('http://35.236.27.209/movilPeru/api/controller/get_origenes.php', {
+            method: "GET"
+        }).then(response => { return response.json() })
+            .then(
+                (data) => {
+                    console.log(data);
+                });
+    }
+
     filterSearch(text) {
         const newData = cities.filter((item) => {
             const departamentoData = item.departamento.toUpperCase();
@@ -36,7 +50,7 @@ export default class OrigenScreen extends React.Component {
     }
 
     saveStorage(idOrigen, departamento, distrito) {
-        const origen = departamento+", "+distrito;
+        const origen = departamento + ", " + distrito;
         this.props.dispatch({ type: 'SAVEIDORIGEN', idOrigen });
         this.props.dispatch({ type: 'SAVEORIGEN', origen });
         this.props.navigation.navigate("Trips");
