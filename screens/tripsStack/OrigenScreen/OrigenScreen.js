@@ -32,7 +32,7 @@ export default class OrigenScreen extends React.Component {
                 (data) => {
                     data.success
                         ? this.setState({ origenes: data.data, dataSource: data.data, loading: false })
-                        : this.setState({ loading: false });;
+                        : this.setState({ loading: false });
                 });
     }
 

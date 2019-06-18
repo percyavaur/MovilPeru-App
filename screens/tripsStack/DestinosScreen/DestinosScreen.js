@@ -22,14 +22,15 @@ export default class DestinosScreen extends React.Component {
   }
 
   fetchDestinos = async () => {
+    this.setState({ loading: true });
     await fetch('http://35.236.27.209/movilPeru/api/controller/get_destinos.php', {
       method: "GET"
     }).then(response => { return response.json() })
       .then(
         (data) => {
           data.success
-            ? this.setState({ destinos: data.data, dataSource: data.data })
-            : null;
+            ? this.setState({ destinos: data.data, dataSource: data.data, loading: false })
+            : this.setState({ loading: false });
         });
   }
 
