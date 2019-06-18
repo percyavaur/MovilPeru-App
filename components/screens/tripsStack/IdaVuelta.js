@@ -7,6 +7,25 @@ const { width, height } = Dimensions.get('window');
 // import Icon from '@expo/vector-icons'
 export default class IdaVuelta extends React.Component {
 
+    fetchGetViajes = async (idOrigen, idDestino, cantPasajeros, fechaIda, fechaSalida) => {
+        await fetch('http://35.236.27.209/movilPeru/api/controller/get_viajes.php', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idOrigen: idOrigen,
+                idDestino: idDestino,
+                cantPasajeros: cantPasajeros,
+                fechaSalida: fechaIda
+            })
+        }).then(response => { return response.json() })
+            .then(
+                (data) => {
+                    alert(JSON.stringify(data.data))
+                });
+    }
 
     render() {
         const { currentTrip } = this.props;
@@ -20,9 +39,9 @@ export default class IdaVuelta extends React.Component {
                         icon="md-pin"
                         label="Origen"
                         value={currentTrip.origen ? currentTrip.origen : "Ingresa una ciudad de origen"}
-                        style={currentTrip.origen ? { color: "blue", fontFamily: "NeoSans"} : null }
-                       
-                    /> 
+                        style={currentTrip.origen ? { color: "blue", fontFamily: "NeoSans" } : null}
+
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     this.props.navigation.navigate("DestinosScreen");
@@ -67,9 +86,8 @@ export default class IdaVuelta extends React.Component {
                         />
                     </TouchableOpacity>
                 </View>
-                <Button style={styles.Button}>
+                <Button style={styles.Button} onPress={() => { this.fetchGetViajes(currentTrip.idOrigen, currentTrip.idDestino, currentTrip.cantPasajeros, currentTrip.fechaIda, currentTrip.fechaSalida) }}>
                     <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
-                    
                 </Button>
             </Content>
         )
