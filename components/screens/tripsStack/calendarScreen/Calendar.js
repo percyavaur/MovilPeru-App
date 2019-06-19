@@ -21,7 +21,6 @@ export default class CalendarScreen extends React.Component {
     render() {
         const { selected } = this.state;
         const { minDate } = this.props;
-        console.log(minDate);
 
         return (
             <View style={{ flex: 1 }}>
