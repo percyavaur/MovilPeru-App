@@ -17,7 +17,7 @@ export default class DestinosScreen extends React.Component {
     destinos: ""
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.fetchDestinos();
   }
 
@@ -61,6 +61,7 @@ export default class DestinosScreen extends React.Component {
   render() {
 
     const { dataSource } = this.state;
+    const { origen } = this.props.currentTrip;
 
     return (
       <View style={{ flex: 1 }}>
@@ -73,11 +74,16 @@ export default class DestinosScreen extends React.Component {
         <FlatList
           data={dataSource}
           vertical={true}
-          renderItem={({ item }) => (
-            <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
-              <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
-            </ListItem>
-          )}
+          renderItem={({ item }) => {
+            const destino = item.departamento + ", " + item.distrito + ", " + item.direccion;
+            if (destino != origen) {
+              return (
+                <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
+                  <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
+                </ListItem>
+              )
+            }
+          }}
           keyExtractor={(item, index) => index.toString()}
         />
         {this.state.loading &&

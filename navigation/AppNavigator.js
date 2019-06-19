@@ -22,6 +22,8 @@ const PasajerosRedux = connect(state => ({ currentTrip: state.currentTrip }))(sc
 const IdaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.IdaCalendarScreen);
 const VueltaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.VueltaCalendarScreen);
 const OrigenRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.OrigenScreen);
+const ViajesRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.ViajesScreen);
+
 export default class AppNavigator extends Component {
 
   render() {
@@ -32,7 +34,8 @@ export default class AppNavigator extends Component {
       DestinosScreen: { screen: DestinosRedux },
       PasajerosScreen: { screen: PasajerosRedux },
       IdaCalendarScreen: { screen: IdaCalendarRedux },
-      VueltaCalendarScreen: { screen: VueltaCalendarRedux }
+      VueltaCalendarScreen: { screen: VueltaCalendarRedux },
+      ViajesScreen: { screen: ViajesRedux }
     });
 
     TripsStack.navigationOptions = {

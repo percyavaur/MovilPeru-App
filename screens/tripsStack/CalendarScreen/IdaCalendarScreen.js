@@ -27,6 +27,7 @@ export default class IdaCalendarScreen extends React.Component {
     const { date } = this.state;
     const fechaIda = date.year + "-" + date.month + "-" + date.day;
     this.props.dispatch({ type: 'FECHAIDA', fechaIda });
+    this.props.dispatch({ type: 'DATEIDA', date });
     this.props.navigation.navigate("Trips");
   }
 

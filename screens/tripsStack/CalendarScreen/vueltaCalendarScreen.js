@@ -27,12 +27,15 @@ export default class VueltaCalendarScreen extends React.Component {
     const { date } = this.state;
     const fechaVuelta = date.year + "-" + date.month + "-" + date.day;
     this.props.dispatch({ type: 'FECHAVUELTA', fechaVuelta });
+    this.props.dispatch({ type: 'DATEVUELTA', date  });
     this.props.navigation.navigate("Trips");
   }
 
   render() {
     const { date } = this.state;
     const ts = date.timestamp ? new Date(date.timestamp) : null;
+    const {dateIda} = this.props.currentTrip;
+
     return (
       <View style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         {date
@@ -50,6 +53,7 @@ export default class VueltaCalendarScreen extends React.Component {
         <View style={{ height: 365 }}>
           <Calendar
             onChange={(date) => { this.handleChange("date", date) }}
+            minDate={dateIda}
           />
         </View>
         <View>
