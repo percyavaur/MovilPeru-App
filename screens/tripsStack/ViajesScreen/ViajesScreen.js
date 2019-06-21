@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Body, Left, Right } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 import Accordion from 'react-native-collapsible/Accordion';
+const { width, height } = Dimensions.get('window');
+
 
 export default class ViajesScreen extends Component {
 
@@ -39,7 +41,6 @@ export default class ViajesScreen extends Component {
         }).then(response => { return response.json() })
             .then(
                 (data) => {
-                    console.log(data.data)
                     this.setState({ tripsData: data.data });
                 });
     }
@@ -59,12 +60,14 @@ export default class ViajesScreen extends Component {
                     <CardItem>
                         <Left>
                             <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                                <View style={{ display: "flex", flexDirection: "column" }}>
+                                <View style={{ display: "flex", flexDirection: "column", width: width * 0.25 }}>
                                     <Text>{section.depOrigen}, {section.disOrigen}</Text>
                                     <Text>{section.horaSalida}</Text>
                                 </View>
                                 <AntDesign name={"right"} color={"#ED1650"} size={RF(5)} />
-                                <Text>{section.depDestino}, {section.disDestino}</Text>
+                                <View style={{ width: width * 0.25 }}>
+                                    <Text>{section.depDestino}, {section.disDestino}</Text>
+                                </View>
                             </View>
                         </Left>
                         <Right>
