@@ -76,7 +76,7 @@ export default class DestinosScreen extends React.Component {
           vertical={true}
           renderItem={({ item }) => {
             const destino = item.departamento + ", " + item.distrito + ", " + item.direccion;
-            if (destino != origen) {
+            if (destino.toUpperCase() != origen.toUpperCase()) {
               return (
                 <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
                   <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>

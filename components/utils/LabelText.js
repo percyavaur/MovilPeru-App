@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native"
+import { View, Text } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import RF from "react-native-responsive-fontsize";
 const Icon = Ionicons;

@@ -16,6 +16,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>ayy :c y yo que quiera conversar mas tiempo contigo</Text>
       </View>
     );
   }
@@ -24,5 +25,8 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
+    top: 250,
+    alignItems: "center",
+    justifyContent: "center",
   }
 });

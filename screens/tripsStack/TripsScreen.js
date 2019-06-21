@@ -1,10 +1,12 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableHighlight, ImageBackground, ActivityIndicator } from "react-native";
+import { Text, StyleSheet, TouchableHighlight, ImageBackground, ActivityIndicator, Dimensions } from "react-native";
 import { View } from "native-base"
 import { NavigationOptions } from "../../navigation/NavigationOptions";
 import TripForm from "../../components/screens/tripsStack/TripForm";
 import Toast from 'react-native-easy-toast';
 import { BlurView } from 'expo';
+
+const { width, height } = Dimensions.get('window');
 
 export default class TripsScreen extends React.Component {
 
@@ -82,13 +84,13 @@ export default class TripsScreen extends React.Component {
                                 this.setState({ loading: value })
                             }} />
                     </View>
+                    <Toast
+                        ref="toast"
+                        style={styles.toast}
+                        position='bottom'
+                        opacity={0.8}
+                    />
                 </ImageBackground>
-                <Toast
-                    ref="toast"
-                    style={styles.toast}
-                    position='bottom'
-                    opacity={0.8}
-                />
                 {this.state.loading &&
                     <BlurView tint="light" intensity={50} style={StyleSheet.absoluteFill}>
                         <ActivityIndicator size='large' style={styles.loading} />
@@ -114,9 +116,10 @@ const styles = StyleSheet.create({
     toast: {
         backgroundColor: '#ED1650',
         width: "70%",
-        position: 'absolute',
+        display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        bottom: width * 0.2
     },
     loading: {
         position: 'absolute',
