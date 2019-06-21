@@ -31,6 +31,9 @@ export default class DestinosScreen extends React.Component {
           data.success
             ? this.setState({ destinos: data.data, dataSource: data.data, loading: false })
             : this.setState({ loading: false });
+        })
+        .catch(function (e) {
+            alert("Algo ha salido mal");
         });
   }
 
@@ -75,7 +78,7 @@ export default class DestinosScreen extends React.Component {
           data={dataSource}
           vertical={true}
           renderItem={({ item }) => {
-            if (item.idDestino!= idOrigen) {
+            if (item.idDestino != idOrigen) {
               return (
                 <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
                   <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>

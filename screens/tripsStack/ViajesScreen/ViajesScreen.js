@@ -26,6 +26,7 @@ export default class ViajesScreen extends Component {
     }
 
     fetchGetViajes = async (idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta) => {
+        this.setState({ loading: true });
         await fetch('http://35.236.27.209/movilPeru/api/controller/get_viajes.php', {
             method: "POST",
             headers: {
@@ -42,7 +43,10 @@ export default class ViajesScreen extends Component {
             .then(
                 (data) => {
                     this.setState({ tripsData: data.data });
-                });
+                })
+            .catch(function (e) {
+                alert("Algo ha salido mal");
+            });
     }
 
     _renderSectionTitle = section => {
@@ -54,19 +58,22 @@ export default class ViajesScreen extends Component {
     };
 
     _renderHeader = section => {
+
+        var hour = section.horaSalida.split(":");
+
         return (
-            <View>
+            <View style={{marginHorizontal: width * 0.025}}>
                 <Card>
                     <CardItem>
                         <Left>
                             <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                                <View style={{ display: "flex", flexDirection: "column", width: width * 0.25 }}>
-                                    <Text>{section.depOrigen}, {section.disOrigen}</Text>
-                                    <Text>{section.horaSalida}</Text>
+                                <View style={{ display: "flex", flexDirection: "column", width: width * 0.25, alignItems: "center" }}>
+                                    <Text style={styles.texto}>{section.depOrigen}, {section.disOrigen}</Text>
+                                    <Text style={styles.texto}>{hour[0]}:{hour[1]}</Text>
                                 </View>
                                 <AntDesign name={"right"} color={"#ED1650"} size={RF(5)} />
                                 <View style={{ width: width * 0.25 }}>
-                                    <Text>{section.depDestino}, {section.disDestino}</Text>
+                                    <Text style={styles.texto}>{section.depDestino}, {section.disDestino}</Text>
                                 </View>
                             </View>
                         </Left>
@@ -81,8 +88,8 @@ export default class ViajesScreen extends Component {
                                     }}
                                 />
                                 <View style={{ display: "flex", flexDirection: "column", alignContent: "center" }}>
-                                    <Text>Precio</Text>
-                                    <Text>S/ {section.precio}</Text>
+                                    <Text style={[styles.texto, { color: 'blue', fontWeight: "bold" }]} >Precio</Text>
+                                    <Text style={styles.texto}>S/ {section.precio}</Text>
                                 </View>
                             </View>
                         </Right>
@@ -94,9 +101,15 @@ export default class ViajesScreen extends Component {
 
     _renderContent = section => {
         return (
-            <View style={{ display: "flex", flexDirection: "column" }}>
-                <Text>{section.horaSalida}</Text>
-                <Text>{section.precio}</Text>
+            <View style={{ display: "flex", flexDirection: "column", marginHorizontal: width * 0.05 }}>
+                <Card>
+                    <CardItem>
+                        <Body>
+                            <Text>{section.horaSalida}</Text>
+                            <Text>{section.precio}</Text>
+                        </Body>
+                    </CardItem>
+                </Card>
             </View>
         );
     };
@@ -110,14 +123,23 @@ export default class ViajesScreen extends Component {
         const { tripsData } = this.state;
 
         return (
-            <Accordion
-                underlayColor={"grey"}
-                sections={tripsData}
-                activeSections={this.state.activeSections}
-                renderHeader={this._renderHeader}
-                renderContent={this._renderContent}
-                onChange={this._updateSections}
-            />
+            <View style={{ backgroundColor: "#F0F2F9", height: height }}>
+                <Accordion
+                    underlayColor={"grey"}
+                    sections={tripsData}
+                    activeSections={this.state.activeSections}
+                    renderHeader={this._renderHeader}
+                    renderContent={this._renderContent}
+                    onChange={this._updateSections}
+                />
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    texto: {
+        fontFamily: "NeoSans",
+        fontSize: RF(2)
+    }
+});

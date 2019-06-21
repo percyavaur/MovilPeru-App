@@ -33,7 +33,10 @@ export default class OrigenScreen extends React.Component {
                     data.success
                         ? this.setState({ origenes: data.data, dataSource: data.data, loading: false })
                         : this.setState({ loading: false });
-                });
+                })
+            .catch(function (e) {
+                alert("Algo ha salido mal");
+            });
     }
 
     filterSearch(text) {
