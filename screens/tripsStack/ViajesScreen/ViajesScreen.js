@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body, Left, Right } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Body, Left, Right, Button } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
@@ -62,7 +62,7 @@ export default class ViajesScreen extends Component {
         var hour = section.horaSalida.split(":");
 
         return (
-            <View style={{marginHorizontal: width * 0.025}}>
+            <View style={{ marginHorizontal: width * 0.025 }}>
                 <Card>
                     <CardItem>
                         <Left>
@@ -108,6 +108,19 @@ export default class ViajesScreen extends Component {
                             <Text>{section.horaSalida}</Text>
                             <Text>{section.precio}</Text>
                         </Body>
+                    </CardItem>
+                    <CardItem>
+                        <Right>
+                            <View style={{ marginLeft: width * 0.5, }}>
+                                <Button style={{
+                                    backgroundColor: "#ED1650", width: width * 0.3,
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Text style={[styles.texto, { color: "white" }]}>Continuar</Text>
+                                </Button>
+                            </View>
+                        </Right>
                     </CardItem>
                 </Card>
             </View>
