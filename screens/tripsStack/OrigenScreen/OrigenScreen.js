@@ -4,6 +4,7 @@ import { ListItem, Item, Input, Icon } from 'native-base';
 import { BlurView } from 'expo';
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 const { width, height } = Dimensions.get('window');
+import * as Animatable from 'react-native-animatable';
 
 export default class OrigenScreen extends React.Component {
 
@@ -66,12 +67,15 @@ export default class OrigenScreen extends React.Component {
 
         return (
             <View style={{ flex: 1 }}>
-                <ListItem>
-                    <Item style={{ borderBottomColor: "red" }}>
-                        <Input placeholder='Ingresa una ciudad o destino' onChangeText={(text) => { this.filterSearch(text) }} />
-                        <Icon name='close-circle' color={"grey"} />
-                    </Item>
-                </ListItem>
+                <View style={{
+                    height: 70, backgroundColor: '#ED1650', justifyContent: 'center',
+                    paddingHorizontal: 5
+                }}>
+                    <Animatable.View animation="slideInRight" duration={1000} style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
+                        <Icon name='ios-search' style={{ fontSize: 24 }} />
+                        <Input style={{ marginLeft: 15 }} placeholder='Buscar' onChangeText={(text) => { this.filterSearch(text) }} />
+                    </Animatable.View>
+                </View>
                 <FlatList
                     inset={true}
                     data={dataSource}
