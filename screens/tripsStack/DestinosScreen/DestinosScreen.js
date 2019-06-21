@@ -61,7 +61,7 @@ export default class DestinosScreen extends React.Component {
   render() {
 
     const { dataSource } = this.state;
-    const { origen } = this.props.currentTrip;
+    const { idOrigen } = this.props.currentTrip;
 
     return (
       <View style={{ flex: 1 }}>
@@ -75,8 +75,7 @@ export default class DestinosScreen extends React.Component {
           data={dataSource}
           vertical={true}
           renderItem={({ item }) => {
-            const destino = item.departamento + ", " + item.distrito + ", " + item.direccion;
-            if (destino.toUpperCase() != origen.toUpperCase()) {
+            if (item.idDestino!= idOrigen) {
               return (
                 <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
                   <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>

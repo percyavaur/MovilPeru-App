@@ -39,6 +39,7 @@ export default class ViajesScreen extends Component {
         }).then(response => { return response.json() })
             .then(
                 (data) => {
+                    console.log(data.data)
                     this.setState({ tripsData: data.data });
                 });
     }
