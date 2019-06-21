@@ -21,7 +21,6 @@ export default class OrigenScreen extends React.Component {
     componentWillMount() {
         this.fetchGetOrigenes();
     }
-
     fetchGetOrigenes = async () => {
         this.setState({ loading: true });
 

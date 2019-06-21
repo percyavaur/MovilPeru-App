@@ -57,6 +57,21 @@ export default class RegisterModal extends Component {
     }
   }
 
+  handleChangeNumeric = (name, value) => {
+    if (/^\d+$/.test(value) || value==='') {
+      this.setState({
+          [name]: value
+      });
+    }
+  }
+  handleChangeText = (name, value) => {
+    if (/^[a-zA-Z ]+$/.test(value) || value==='') {
+      this.setState({
+          [name]: value
+      });
+    }
+  }
+
   registerValidation() {
     const { username, password, confirmPassword, nombres, apellidos, genero, fecNac, tipoDocumento, numDocumento, correoElectronico, telefono } = this.state;
     this.setState({
@@ -191,7 +206,7 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Nombres</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("nombres", value) }}
+                    onChangeText={(value) => { this.handleChangeText("nombres", value) }}
                     value={nombres} />
                 </Item>
                 <Item floatingLabel error={apellidosError}>
@@ -199,7 +214,7 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Apellidos</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("apellidos", value) }}
+                    onChangeText={(value) => { this.handleChangeText("apellidos", value) }}
                     value={apellidos} />
                 </Item>
                 <Item error={generoError}>
@@ -261,8 +276,9 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Numero documento</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("numDocumento", value) }}
-                    value={numDocumento} />
+                    onChangeText={(value) => { this.handleChangeNumeric("numDocumento", value) }}
+                    value={numDocumento}
+                    keyboardType='numeric' />
                 </Item>
               </Form>
             </View>
@@ -284,8 +300,9 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Numero de telefono</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("telefono", value) }}
-                    value={telefono} />
+                    onChangeText={(value) => { this.handleChangeNumeric("telefono", value) }}
+                    value={telefono}
+                    keyboardType="numeric" />
                 </Item>
                 <Button style={styles.Button} onPress={() => {
                   Keyboard.dismiss();
