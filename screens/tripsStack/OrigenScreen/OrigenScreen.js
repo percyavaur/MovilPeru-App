@@ -81,7 +81,7 @@ export default class OrigenScreen extends React.Component {
                     data={dataSource}
                     renderItem={({ item }) => (
                         <ListItem onPress={() => { this.saveStorage(item.idOrigen, item.departamento, item.distrito, item.direccion) }}>
-                            <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
+                            <Animatable.Text animation="lightSpeedIn">{item.departamento} , {item.distrito}, {item.direccion}</Animatable.Text>
                         </ListItem>
                     )}
                     keyExtractor={(item, index) => index.toString()}

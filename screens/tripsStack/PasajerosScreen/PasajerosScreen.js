@@ -4,7 +4,7 @@ import { Button } from "native-base";
 import CountText from "../../../components/utils/CountText";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-
+import * as Animatable from 'react-native-animatable';
 export default class PasajerosScreen extends React.Component {
 
   componentDidMount() {
