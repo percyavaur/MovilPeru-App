@@ -73,7 +73,7 @@ export default class DestinosScreen extends React.Component {
                     height: 70, backgroundColor: '#ED1650', justifyContent: 'center',
                     paddingHorizontal: 5
                 }}>
-                    <Animatable.View animation="slideInRight" duration={1000} style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
+                    <Animatable.View animation="fadeInRightBig" duration={500} style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
                         <Icon name='ios-search' style={{ fontSize: 24 }} />
                         <Input style={{ marginLeft: 15 }} placeholder='Buscar' onChangeText={(text) => { this.filterSearch(text) }} />
                     </Animatable.View>
@@ -85,7 +85,7 @@ export default class DestinosScreen extends React.Component {
             if (item.idDestino != idOrigen) {
               return (
                 <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
-                  <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
+                  <Animatable.Text animation="lightSpeedIn">{item.departamento} , {item.distrito}, {item.direccion}</Animatable.Text>
                 </ListItem>
               )
             }

@@ -4,7 +4,7 @@ import { Button } from "native-base";
 import Calendar from "../../../components/screens/tripsStack/calendarScreen/Calendar";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-
+import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window');
 const mySpanishDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 const mySpanishMonths = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -54,11 +54,11 @@ export default class IdaCalendarScreen extends React.Component {
             onChange={(date) => { this.handleChange("date", date) }}
           />
         </View>
-        <View>
-          <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={ !date ? true : false}>
-            <Text style={styles.buttonLoginText}>Continuar</Text>
+        <Animatable.View  animation="fadeInUpBig">
+          <Button  style={styles.Button} onPress={() => { this.saveStorage() }} disabled={ !date ? true : false}>
+            <Text  style={styles.buttonLoginText}>Continuar</Text>
           </Button>
-        </View>
+        </Animatable.View>
       </View>
     );
 
