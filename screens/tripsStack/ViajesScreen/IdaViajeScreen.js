@@ -8,7 +8,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 const { width, height } = Dimensions.get('window');
 
 
-export default class ViajesScreen extends Component {
+export default class IdaViajeScreen extends Component {
 
     static navigationOptions = ({ navigation }) => {
         return NavigationOptions2(navigation, "Viaje de Ida");
@@ -117,7 +117,9 @@ export default class ViajesScreen extends Component {
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}>
-                                    <Text style={[styles.texto, { color: "white" }]}>Continuar</Text>
+                                    <Text style={[styles.texto, { color: "white" }]}
+                                        onPress={() => { this.props.navigation.navigate("VueltaViajeScreen") }}
+                                    >Continuar</Text>
                                 </Button>
                             </View>
                         </Right>
@@ -137,6 +139,9 @@ export default class ViajesScreen extends Component {
 
         return (
             <View style={{ backgroundColor: "#F0F2F9", height: height }}>
+            <Text style={[styles.texto,{alignItems: 'center', justifyContent: 'center'}]}>
+                {tripsData[0] ? tripsData[0].fechaSalida : null}
+            </Text>
                 <Accordion
                     underlayColor={"grey"}
                     sections={tripsData}

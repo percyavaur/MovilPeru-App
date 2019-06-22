@@ -88,15 +88,15 @@ export default class TripForm extends React.Component {
                 {
                     selectedTab == 0
                         ? <Button
-                            style={[styles.Button, { backgroundColor: !buttonDisable &&  currentTrip.fechaVuelta ?  '#ED1650' : '#bababa' }]}
+                            style={[styles.Button, { backgroundColor: !buttonDisable && currentTrip.fechaVuelta ? '#ED1650' : '#bababa' }]}
                             disabled={!buttonDisable && currentTrip.fechaVuelta ? false : true}
-                            onPress={() => {  this.props.navigation.navigate("ViajesScreen")}}>
+                            onPress={() => { this.props.navigation.navigate("IdaViajeScreen") }}>
                             <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
                         </Button>
                         : <Button
                             style={[styles.Button, { backgroundColor: !buttonDisable ? '#ED1650' : '#bababa' }]}
                             disabled={buttonDisable}
-                            onPress={() => { }}>
+                            onPress={() => { this.props.navigation.navigate("IdaViajeScreen") }}>
                             <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
                         </Button>
                 }

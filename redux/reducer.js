@@ -59,6 +59,21 @@ export function currentTrip(state, action) {
           dateVuelta: action.date
         })
         break;
+      case 'TRIPTYPE':
+        return Object.assign({}, state, {
+          tripType: action.index
+        })
+        break;
+      case 'IDADONE':
+        return Object.assign({}, state, {
+          idaDone: action.idaDone
+        })
+        break;
+      case 'VULETADONE':
+        return Object.assign({}, state, {
+          vueltaDone: action.date
+        })
+        break;
       default:
         return state
     }

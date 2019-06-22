@@ -14,6 +14,11 @@ export default class TripsScreen extends React.Component {
         return NavigationOptions(navigation);
     };
 
+    componentDidMount() {
+        let index = 0;
+        this.props.dispatch({ type: 'TRIPTYPE', index });
+    }
+
     state = {
         selectedTab: 0,
         loading: false
@@ -21,6 +26,7 @@ export default class TripsScreen extends React.Component {
 
     handleTabChange = (index) => {
         this.setState({ selectedTab: index });
+        this.props.dispatch({ type: 'TRIPTYPE', index });
     };
 
     onActivateToast(value) {

@@ -342,7 +342,6 @@ export default class ProfileScreen extends React.Component {
                                 value={correoElectronico}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("correoElectronico", value) }}
-                                keyboardType={}
                             />
                             <InputText
                                 label={"Numero de telefono"}
