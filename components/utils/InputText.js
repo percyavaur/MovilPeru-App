@@ -12,7 +12,7 @@ export default class InputText extends Component {
 
     render() {
 
-        const { label, placeholder, value, editable } = this.props
+        const { label, placeholder, value, editable, keyboardType } = this.props
 
         return (
             <View style={styles.inputContainer}>
@@ -23,6 +23,7 @@ export default class InputText extends Component {
                     value={value}
                     onChangeText={(value) => { this.handleChange(value) }}
                     editable={editable}
+                    keyboardType={keyboardType ? keyboardType : 'default'}
                     selectTextOnFocus={editable}
                 />
             </View>
@@ -53,6 +54,6 @@ const styles = StyleSheet.create({
         elevation: 1,
         fontSize: RF(2.5),
         paddingLeft: RF(1.5),
-        width: width*0.775
+        width: width * 0.775
     }
 });
