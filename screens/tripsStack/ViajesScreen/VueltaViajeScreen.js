@@ -20,7 +20,7 @@ export default class VueltaViajeScreen extends Component {
         loading: false
     };
 
-    componentDidMount() {
+    componentWillMount() {
         const { idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta } = this.props.currentTrip;
         this.fetchGetViajes(idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta);
     }

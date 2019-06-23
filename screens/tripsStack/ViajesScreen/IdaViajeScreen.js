@@ -20,8 +20,9 @@ export default class IdaViajeScreen extends Component {
         loading: false
     };
 
-    componentDidMount() {
+    componentWillMount() {
         const { idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta } = this.props.currentTrip;
+        console.log("Opened")
         this.fetchGetViajes(idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta);
     }
 
@@ -100,6 +101,9 @@ export default class IdaViajeScreen extends Component {
     };
 
     _renderContent = section => {
+
+        const { currentTrip } = this.props;
+
         return (
             <View style={{ display: "flex", flexDirection: "column", marginHorizontal: width * 0.05 }}>
                 <Card>
@@ -118,7 +122,11 @@ export default class IdaViajeScreen extends Component {
                                     justifyContent: 'center'
                                 }}>
                                     <Text style={[styles.texto, { color: "white" }]}
-                                        onPress={() => { this.props.navigation.navigate("VueltaViajeScreen") }}
+                                        onPress={() => {
+                                            console.log(currentTrip.tripType);
+                                            this.props.navigation.navigate("RegisterPassangers")
+                                        }
+                                        }
                                     >Continuar</Text>
                                 </Button>
                             </View>
@@ -139,9 +147,9 @@ export default class IdaViajeScreen extends Component {
 
         return (
             <View style={{ backgroundColor: "#F0F2F9", height: height }}>
-            <Text style={[styles.texto,{alignItems: 'center', justifyContent: 'center'}]}>
-                {tripsData[0] ? tripsData[0].fechaSalida : null}
-            </Text>
+                <Text style={[styles.texto, { alignItems: 'center', justifyContent: 'center' }]}>
+                    {tripsData[0] ? tripsData[0].fechaSalida : null}
+                </Text>
                 <Accordion
                     underlayColor={"grey"}
                     sections={tripsData}

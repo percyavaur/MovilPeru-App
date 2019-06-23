@@ -11,3 +11,4 @@ export {default as ProfileScreen} from "./profile/ProfileScreen";
 export {default as OrigenScreen} from "./tripsStack/OrigenScreen/OrigenScreen";
 export {default as IdaViajeScreen} from "./tripsStack/ViajesScreen/IdaViajeScreen";
 export {default as VueltaViajeScreen} from "./tripsStack/ViajesScreen/VueltaViajeScreen";
+export {default as RegisterPassangers} from "./tripsStack/ViajesScreen/RegisterPassangers";

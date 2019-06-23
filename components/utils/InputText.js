@@ -25,6 +25,7 @@ export default class InputText extends Component {
                     editable={editable}
                     keyboardType={keyboardType ? keyboardType : 'default'}
                     selectTextOnFocus={editable}
+                    maxLength={this.props.maxLength}
                 />
             </View>
         )
