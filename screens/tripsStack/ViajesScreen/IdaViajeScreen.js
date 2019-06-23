@@ -124,7 +124,9 @@ export default class IdaViajeScreen extends Component {
                                     <Text style={[styles.texto, { color: "white" }]}
                                         onPress={() => {
                                             console.log(currentTrip.tripType);
-                                            this.props.navigation.navigate("RegisterPassangers")
+                                            currentTrip.tripType == 0
+                                                ? this.props.navigation.navigate("VueltaViajeScreen")
+                                                : this.props.navigation.navigate("RegisterPassangers")
                                         }
                                         }
                                     >Continuar</Text>
