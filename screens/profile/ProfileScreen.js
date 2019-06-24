@@ -328,6 +328,8 @@ export default class ProfileScreen extends React.Component {
                                 value={numDocumento}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("numDocumento", value) }}
+                                keyboardType="number-pad"
+                                maxLength={8}
                             />
                             <View style={styles.separator} />
                             <Text style={{
@@ -349,6 +351,8 @@ export default class ProfileScreen extends React.Component {
                                 value={telefono}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("telefono", value) }}
+                                keyboardType="number-pad"
+                                maxLength = {10}
                             />
                             <InputText
                                 label={"Direccion"}
