@@ -71,17 +71,17 @@ export default class OrigenScreen extends React.Component {
                     height: 70, backgroundColor: '#ED1650', justifyContent: 'center',
                     paddingHorizontal: 5
                 }}>
-                    <Animatable.View animation="slideInRight" duration={1000} style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
+                    <View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
                         <Icon name='ios-search' style={{ fontSize: 24 }} />
                         <Input style={{ marginLeft: 15 }} placeholder='Buscar' onChangeText={(text) => { this.filterSearch(text) }} />
-                    </Animatable.View>
+                    </View>
                 </View>
                 <FlatList
                     inset={true}
                     data={dataSource}
                     renderItem={({ item }) => (
                         <ListItem onPress={() => { this.saveStorage(item.idOrigen, item.departamento, item.distrito, item.direccion) }}>
-                            <Animatable.Text animation="lightSpeedIn">{item.departamento} , {item.distrito}, {item.direccion}</Animatable.Text>
+                            <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
                         </ListItem>
                     )}
                     keyExtractor={(item, index) => index.toString()}

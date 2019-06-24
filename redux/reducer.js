@@ -64,14 +64,14 @@ export function currentTrip(state, action) {
           tripType: action.index
         })
         break;
-      case 'IDADONE':
+      case 'IDIDA':
         return Object.assign({}, state, {
-          idaDone: action.idaDone
+          idIda: action.idViaje
         })
         break;
-      case 'VULETADONE':
+      case 'IDVUELTA':
         return Object.assign({}, state, {
-          vueltaDone: action.date
+          idVuelta: action.idViaje
         })
         break;
       default:

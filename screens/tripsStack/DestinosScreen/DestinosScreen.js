@@ -5,7 +5,7 @@ import { BlurView } from 'expo';
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window');
- 
+
 export default class DestinosScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -33,9 +33,9 @@ export default class DestinosScreen extends React.Component {
             ? this.setState({ destinos: data.data, dataSource: data.data, loading: false })
             : this.setState({ loading: false });
         })
-        .catch(function (e) {
-            alert("Algo ha salido mal");
-        });
+      .catch(function (e) {
+        alert("Algo ha salido mal");
+      });
   }
 
   filterSearch(text) {
@@ -69,15 +69,15 @@ export default class DestinosScreen extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
-           <View style={{
-                    height: 70, backgroundColor: '#ED1650', justifyContent: 'center',
-                    paddingHorizontal: 5
-                }}>
-                    <Animatable.View animation="fadeInRightBig" duration={500} style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
-                        <Icon name='ios-search' style={{ fontSize: 24 }} />
-                        <Input style={{ marginLeft: 15 }} placeholder='Buscar' onChangeText={(text) => { this.filterSearch(text) }} />
-                    </Animatable.View>
-                </View>
+        <View style={{
+          height: 70, backgroundColor: '#ED1650', justifyContent: 'center',
+          paddingHorizontal: 5
+        }}>
+          <View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
+            <Icon name='ios-search' style={{ fontSize: 24 }} />
+            <Input style={{ marginLeft: 15 }} placeholder='Buscar' onChangeText={(text) => { this.filterSearch(text) }} />
+          </View>
+        </View>
         <FlatList
           data={dataSource}
           vertical={true}
@@ -85,7 +85,7 @@ export default class DestinosScreen extends React.Component {
             if (item.idDestino != idOrigen) {
               return (
                 <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
-                  <Animatable.Text animation="lightSpeedIn">{item.departamento} , {item.distrito}, {item.direccion}</Animatable.Text>
+                  <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
                 </ListItem>
               )
             }

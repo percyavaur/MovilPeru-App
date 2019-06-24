@@ -54,11 +54,11 @@ export default class IdaCalendarScreen extends React.Component {
             onChange={(date) => { this.handleChange("date", date) }}
           />
         </View>
-        <Animatable.View  animation="fadeInUpBig">
-          <Button  style={styles.Button} onPress={() => { this.saveStorage() }} disabled={ !date ? true : false}>
-            <Text  style={styles.buttonLoginText}>Continuar</Text>
+        <View >
+          <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={!date ? true : false}>
+            <Text style={styles.buttonLoginText}>Continuar</Text>
           </Button>
-        </Animatable.View>
+        </View>
       </View>
     );
 

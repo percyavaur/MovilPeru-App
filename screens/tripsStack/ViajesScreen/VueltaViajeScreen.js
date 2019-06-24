@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Body, Left, Right, Button } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
 import Accordion from 'react-native-collapsible/Accordion';
+import { BlurView } from 'expo';
 const { width, height } = Dimensions.get('window');
 
 
@@ -21,12 +22,12 @@ export default class VueltaViajeScreen extends Component {
     };
 
     componentWillMount() {
-        const { idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta } = this.props.currentTrip;
+        this.setState({ loading: true });
+        const { idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta, idIda } = this.props.currentTrip;
         this.fetchGetViajes(idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta);
     }
 
     fetchGetViajes = async (idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta) => {
-        this.setState({ loading: true });
         await fetch('http://35.236.27.209/movilPeru/api/controller/get_viajes.php', {
             method: "POST",
             headers: {
@@ -42,11 +43,16 @@ export default class VueltaViajeScreen extends Component {
         }).then(response => { return response.json() })
             .then(
                 (data) => {
-                    this.setState({ tripsData: data.data });
+                    this.setState({ tripsData: data.data, loading: false });
                 })
             .catch(function (e) {
                 alert("Algo ha salido mal");
             });
+    }
+
+    stateToStorage(idViaje) {
+        this.props.dispatch({ type: 'IDVUELTA', idViaje });
+        this.props.navigation.navigate("RegisterPassangers");
     }
 
     _renderSectionTitle = section => {
@@ -116,7 +122,8 @@ export default class VueltaViajeScreen extends Component {
                                     backgroundColor: "#ED1650", width: width * 0.3,
                                     alignItems: 'center',
                                     justifyContent: 'center'
-                                }}>
+                                }}
+                                    onPress={() => { this.stateToStorage(section.idViaje) }}>
                                     <Text style={[styles.texto, { color: "white" }]}>Continuar</Text>
                                 </Button>
                             </View>
@@ -137,9 +144,14 @@ export default class VueltaViajeScreen extends Component {
 
         return (
             <View style={{ backgroundColor: "#F0F2F9", height: height, display: "flex" }}>
-                <Text style={[styles.texto,{alignItems: 'center', justifyContent: 'center'}]}>
-                    {tripsData[0] ? tripsData[0].fechaSalida : null}
-                </Text>
+                <View style={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}>
+                    <Text style={[styles.texto, { alignItems: 'center', justifyContent: 'center' }]}>
+                        {tripsData[0] ? tripsData[0].fechaSalida : null}
+                    </Text>
+                </View>
                 <Accordion
                     underlayColor={"grey"}
                     sections={tripsData}
@@ -148,6 +160,11 @@ export default class VueltaViajeScreen extends Component {
                     renderContent={this._renderContent}
                     onChange={this._updateSections}
                 />
+                {this.state.loading &&
+                    <BlurView tint="light" intensity={50} style={StyleSheet.absoluteFill}>
+                        <ActivityIndicator size='large' style={styles.loading} />
+                    </BlurView>
+                }
             </View>
         );
     }
@@ -157,5 +174,14 @@ const styles = StyleSheet.create({
     texto: {
         fontFamily: "NeoSans",
         fontSize: RF(2)
+    },
+    loading: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
