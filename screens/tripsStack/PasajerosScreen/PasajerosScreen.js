@@ -42,7 +42,7 @@ export default class PasajerosScreen extends React.Component {
     }
     else if (name == "bebes") {
       totalPassengers = value + niños + adultos;
-      totalPassengers <= 9 && value >= 0 ? this.handleChange(name, value) : null;
+      totalPassengers <= 9 && (value >= 0 && value <= adultos) ? this.handleChange(name, value) : null;
     }
 
   }

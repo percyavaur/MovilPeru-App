@@ -26,6 +26,8 @@ export default class InputText extends Component {
                     keyboardType={keyboardType ? keyboardType : 'default'}
                     selectTextOnFocus={editable}
                     maxLength={this.props.maxLength}
+                    autoCorrect={false}
+                    autoCapitalize='none'
                 />
             </View>
         )

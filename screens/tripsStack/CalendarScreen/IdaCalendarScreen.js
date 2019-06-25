@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Button } from "native-base";
 import Calendar from "../../../components/screens/tripsStack/calendarScreen/Calendar";
 import RF from "react-native-responsive-fontsize";
@@ -49,16 +49,18 @@ export default class IdaCalendarScreen extends React.Component {
           </View>
           : null
         }
-        <View style={{ height: 365 }}>
-          <Calendar
-            onChange={(date) => { this.handleChange("date", date) }}
-          />
-        </View>
-        <View >
-          <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={!date ? true : false}>
-            <Text style={styles.buttonLoginText}>Continuar</Text>
-          </Button>
-        </View>
+        <ScrollView>
+          <View style={{ height: 365 }}>
+            <Calendar
+              onChange={(date) => { this.handleChange("date", date) }}
+            />
+          </View>
+          <View style={{marginBottom:50}}>
+            <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={!date ? true : false}>
+              <Text style={styles.buttonLoginText}>Continuar</Text>
+            </Button>
+          </View>
+        </ScrollView>
       </View>
     );
 

@@ -53,7 +53,12 @@ export default class IdaViajeScreen extends Component {
 
     stateToStorage(idViaje) {
         this.props.dispatch({ type: 'IDIDA', idViaje });
-        this.props.navigation.navigate("VueltaViajeScreen");
+        const { tripType } = this.props.currentTrip;
+        if (tripType == 0) {
+            this.props.navigation.navigate("VueltaViajeScreen");
+        } else {
+            this.props.navigation.navigate("RegisterPassangers");
+        }
     }
 
     _renderSectionTitle = section => {

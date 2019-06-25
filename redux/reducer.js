@@ -74,6 +74,9 @@ export function currentTrip(state, action) {
           idVuelta: action.idViaje
         })
         break;
+      case 'DELETEALL':
+        return state = {};
+        break;
       default:
         return state
     }
