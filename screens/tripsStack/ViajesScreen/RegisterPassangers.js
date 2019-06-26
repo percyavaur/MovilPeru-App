@@ -56,16 +56,6 @@ export default class RegisterPassangers extends React.Component {
         const { descPasajeros, idIda, idVuelta, tripType } = this.props.currentTrip;
         const jwt = await _GetAsyncStorage("jwt");
 
-        console.log(JSON.stringify({
-            idViajeIda: idIda,
-            idViajeVuelta: tripType == 0 ? idVuelta : 0,
-            cantAdultos: descPasajeros.adultos,
-            cantNinos: descPasajeros.niños,
-            cantBebes: descPasajeros.bebes,
-            passangersData: passangersData,
-            jwt: jwt
-        }))
-
         await fetch('http://35.236.27.209/movilPeru/api/controller/register_venta.php', {
             method: "POST",
             headers: {
@@ -97,123 +87,123 @@ export default class RegisterPassangers extends React.Component {
         const { passangersData } = this.state;
 
         return (
-            <View style={{ backgroundColor: "#f7fafc", flex: 1, height: height }}>
-                <ScrollView style={{ marginHorizontal: width * 0.05 }}>
-                    <View style={{ flex: 1 }} >
-                        {
-                            passangersData.map((item, index) => {
-                                return (
-                                    <Card key={index} >
-                                        <CardItem header>
-                                            <Text style={{
-                                                fontWeight: "bold",
-                                                fontFamily: "NeoSans",
-                                                fontSize: RF(3.5),
-                                                color: "#525f7f"
-                                            }}>
-                                                {item.idTipoPasaje == 1 ? ("Adulto") : null}
-                                                {item.idTipoPasaje == 2 ? ("Niño") : null}
-                                                {item.idTipoPasaje == 3 ? ("Bebe") : null}
-                                            </Text>
+            <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "#f7fafc" }} behavior="padding" enabled>
+                    <ScrollView style={{ marginHorizontal: width * 0.05 }}>
+                        <View style={{ flex: 1 }} >
+                            {
+                                passangersData.map((item, index) => {
+                                    return (
+                                        <Card key={index} >
+                                            <CardItem header>
+                                                <Text style={{
+                                                    fontWeight: "bold",
+                                                    fontFamily: "NeoSans",
+                                                    fontSize: RF(3.5),
+                                                    color: "#525f7f"
+                                                }}>
+                                                    {item.idTipoPasaje == 1 ? ("Adulto") : null}
+                                                    {item.idTipoPasaje == 2 ? ("Niño") : null}
+                                                    {item.idTipoPasaje == 3 ? ("Bebe") : null}
+                                                </Text>
 
-                                        </CardItem>
-                                        <CardItem style={{ backgroundColor: "#F0F2F9" }}>
-                                            <Body style={{
-                                                display: "flex", flexDirection: "column",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                            }}>
-                                                <InputText
-                                                    label={"Nombres"}
-                                                    placeholder={"Nombre"}
-                                                    style={{ fontFamily: "NeoSans", borderColor: "black" }}
-                                                    onChange={(value) => { this.handleChange(index, "nombres", value) }}
-                                                    value={item.nombres}
-                                                    keyboardType={"visible-password"}
-                                                />
-                                                <InputText
-                                                    label={"Apellidos"}
-                                                    placeholder={"Apellido"}
-                                                    style={{ fontFamily: "NeoSans", borderColor: "black" }}
-                                                    onChange={(value) => { this.handleChange(index, "apellidos", value) }}
-                                                    value={item.apellidos}
-                                                    keyboardType={"visible-password"}
-                                                />
-                                                <View style={styles.inputContainer}>
-                                                    <Text style={styles.inputLabel}>Tipo de documento</Text>
-                                                    <Picker
-                                                        note
-                                                        mode="dropdown"
-                                                        style={styles.input}
-                                                        itemTextStyle={{ fontFamily: "NeoSans", color: "black" }}
-                                                        textStyle={{ fontFamily: "NeoSans", color: "black" }}
-                                                        selectedValue={item.tipoDocumento}
-                                                        onValueChange={(value) => { this.handleChange(index, "tipoDocumento", value) }}
-                                                    >
-                                                        <Picker.Item label="Selecciona el tipo documento" value={null} />
-                                                        <Picker.Item label="DNI" value="DNI" />
-                                                        <Picker.Item label="Pasaporte" value="Pasaporte" />
-                                                    </Picker>
-                                                </View>
-                                                <InputText
-                                                    label={"Numero de documento"}
-                                                    placeholder={"Numero de documento"}
-                                                    style={{ fontFamily: "NeoSans", borderColor: "black" }}
-                                                    onChange={(value) => { this.handleChange(index, "numDocumento", value) }}
-                                                    value={item.numDocumento}
-                                                    keyboardType={"visible-password"}
-                                                />
-                                            </Body>
-                                        </CardItem>
-                                    </Card>
-                                )
-                            })
-                        }
-                    </View>
-                    <Card>
-                        <CardItem header>
-                            <Text style={{
-                                fontWeight: "bold",
-                                fontFamily: "NeoSans",
-                                fontSize: RF(3.5),
-                                color: "#525f7f"
-                            }}>
-                                Contacto
+                                            </CardItem>
+                                            <CardItem style={{ backgroundColor: "#F0F2F9" }}>
+                                                <Body style={{
+                                                    display: "flex", flexDirection: "column",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                }}>
+                                                    <InputText
+                                                        label={"Nombres"}
+                                                        placeholder={"Nombre"}
+                                                        style={{ fontFamily: "NeoSans", borderColor: "black" }}
+                                                        onChange={(value) => { this.handleChange(index, "nombres", value) }}
+                                                        value={item.nombres}
+                                                        keyboardType={"visible-password"}
+                                                    />
+                                                    <InputText
+                                                        label={"Apellidos"}
+                                                        placeholder={"Apellido"}
+                                                        style={{ fontFamily: "NeoSans", borderColor: "black" }}
+                                                        onChange={(value) => { this.handleChange(index, "apellidos", value) }}
+                                                        value={item.apellidos}
+                                                        keyboardType={"visible-password"}
+                                                    />
+                                                    <View style={styles.inputContainer}>
+                                                        <Text style={styles.inputLabel}>Tipo de documento</Text>
+                                                        <Picker
+                                                            note
+                                                            mode="dropdown"
+                                                            style={styles.input}
+                                                            itemTextStyle={{ fontFamily: "NeoSans", color: "black" }}
+                                                            textStyle={{ fontFamily: "NeoSans", color: "black" }}
+                                                            selectedValue={item.tipoDocumento}
+                                                            onValueChange={(value) => { this.handleChange(index, "tipoDocumento", value) }}
+                                                        >
+                                                            <Picker.Item label="Selecciona el tipo documento" value={null} />
+                                                            <Picker.Item label="DNI" value="DNI" />
+                                                            <Picker.Item label="Pasaporte" value="Pasaporte" />
+                                                        </Picker>
+                                                    </View>
+                                                    <InputText
+                                                        label={"Numero de documento"}
+                                                        placeholder={"Numero de documento"}
+                                                        style={{ fontFamily: "NeoSans", borderColor: "black" }}
+                                                        onChange={(value) => { this.handleChange(index, "numDocumento", value) }}
+                                                        value={item.numDocumento}
+                                                        keyboardType={"visible-password"}
+                                                    />
+                                                </Body>
+                                            </CardItem>
+                                        </Card>
+                                    )
+                                })
+                            }
+                        </View>
+                        <Card>
+                            <CardItem header>
+                                <Text style={{
+                                    fontWeight: "bold",
+                                    fontFamily: "NeoSans",
+                                    fontSize: RF(3.5),
+                                    color: "#525f7f"
+                                }}>
+                                    Contacto
                             </Text>
 
-                        </CardItem>
-                        <CardItem style={{ backgroundColor: "#F0F2F9" }}>
-                            <Body style={{
-                                display: "flex", flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "center",
+                            </CardItem>
+                            <CardItem style={{ backgroundColor: "#F0F2F9" }}>
+                                <Body style={{
+                                    display: "flex", flexDirection: "column",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}>
+                                    <InputText
+                                        label={"Numero de telefono"}
+                                        placeholder={"Telefono"}
+                                        style={{ fontFamily: "NeoSans", borderColor: "black" }}
+                                        onChange={(value) => { this.handleChange2("telefono", value) }}
+                                        value={""}
+                                        keyboardType={"visible-password"}
+                                    />
+                                </Body>
+                            </CardItem>
+                        </Card>
+                        <View style={{ marginVertical: width * 0.05 }}>
+                            <View style={{
+                                marginLeft: width * 0.39,
                             }}>
-                                <InputText
-                                    label={"Numero de telefono"}
-                                    placeholder={"Telefono"}
-                                    style={{ fontFamily: "NeoSans", borderColor: "black" }}
-                                    onChange={(value) => { this.handleChange2("telefono", value) }}
-                                    value={""}
-                                    keyboardType={"visible-password"}
-                                />
-                            </Body>
-                        </CardItem>
-                    </Card>
-                    <View style={{ marginVertical: width * 0.05 }}>
-                        <View style={{
-                            marginLeft: width * 0.39,
-                        }}>
-                            <Button
-                                onPress={() => {
-                                    this.fetchRegisterVenta()
-                                }}
-                                style={styles.Button}>
-                                <Text style={styles.buttonLoginText}>Reservar Pasajes</Text>
-                            </Button>
+                                <Button
+                                    onPress={() => {
+                                        this.fetchRegisterVenta()
+                                    }}
+                                    style={styles.Button}>
+                                    <Text style={styles.buttonLoginText}>Reservar Pasajes</Text>
+                                </Button>
+                            </View>
                         </View>
-                    </View>
-                </ScrollView>
-            </View>
+                    </ScrollView>
+            </KeyboardAvoidingView>
         );
     }
 }

@@ -107,7 +107,9 @@ export async function currentUser(state, action) {
         break;
 
       case 'LOGOUT':
-        _RemoveStorage("jwt");
+        jwt = await _GetAsyncStorage("jwt");
+        await fetchLogout(jwt);
+        await _RemoveStorage("jwt");
         state = null;
         return state;
         break;
@@ -137,4 +139,15 @@ fetchValidateToken = async (jwt) => {
     },
     body: JSON.stringify({ jwt: jwt })
   });
+}
+
+fetchLogout = async (jwt) => {
+  await fetch('http://35.236.27.209/movilPeru/api/controller/update_Token.php', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ jwt: jwt, expoToken: "" })
+  })
 }
