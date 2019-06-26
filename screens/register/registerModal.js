@@ -58,16 +58,16 @@ export default class RegisterModal extends Component {
   }
 
   handleChangeNumeric = (name, value) => {
-    if (/^\d+$/.test(value) || value==='') {
+    if (/^\d+$/.test(value) || value === '') {
       this.setState({
-          [name]: value
+        [name]: value
       });
     }
   }
   handleChangeText = (name, value) => {
-    if (/^[a-zA-Z ]+$/.test(value) || value==='') {
+    if (/^[a-zA-Z ]+$/.test(value) || value === '') {
       this.setState({
-          [name]: value
+        [name]: value
       });
     }
   }
@@ -120,7 +120,7 @@ export default class RegisterModal extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username:username, password:password, nombres:nombres, apellidos:apellidos, genero:genero, fecNac:fecNac, tipoDocumento:tipoDocumento, numDocumento:numDocumento, correoElectronico:correoElectronico, telefono:telefono })
+      body: JSON.stringify({ username: username, password: password, nombres: nombres, apellidos: apellidos, genero: genero, fecNac: fecNac, tipoDocumento: tipoDocumento, numDocumento: numDocumento, correoElectronico: correoElectronico, telefono: telefono })
     }).then(response => { return response.json() })
       .then(data => {
         if (data.success) {
@@ -163,7 +163,9 @@ export default class RegisterModal extends Component {
         >
           <Icon active name="md-arrow-round-back" style={{ left: "20%" }} />
         </TouchableOpacity>
-        <ScrollView>
+        <ScrollView style={{
+          marginTop: width * 0.05
+        }}>
           <View style={styles.container}>
             <View style={{ flexDirection: "column", marginHorizontal: width * 0.05, marginBottom: width * 0.1 }}>
               <Form>

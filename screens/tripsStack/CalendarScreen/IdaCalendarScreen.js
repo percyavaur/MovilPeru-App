@@ -24,11 +24,27 @@ export default class IdaCalendarScreen extends React.Component {
   }
 
   saveStorage() {
-    const { date } = this.state;
+    var { date } = this.state;
     const fechaIda = date.year + "-" + date.month + "-" + date.day;
     this.props.dispatch({ type: 'FECHAIDA', fechaIda });
     this.props.dispatch({ type: 'DATEIDA', date });
+
+    this.verifyTimes(date);
+
     this.props.navigation.navigate("Trips");
+  }
+
+  verifyTimes(dateIda) {
+    const { dateVuelta } = this.props.currentTrip;
+
+    if (dateVuelta) {
+      if (new Date(dateIda.timestamp) > new Date(dateVuelta.timestamp)) {
+        const fechaVuelta = "";
+        var date = "";
+        this.props.dispatch({ type: 'FECHAVUELTA', fechaVuelta });
+        this.props.dispatch({ type: 'DATEVUELTA', date });
+      }
+    }
   }
 
   render() {
@@ -55,7 +71,7 @@ export default class IdaCalendarScreen extends React.Component {
               onChange={(date) => { this.handleChange("date", date) }}
             />
           </View>
-          <View style={{marginBottom:50}}>
+          <View style={{ marginBottom: 50 }}>
             <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={!date ? true : false}>
               <Text style={styles.buttonLoginText}>Continuar</Text>
             </Button>

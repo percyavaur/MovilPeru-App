@@ -56,8 +56,14 @@ export default class DestinosScreen extends React.Component {
 
   saveStorage(idDestino, departamento, distrito, direccion) {
     const destino = departamento + ", " + distrito + ", " + direccion;
+    const cantPasajeros = 1;
+    const descPasajeros = { adultos:1, niños:0, bebes:0 };
+    
     this.props.dispatch({ type: 'SAVEIDDESTINO', idDestino });
     this.props.dispatch({ type: 'SAVEDESTINO', destino });
+    
+    this.props.dispatch({ type: 'CANTPASAJEROS', cantPasajeros });
+    this.props.dispatch({ type: 'DESCPASAJEROS', descPasajeros });
     this.props.navigation.navigate("Trips");
   }
 
