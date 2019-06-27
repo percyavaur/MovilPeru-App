@@ -13,3 +13,4 @@ export {default as VueltaViajeScreen} from "./tripsStack/ViajesScreen/VueltaViaj
 export {default as RegisterPassangers} from "./tripsStack/ViajesScreen/RegisterPassangers";
 export {default as NewsScreen} from "./newsStack/newsScreen";
 export {default as SelectNewScreen} from "./newsStack/selectNewScreen";
+export {default as UserTrips} from "./userTrips/UserTrips";

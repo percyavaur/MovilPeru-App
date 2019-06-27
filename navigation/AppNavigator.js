@@ -71,12 +71,11 @@ export default class AppNavigator extends Component {
       )
     }
 
-    const GraphStack = createStackNavigator({
-      Graph: { screen: screen.GraphScreen }
+    const pasajesStack = createStackNavigator({
+      pasajes: { screen: screen.UserTrips }
     });
-
-    GraphStack.navigationOptions = {
-      tabBarLabel: "Graph",
+    pasajesStack.navigationOptions = {
+      tabBarLabel: "Tus Pasajes",
       tabBarIcon: ({ focused }) => (
         <Icon.Foundation
           color={focused ? "#ED1650" : "white"}
@@ -121,7 +120,7 @@ export default class AppNavigator extends Component {
       {
         Trips: TripsStack,
         News: NewsStack,
-        Graph: GraphStack,
+        Pasajes: pasajesStack,
       }, {
         initialRouteName: "Trips",
         navigationOptions: () => {
