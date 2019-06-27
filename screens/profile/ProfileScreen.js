@@ -36,7 +36,13 @@ export default class ProfileScreen extends React.Component {
         alertTitle: "",
         alertContent: "",
     }
-
+    handleChangeText = (name, value) => {
+        if (/^[a-zA-Z ]+$/.test(value) || value === '') {
+          this.setState({
+            [name]: value
+          });
+        }
+      }
     componentDidMount = async () => {
         const currentUser = await this.props.currentUser
         currentUser ? this.propsToState(currentUser) : null;
@@ -253,14 +259,14 @@ export default class ProfileScreen extends React.Component {
                                 placeholder={"Nombres"}
                                 value={nombres}
                                 editable={editable}
-                                onChange={(value) => { this.handleChange("nombres", value) }}
+                                onChange={(value) => { this.handleChangeText("nombres", value) }}
                             />
                             <InputText
                                 label={"Apellidos"}
                                 placeholder={"Apellidos"}
                                 value={apellidos}
                                 editable={editable}
-                                onChange={(value) => { this.handleChange("apellidos", value) }}
+                                onChange={(value) => { this.handleChangeText("apellidos", value) }}
                             />
                             <View style={styles.inputContainer}>
                                 <Text style={styles.inputLabel}>Genero</Text>
@@ -295,6 +301,8 @@ export default class ProfileScreen extends React.Component {
                                                 textStyle={{ color: "black" }}
                                                 placeHolderTextStyle={{ color: "grey" }}
                                                 onDateChange={(value) => { this.handleChange("fecNac", value) }}
+                                                minimumDate={new Date(1900, 1, 1)}
+                                                maximumDate={new Date(2019, 12, 31)}
                                             />
                                         </View>
                                     </View>
@@ -344,6 +352,7 @@ export default class ProfileScreen extends React.Component {
                                 value={correoElectronico}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("correoElectronico", value) }}
+                                keyboardType="email-address"
                             />
                             <InputText
                                 label={"Numero de telefono"}

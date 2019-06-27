@@ -252,6 +252,8 @@ export default class RegisterModal extends Component {
                       placeHolderTextStyle={{ color: "grey" }}
                       onDateChange={(value) => { this.handleChange("fecNac", value) }}
                       disabled={false}
+                      minimumDate={new Date(1900, 1, 1)}
+                      maximumDate={new Date(2019, 12, 31)}
                     />
                   </View>
                 </Item>
@@ -280,7 +282,8 @@ export default class RegisterModal extends Component {
                     style={{ fontFamily: "NeoSans" }}
                     onChangeText={(value) => { this.handleChangeNumeric("numDocumento", value) }}
                     value={numDocumento}
-                    keyboardType='numeric' />
+                    keyboardType="number-pad"
+                    maxLength={10} />
                 </Item>
               </Form>
             </View>
@@ -295,7 +298,9 @@ export default class RegisterModal extends Component {
                   <Input
                     style={{ fontFamily: "NeoSans" }}
                     onChangeText={(value) => { this.handleChange("correoElectronico", value) }}
-                    value={correoElectronico} />
+                    value={correoElectronico}
+                    keyboardType="email-address"
+                     />
                 </Item>
                 <Item floatingLabel error={telefonoError}>
                   <Icon active name='ios-call' />
@@ -304,7 +309,8 @@ export default class RegisterModal extends Component {
                     style={{ fontFamily: "NeoSans" }}
                     onChangeText={(value) => { this.handleChangeNumeric("telefono", value) }}
                     value={telefono}
-                    keyboardType="numeric" />
+                    keyboardType="number-pad"
+                    maxLength = {9}  />
                 </Item>
                 <Button style={styles.Button} onPress={() => {
                   Keyboard.dismiss();

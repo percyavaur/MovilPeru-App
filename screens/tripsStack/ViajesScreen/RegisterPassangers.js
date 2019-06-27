@@ -151,7 +151,8 @@ export default class RegisterPassangers extends React.Component {
                                                         style={{ fontFamily: "NeoSans", borderColor: "black" }}
                                                         onChange={(value) => { this.handleChange(index, "numDocumento", value) }}
                                                         value={item.numDocumento}
-                                                        keyboardType={"visible-password"}
+                                                        keyboardType="number-pad"
+                                                        maxLength={10}
                                                     />
                                                 </Body>
                                             </CardItem>
