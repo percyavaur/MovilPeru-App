@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Dimensions, Image, RefreshControl, FlatList, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, Image, RefreshControl, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { Card, CardItem, Body, Text } from "native-base";
 import { NavigationOptions } from "../../navigation/NavigationOptions";
+import { BlurView } from 'expo';
 const { width, height } = Dimensions.get('window');
 import RF from "react-native-responsive-fontsize";
 
@@ -12,8 +13,9 @@ export default class HomeScreen extends React.Component {
   };
 
   state = {
-    news: [{},{},{},{}],
-    refreshing: false
+    news: [{}, {}, {}, {}],
+    refreshing: false,
+    loading: false
   }
 
   componentDidMount() {
@@ -21,6 +23,7 @@ export default class HomeScreen extends React.Component {
   }
 
   fetchGetNews = async () => {
+    this.setState({ loading: true });
     await fetch('http://35.236.27.209/movilPeru/api/controller/get_news.php', {
       method: "GET",
       headers: {
@@ -30,7 +33,8 @@ export default class HomeScreen extends React.Component {
     }).then(response => { return response.json() })
       .then(
         (data) => {
-          this.setState({ news: data.news })
+          this.setState({ news: data.news });
+          this.setState({ loading: false });
         });
   }
 
@@ -90,6 +94,11 @@ export default class HomeScreen extends React.Component {
             keyExtractor={(item, index) => index.toString()}
           />
         </ScrollView>
+        {this.state.loading &&
+          <BlurView tint="light" intensity={50} style={StyleSheet.absoluteFill}>
+            <ActivityIndicator size='large' style={styles.loading} />
+          </BlurView>
+        }
       </View>
     );
   }
@@ -100,4 +109,13 @@ const styles = StyleSheet.create({
     fontFamily: "NeoSans",
     color: "black"
   },
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

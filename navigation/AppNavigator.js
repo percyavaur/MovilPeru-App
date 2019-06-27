@@ -27,6 +27,7 @@ const VueltaViajeRedux = connect(state => ({ currentTrip: state.currentTrip }))(
 const RegisterPassangersRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.RegisterPassangers);
 const NewsRedux = connect(state => ({ currentNews: state.currentNews }))(screen.NewsScreen);
 const SelectNewsRedux = connect(state => ({ currentNews: state.currentNews }))(screen.SelectNewScreen);
+const UserTripsRedux = connect(state => ({ currentUser: state.currentUser }))(screen.UserTrips);
 
 export default class AppNavigator extends Component {
 
@@ -72,15 +73,15 @@ export default class AppNavigator extends Component {
     }
 
     const pasajesStack = createStackNavigator({
-      pasajes: { screen: screen.UserTrips }
+      pasajes: { screen: UserTripsRedux }
     });
     pasajesStack.navigationOptions = {
       tabBarLabel: "Tus Pasajes",
       tabBarIcon: ({ focused }) => (
-        <Icon.Foundation
+        <Icon.Entypo
           color={focused ? "#ED1650" : "white"}
           size={25}
-          name="graph-pie"
+          name="ticket"
         />
       )
     }

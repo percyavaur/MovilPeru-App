@@ -119,12 +119,6 @@ export default class IdaViajeScreen extends Component {
             <View style={{ display: "flex", flexDirection: "column", marginHorizontal: width * 0.05 }}>
                 <Card>
                     <CardItem>
-                        <Body>
-                            <Text>{section.horaSalida}</Text>
-                            <Text>{section.precio}</Text>
-                        </Body>
-                    </CardItem>
-                    <CardItem>
                         <Right>
                             <View style={{ marginLeft: width * 0.5, }}>
                                 <Button style={{
