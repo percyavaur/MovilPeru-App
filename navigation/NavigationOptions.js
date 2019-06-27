@@ -28,7 +28,7 @@ export const NavigationOptions = (navigation, Title) => {
       shadowOpacity: 0,
       borderBottomWidth: 0,
     },
-    headerBackTitle: null,
+    headerBackTitle: null
   };
 };
 

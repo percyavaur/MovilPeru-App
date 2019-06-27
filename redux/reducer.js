@@ -83,6 +83,43 @@ export function currentTrip(state, action) {
   }
 }
 
+export function currentNews(state, action) {
+  var news = {};
+
+  if (typeof state === "undefined") {
+    state = news;
+    return state;
+  } else {
+    switch (action.type) {
+      case 'SAVETITULO':
+        return Object.assign({}, state, {
+          titulo: action.titulo
+        })
+        break;
+      case 'SAVESUBTITULO':
+        return Object.assign({}, state, {
+          subtitulo: action.subtitulo
+        })
+        break;
+      case 'SAVECONTENIDO':
+        return Object.assign({}, state, {
+          contenido: action.contenido
+        })
+        break;
+      case 'SAVEIMAGEN':
+        return Object.assign({}, state, {
+          imagen: action.imagen
+        })
+        break;
+      case 'DELETEALL':
+        return state = {};
+        break;
+      default:
+        return state
+    }
+  }
+}
+
 export async function currentUser(state, action) {
 
   var jwt = "";

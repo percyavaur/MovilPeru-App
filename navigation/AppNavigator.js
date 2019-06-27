@@ -10,7 +10,7 @@ import {
 } from 'react-navigation';
 import DrawerContent from "../components/DrawerContent";
 import * as screen from "../screens";
-import { NativeViewGestureHandler } from "react-native-gesture-handler";
+const Entypo = Icon.Entypo;
 
 const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
 const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
@@ -25,6 +25,8 @@ const OrigenRedux = connect(state => ({ currentTrip: state.currentTrip }))(scree
 const IdaViajeRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.IdaViajeScreen);
 const VueltaViajeRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.VueltaViajeScreen);
 const RegisterPassangersRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.RegisterPassangers);
+const NewsRedux = connect(state => ({ currentNews: state.currentNews }))(screen.NewsScreen);
+const SelectNewsRedux = connect(state => ({ currentNews: state.currentNews }))(screen.SelectNewScreen);
 
 export default class AppNavigator extends Component {
 
@@ -43,7 +45,7 @@ export default class AppNavigator extends Component {
     });
 
     TripsStack.navigationOptions = {
-      tabBarLabel: "Trips",
+      tabBarLabel: "Viajes",
       tabBarIcon: ({ focused }) => (
         <Icon.Ionicons
           color={focused ? "#ED1650" : "white"}
@@ -53,17 +55,18 @@ export default class AppNavigator extends Component {
       )
     }
 
-    const HomeStack = createStackNavigator({
-      Home: { screen: screen.HomeScreen },
+    const NewsStack = createStackNavigator({
+      News: { screen: NewsRedux },
+      selectNewsScreen: { screen: SelectNewsRedux },
     });
 
-    HomeStack.navigationOptions = {
-      tabBarLabel: "Home",
+    NewsStack.navigationOptions = {
+      tabBarLabel: "Noticias",
       tabBarIcon: ({ focused }) => (
-        <Icon.Ionicons
+        <Entypo
           color={focused ? "#ED1650" : "white"}
           size={25}
-          name="md-home"
+          name="news"
         />
       )
     }
@@ -117,8 +120,8 @@ export default class AppNavigator extends Component {
     const DashboardTabNavigator = createBottomTabNavigator(
       {
         Trips: TripsStack,
+        News: NewsStack,
         Graph: GraphStack,
-        Home: HomeStack,
       }, {
         initialRouteName: "Trips",
         navigationOptions: () => {

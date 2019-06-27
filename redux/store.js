@@ -1,9 +1,11 @@
 import { createStore, combineReducers } from "redux";
-import { currentUser,currentTrip } from "./reducer";
+import { currentUser, currentTrip, currentNews } from "./reducer";
+
 export const store =
     createStore(combineReducers(
         {
             currentUser: currentUser,
-            currentTrip: currentTrip
+            currentTrip: currentTrip,
+            currentNews: currentNews
         }
     ));
