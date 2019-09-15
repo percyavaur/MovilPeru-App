@@ -4,7 +4,7 @@ import { Button } from "native-base";
 import CountText from "../../../components/utils/CountText";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-
+import * as Animatable from 'react-native-animatable';
 export default class PasajerosScreen extends React.Component {
 
   componentDidMount() {
@@ -42,7 +42,7 @@ export default class PasajerosScreen extends React.Component {
     }
     else if (name == "bebes") {
       totalPassengers = value + niños + adultos;
-      totalPassengers <= 9 && value >= 0 ? this.handleChange(name, value) : null;
+      totalPassengers <= 9 && (value >= 0 && value <= adultos) ? this.handleChange(name, value) : null;
     }
 
   }

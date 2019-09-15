@@ -1,4 +1,3 @@
-export {default as HomeScreen} from "./homeStack/HomeScreen";
 export {default as GraphScreen} from "./graphStack/graphScreen";
 export {default as LoginModal} from "./login/LoginModal";
 export {default as RegisterModal} from "./register/registerModal";
@@ -9,3 +8,9 @@ export {default as IdaCalendarScreen} from "./tripsStack/CalendarScreen/IdaCalen
 export {default as VueltaCalendarScreen} from "./tripsStack/CalendarScreen/vueltaCalendarScreen";
 export {default as ProfileScreen} from "./profile/ProfileScreen";
 export {default as OrigenScreen} from "./tripsStack/OrigenScreen/OrigenScreen";
+export {default as IdaViajeScreen} from "./tripsStack/ViajesScreen/IdaViajeScreen";
+export {default as VueltaViajeScreen} from "./tripsStack/ViajesScreen/VueltaViajeScreen";
+export {default as RegisterPassangers} from "./tripsStack/ViajesScreen/RegisterPassangers";
+export {default as NewsScreen} from "./newsStack/newsScreen";
+export {default as SelectNewScreen} from "./newsStack/selectNewScreen";
+export {default as UserTrips} from "./userTrips/UserTrips";

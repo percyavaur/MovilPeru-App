@@ -5,11 +5,22 @@ import { TouchableOpacity, Text, StyleSheet, Dimensions, TouchableWithoutFeedbac
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 // import Icon from '@expo/vector-icons'
-export default class IdaVuelta extends React.Component {
 
+export default class TripForm extends React.Component {
+
+    state = {
+        loading: false,
+    }
 
     render() {
-        const { currentTrip } = this.props;
+        const { currentTrip, selectedTab } = this.props;
+        const buttonDisable
+            = currentTrip.idOrigen
+                && currentTrip.idDestino
+                && currentTrip.cantPasajeros
+                && currentTrip.fechaIda
+                ? false
+                : true;
 
         return (
             <Content style={{ marginTop: "2%" }}>
@@ -20,12 +31,14 @@ export default class IdaVuelta extends React.Component {
                         icon="md-pin"
                         label="Origen"
                         value={currentTrip.origen ? currentTrip.origen : "Ingresa una ciudad de origen"}
-                        style={currentTrip.origen ? { color: "blue", fontFamily: "NeoSans"} : null }
-                       
-                    /> 
+                        style={currentTrip.origen ? { color: "blue", fontFamily: "NeoSans" } : null}
+
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    this.props.navigation.navigate("DestinosScreen");
+                    currentTrip.idOrigen
+                        ? this.props.navigation.navigate("DestinosScreen")
+                        : this.props.onActivateToast('Por favor, elige primero un origen');
                 }}>
                     <LabelText
                         icon="md-pin"
@@ -35,7 +48,9 @@ export default class IdaVuelta extends React.Component {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
-                    this.props.navigation.navigate("PasajerosScreen");
+                    currentTrip.idOrigen && currentTrip.idDestino
+                        ? this.props.navigation.navigate("PasajerosScreen")
+                        : this.props.onActivateToast('Por favor, elige primero un origen y destino');
                 }}>
                     <LabelText
                         icon="md-people"
@@ -56,21 +71,35 @@ export default class IdaVuelta extends React.Component {
                             style={currentTrip.fechaIda ? { color: "blue" } : null}
                         />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        this.props.navigation.navigate("VueltaCalendarScreen");
-                    }}>
-                        <LabelText
-                            icon="ios-calendar"
-                            label="Vuelta"
-                            value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "aaaa-mm-dd"}
-                            style={currentTrip.fechaVuelta ? { color: "blue" } : null}
-                        />
-                    </TouchableOpacity>
+                    {selectedTab == 0 ?
+                        <TouchableOpacity onPress={() => {
+                            this.props.navigation.navigate("VueltaCalendarScreen");
+                        }}>
+                            <LabelText
+                                icon="ios-calendar"
+                                label="Vuelta"
+                                value={currentTrip.fechaVuelta ? currentTrip.fechaVuelta : "aaaa-mm-dd"}
+                                style={currentTrip.fechaVuelta ? { color: "blue" } : null}
+                            />
+                        </TouchableOpacity>
+                        : null
+                    }
                 </View>
-                <Button style={styles.Button}>
-                    <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
-                    
-                </Button>
+                {
+                    selectedTab == 0
+                        ? <Button
+                            style={[styles.Button, { backgroundColor: !buttonDisable && currentTrip.fechaVuelta ? '#ED1650' : '#bababa' }]}
+                            disabled={!buttonDisable && currentTrip.fechaVuelta ? false : true}
+                            onPress={() => { this.props.navigation.navigate("IdaViajeScreen") }}>
+                            <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
+                        </Button>
+                        : <Button
+                            style={[styles.Button, { backgroundColor: !buttonDisable ? '#ED1650' : '#bababa' }]}
+                            disabled={buttonDisable}
+                            onPress={() => { this.props.navigation.navigate("IdaViajeScreen") }}>
+                            <Text style={styles.buttonLoginText}>Busca tu viaje</Text>
+                        </Button>
+                }
             </Content>
         )
     }
@@ -79,7 +108,6 @@ export default class IdaVuelta extends React.Component {
 
 const styles = StyleSheet.create({
     Button: {
-        backgroundColor: "#ED1650",
         width: "50%",
         height: height * 0.065,
         marginTop: "10%",

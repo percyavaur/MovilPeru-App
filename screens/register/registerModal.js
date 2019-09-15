@@ -57,6 +57,21 @@ export default class RegisterModal extends Component {
     }
   }
 
+  handleChangeNumeric = (name, value) => {
+    if (/^\d+$/.test(value) || value === '') {
+      this.setState({
+        [name]: value
+      });
+    }
+  }
+  handleChangeText = (name, value) => {
+    if (/^[a-zA-Z ]+$/.test(value) || value === '') {
+      this.setState({
+        [name]: value
+      });
+    }
+  }
+
   registerValidation() {
     const { username, password, confirmPassword, nombres, apellidos, genero, fecNac, tipoDocumento, numDocumento, correoElectronico, telefono } = this.state;
     this.setState({
@@ -105,7 +120,7 @@ export default class RegisterModal extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username:username, password:password, nombres:nombres, apellidos:apellidos, genero:genero, fecNac:fecNac, tipoDocumento:tipoDocumento, numDocumento:numDocumento, correoElectronico:correoElectronico, telefono:telefono })
+      body: JSON.stringify({ username: username, password: password, nombres: nombres, apellidos: apellidos, genero: genero, fecNac: fecNac, tipoDocumento: tipoDocumento, numDocumento: numDocumento, correoElectronico: correoElectronico, telefono: telefono })
     }).then(response => { return response.json() })
       .then(data => {
         if (data.success) {
@@ -148,7 +163,9 @@ export default class RegisterModal extends Component {
         >
           <Icon active name="md-arrow-round-back" style={{ left: "20%" }} />
         </TouchableOpacity>
-        <ScrollView>
+        <ScrollView style={{
+          marginTop: width * 0.05
+        }}>
           <View style={styles.container}>
             <View style={{ flexDirection: "column", marginHorizontal: width * 0.05, marginBottom: width * 0.1 }}>
               <Form>
@@ -191,7 +208,7 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Nombres</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("nombres", value) }}
+                    onChangeText={(value) => { this.handleChangeText("nombres", value) }}
                     value={nombres} />
                 </Item>
                 <Item floatingLabel error={apellidosError}>
@@ -199,7 +216,7 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Apellidos</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("apellidos", value) }}
+                    onChangeText={(value) => { this.handleChangeText("apellidos", value) }}
                     value={apellidos} />
                 </Item>
                 <Item error={generoError}>
@@ -235,6 +252,8 @@ export default class RegisterModal extends Component {
                       placeHolderTextStyle={{ color: "grey" }}
                       onDateChange={(value) => { this.handleChange("fecNac", value) }}
                       disabled={false}
+                      minimumDate={new Date(1900, 1, 1)}
+                      maximumDate={new Date(2019, 12, 31)}
                     />
                   </View>
                 </Item>
@@ -261,8 +280,10 @@ export default class RegisterModal extends Component {
                   <Label style={{ fontFamily: "NeoSans" }}>Numero documento</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("numDocumento", value) }}
-                    value={numDocumento} />
+                    onChangeText={(value) => { this.handleChangeNumeric("numDocumento", value) }}
+                    value={numDocumento}
+                    keyboardType="number-pad"
+                    maxLength={10} />
                 </Item>
               </Form>
             </View>
@@ -277,15 +298,19 @@ export default class RegisterModal extends Component {
                   <Input
                     style={{ fontFamily: "NeoSans" }}
                     onChangeText={(value) => { this.handleChange("correoElectronico", value) }}
-                    value={correoElectronico} />
+                    value={correoElectronico}
+                    keyboardType="email-address"
+                     />
                 </Item>
                 <Item floatingLabel error={telefonoError}>
                   <Icon active name='ios-call' />
                   <Label style={{ fontFamily: "NeoSans" }}>Numero de telefono</Label>
                   <Input
                     style={{ fontFamily: "NeoSans" }}
-                    onChangeText={(value) => { this.handleChange("telefono", value) }}
-                    value={telefono} />
+                    onChangeText={(value) => { this.handleChangeNumeric("telefono", value) }}
+                    value={telefono}
+                    keyboardType="number-pad"
+                    maxLength = {9}  />
                 </Item>
                 <Button style={styles.Button} onPress={() => {
                   Keyboard.dismiss();

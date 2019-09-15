@@ -5,6 +5,7 @@ import { Header } from "react-navigation";
 import RF from "react-native-responsive-fontsize";
 import { _SetAsyncStorage } from "../../utils/asyncStorage/setAsyncStorage";
 import { _GetAsyncStorage } from "../../utils/asyncStorage/getAsyncStorage";
+import { GetTokenNotifications } from "../../utils/GetTokenNotification";
 import { BlurView } from 'expo';
 import TestAlert from "../../components/alerts/TestAlert";
 import Toast from 'react-native-easy-toast'
@@ -80,8 +81,13 @@ export default class LoginModal extends Component {
   confirmAccess(jwt) {
     _SetAsyncStorage("jwt", jwt).then(() => {
       this.props.dispatch({ type: 'LOGIN', jwt });
-      this.props.navigation.navigate("Trips");
-    }).then(() => { this.setState({ loading: false }); });
+    });
+
+    GetTokenNotifications(jwt)
+      .then(() => {
+        this.props.navigation.navigate("Trips");
+        this.setState({ loading: false });
+      });
   }
 
   deniedAccess(message) {
@@ -199,7 +205,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
-  }, toast: {
+  },
+  toast: {
     backgroundColor: 'red',
     width: "70%",
     display: "flex",

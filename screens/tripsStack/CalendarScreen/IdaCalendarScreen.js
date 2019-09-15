@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Button } from "native-base";
 import Calendar from "../../../components/screens/tripsStack/calendarScreen/Calendar";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-
+import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window');
 const mySpanishDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 const mySpanishMonths = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -24,10 +24,27 @@ export default class IdaCalendarScreen extends React.Component {
   }
 
   saveStorage() {
-    const { date } = this.state;
+    var { date } = this.state;
     const fechaIda = date.year + "-" + date.month + "-" + date.day;
     this.props.dispatch({ type: 'FECHAIDA', fechaIda });
+    this.props.dispatch({ type: 'DATEIDA', date });
+
+    this.verifyTimes(date);
+
     this.props.navigation.navigate("Trips");
+  }
+
+  verifyTimes(dateIda) {
+    const { dateVuelta } = this.props.currentTrip;
+
+    if (dateVuelta) {
+      if (new Date(dateIda.timestamp) > new Date(dateVuelta.timestamp)) {
+        const fechaVuelta = "";
+        var date = "";
+        this.props.dispatch({ type: 'FECHAVUELTA', fechaVuelta });
+        this.props.dispatch({ type: 'DATEVUELTA', date });
+      }
+    }
   }
 
   render() {
@@ -48,16 +65,18 @@ export default class IdaCalendarScreen extends React.Component {
           </View>
           : null
         }
-        <View style={{ height: 365 }}>
-          <Calendar
-            onChange={(date) => { this.handleChange("date", date) }}
-          />
-        </View>
-        <View>
-          <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={ !date ? true : false}>
-            <Text style={styles.buttonLoginText}>Continuar</Text>
-          </Button>
-        </View>
+        <ScrollView>
+          <View style={{ height: 365 }}>
+            <Calendar
+              onChange={(date) => { this.handleChange("date", date) }}
+            />
+          </View>
+          <View style={{ marginBottom: 50 }}>
+            <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={!date ? true : false}>
+              <Text style={styles.buttonLoginText}>Continuar</Text>
+            </Button>
+          </View>
+        </ScrollView>
       </View>
     );
 

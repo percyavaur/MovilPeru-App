@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+
 export default class CalendarScreen extends React.Component {
 
     constructor(props) {
@@ -16,11 +17,13 @@ export default class CalendarScreen extends React.Component {
         });
         this.props.onChange(date);
     }
+
     render() {
         const { selected } = this.state;
+        const { minDate } = this.props;
 
         return (
-            <View style={{ flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <Calendar
                     horizontal
                     pagingEnabled
@@ -40,7 +43,7 @@ export default class CalendarScreen extends React.Component {
                     scrollEnabled={true}
                     // Enable or disable vertical scroll indicator. Default = false
                     showScrollIndicator={true}
-                    minDate={new Date()}
+                    minDate={minDate ? minDate : new Date()}
                     onDayPress={this.onDayPress}
                     markedDates={{
                         [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'blue' },

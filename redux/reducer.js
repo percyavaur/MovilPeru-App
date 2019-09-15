@@ -44,10 +44,75 @@ export function currentTrip(state, action) {
           fechaIda: action.fechaIda
         })
         break;
+      case 'DATEIDA':
+        return Object.assign({}, state, {
+          dateIda: action.date
+        })
+        break;
       case 'FECHAVUELTA':
         return Object.assign({}, state, {
           fechaVuelta: action.fechaVuelta
         })
+        break;
+      case 'DATEVUELTA':
+        return Object.assign({}, state, {
+          dateVuelta: action.date
+        })
+        break;
+      case 'TRIPTYPE':
+        return Object.assign({}, state, {
+          tripType: action.index
+        })
+        break;
+      case 'IDIDA':
+        return Object.assign({}, state, {
+          idIda: action.idViaje
+        })
+        break;
+      case 'IDVUELTA':
+        return Object.assign({}, state, {
+          idVuelta: action.idViaje
+        })
+        break;
+      case 'DELETEALL':
+        return state = {};
+        break;
+      default:
+        return state
+    }
+  }
+}
+
+export function currentNews(state, action) {
+  var news = {};
+
+  if (typeof state === "undefined") {
+    state = news;
+    return state;
+  } else {
+    switch (action.type) {
+      case 'SAVETITULO':
+        return Object.assign({}, state, {
+          titulo: action.titulo
+        })
+        break;
+      case 'SAVESUBTITULO':
+        return Object.assign({}, state, {
+          subtitulo: action.subtitulo
+        })
+        break;
+      case 'SAVECONTENIDO':
+        return Object.assign({}, state, {
+          contenido: action.contenido
+        })
+        break;
+      case 'SAVEIMAGEN':
+        return Object.assign({}, state, {
+          imagen: action.imagen
+        })
+        break;
+      case 'DELETEALL':
+        return state = {};
         break;
       default:
         return state
@@ -79,7 +144,9 @@ export async function currentUser(state, action) {
         break;
 
       case 'LOGOUT':
-        _RemoveStorage("jwt");
+        jwt = await _GetAsyncStorage("jwt");
+        await fetchLogout(jwt);
+        await _RemoveStorage("jwt");
         state = null;
         return state;
         break;
@@ -101,7 +168,7 @@ export async function currentUser(state, action) {
 };
 
 fetchValidateToken = async (jwt) => {
-  return await fetch('http://35.236.27.209/php_api_jwt/api/model/functions/validate_token.php', {
+  return await fetch('http://35.236.27.209/movilPeru/api/model/functions/validate_token.php', {
     method: "POST",
     headers: {
       'Accept': 'application/json',
@@ -109,4 +176,15 @@ fetchValidateToken = async (jwt) => {
     },
     body: JSON.stringify({ jwt: jwt })
   });
+}
+
+fetchLogout = async (jwt) => {
+  await fetch('http://35.236.27.209/movilPeru/api/controller/update_Token.php', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ jwt: jwt, expoToken: "" })
+  })
 }

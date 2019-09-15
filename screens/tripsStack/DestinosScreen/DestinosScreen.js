@@ -1,56 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Dimensions } from 'react-native';
-import { ListItem, List, Item, Input, Icon } from 'native-base';
+import { StyleSheet, Text, View, FlatList, Dimensions, ActivityIndicator } from 'react-native';
+import { ListItem, Item, Input, Icon } from 'native-base';
+import { BlurView } from 'expo';
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
+import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window');
-
-const cities = [
-  { id: "1", departamento: "Lima", distrito: "los olivos" },
-  { id: "2", departamento: "Lima", distrito: "lima" },
-  { id: "3", departamento: "lima", distrito: "churin" },
-  { id: "4", departamento: "Lima", distrito: "trujillo" },
-  { id: "5", departamento: "Ica", distrito: "trujillo" },
-  { id: "6", departamento: "Tacna", distrito: "trujillo" },
-  { id: "7", departamento: "Arequipa", distrito: "trujillo" },
-  { id: "8", departamento: "Puerto Maldonado", distrito: "trujillo" },
-  { id: "9", departamento: "Piura", distrito: "Mancora" },
-  { id: "10", departamento: "tUMBES", distrito: "trujillo" },
-  { id: "11", departamento: "Madre de Dios", distrito: "trujillo" },
-  { id: "12", departamento: "Loreto", distrito: "trujillo" },
-  { id: "2", departamento: "Lima", distrito: "lima" },
-  { id: "3", departamento: "lima", distrito: "churin" },
-  { id: "4", departamento: "Lima", distrito: "trujillo" },
-  { id: "5", departamento: "Ica", distrito: "trujillo" },
-  { id: "6", departamento: "Tacna", distrito: "trujillo" },
-  { id: "7", departamento: "Arequipa", distrito: "trujillo" },
-  { id: "8", departamento: "Puerto Maldonado", distrito: "trujillo" },
-  { id: "9", departamento: "Piura", distrito: "Mancora" },
-  { id: "10", departamento: "tUMBES", distrito: "trujillo" },
-  { id: "11", departamento: "Madre de Dios", distrito: "trujillo" },
-  { id: "12", departamento: "Loreto", distrito: "trujillo" },
-  { id: "2", departamento: "Lima", distrito: "lima" },
-  { id: "3", departamento: "lima", distrito: "churin" },
-  { id: "4", departamento: "Lima", distrito: "trujillo" },
-  { id: "5", departamento: "Ica", distrito: "trujillo" },
-  { id: "6", departamento: "Tacna", distrito: "trujillo" },
-  { id: "7", departamento: "Arequipa", distrito: "trujillo" },
-  { id: "8", departamento: "Puerto Maldonado", distrito: "trujillo" },
-  { id: "9", departamento: "Piura", distrito: "Mancora" },
-  { id: "10", departamento: "tUMBES", distrito: "trujillo" },
-  { id: "11", departamento: "Madre de Dios", distrito: "trujillo" },
-  { id: "12", departamento: "Loreto", distrito: "trujillo" },
-  { id: "2", departamento: "Lima", distrito: "lima" },
-  { id: "3", departamento: "lima", distrito: "churin" },
-  { id: "4", departamento: "Lima", distrito: "trujillo" },
-  { id: "5", departamento: "Ica", distrito: "trujillo" },
-  { id: "6", departamento: "Tacna", distrito: "trujillo" },
-  { id: "7", departamento: "Arequipa", distrito: "trujillo" },
-  { id: "8", departamento: "Puerto Maldonado", distrito: "trujillo" },
-  { id: "9", departamento: "Piura", distrito: "Mancora" },
-  { id: "10", departamento: "tUMBES", distrito: "trujillo" },
-  { id: "11", departamento: "Madre de Dios", distrito: "trujillo" },
-  { id: "12", departamento: "Loreto", distrito: "trujillo" }
-]
 
 export default class DestinosScreen extends React.Component {
 
@@ -60,15 +14,39 @@ export default class DestinosScreen extends React.Component {
 
   state = {
     searchText: "",
-    dataSource: cities
+    dataSource: "",
+    destinos: ""
+  }
+
+  componentWillMount() {
+    this.fetchDestinos();
+  }
+
+  fetchDestinos = async () => {
+    this.setState({ loading: true });
+    await fetch('http://35.236.27.209/movilPeru/api/controller/get_destinos.php', {
+      method: "GET"
+    }).then(response => { return response.json() })
+      .then(
+        (data) => {
+          data.success
+            ? this.setState({ destinos: data.data, dataSource: data.data, loading: false })
+            : this.setState({ loading: false });
+        })
+      .catch(function (e) {
+        alert("Algo ha salido mal");
+      });
   }
 
   filterSearch(text) {
-    const newData = cities.filter((item) => {
+    const { destinos } = this.state;
+
+    const newData = destinos.filter((item) => {
       const departamentoData = item.departamento.toUpperCase();
       const distritoData = item.distrito.toUpperCase();
+      const direccionData = item.direccion.toUpperCase();
       const textData = text.toUpperCase();
-      return departamentoData.indexOf(textData) > -1 || distritoData.indexOf(textData) > -1;
+      return departamentoData.indexOf(textData) > -1 || distritoData.indexOf(textData) > -1 || direccionData.indexOf(textData) > -1;
     })
     this.setState({
       dataSource: newData,
@@ -76,10 +54,16 @@ export default class DestinosScreen extends React.Component {
     })
   }
 
-  saveStorage(idDestino, departamento, distrito) {
-    const destino = departamento + ", " + distrito;
+  saveStorage(idDestino, departamento, distrito, direccion) {
+    const destino = departamento + ", " + distrito + ", " + direccion;
+    const cantPasajeros = 1;
+    const descPasajeros = { adultos:1, niños:0, bebes:0 };
+    
     this.props.dispatch({ type: 'SAVEIDDESTINO', idDestino });
     this.props.dispatch({ type: 'SAVEDESTINO', destino });
+    
+    this.props.dispatch({ type: 'CANTPASAJEROS', cantPasajeros });
+    this.props.dispatch({ type: 'DESCPASAJEROS', descPasajeros });
     this.props.navigation.navigate("Trips");
   }
 
@@ -87,25 +71,38 @@ export default class DestinosScreen extends React.Component {
   render() {
 
     const { dataSource } = this.state;
+    const { idOrigen } = this.props.currentTrip;
 
     return (
       <View style={{ flex: 1 }}>
-        <ListItem>
-          <Item style={{ borderBottomColor: "red" }}>
-            <Input placeholder='Ingresa una ciudad o destino' onChangeText={(text) => { this.filterSearch(text) }} />
-            <Icon name='close-circle' color={"grey"} />
-          </Item>
-        </ListItem>
+        <View style={{
+          height: 70, backgroundColor: '#ED1650', justifyContent: 'center',
+          paddingHorizontal: 5
+        }}>
+          <View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', padding: 5, alignItems: 'center' }}>
+            <Icon name='ios-search' style={{ fontSize: 24 }} />
+            <Input style={{ marginLeft: 15 }} placeholder='Buscar' onChangeText={(text) => { this.filterSearch(text) }} />
+          </View>
+        </View>
         <FlatList
           data={dataSource}
           vertical={true}
-          renderItem={({ item }) => (
-            <ListItem onPress={() => { this.saveStorage(item.id, item.departamento, item.distrito) }}>
-              <Text>{item.departamento} , {item.distrito}</Text>
-            </ListItem>
-          )}
+          renderItem={({ item }) => {
+            if (item.idDestino != idOrigen) {
+              return (
+                <ListItem onPress={() => { this.saveStorage(item.idDestino, item.departamento, item.distrito, item.direccion) }}>
+                  <Text>{item.departamento} , {item.distrito}, {item.direccion}</Text>
+                </ListItem>
+              )
+            }
+          }}
           keyExtractor={(item, index) => index.toString()}
         />
+        {this.state.loading &&
+          <BlurView tint="light" intensity={50} style={StyleSheet.absoluteFill}>
+            <ActivityIndicator size='large' style={styles.loading} />
+          </BlurView>
+        }
       </View>
     );
 
@@ -116,4 +113,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: "100%"
   },
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

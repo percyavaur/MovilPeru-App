@@ -10,7 +10,7 @@ import {
 } from 'react-navigation';
 import DrawerContent from "../components/DrawerContent";
 import * as screen from "../screens";
-import { NativeViewGestureHandler } from "react-native-gesture-handler";
+const Entypo = Icon.Entypo;
 
 const LoginRedux = connect(state => ({ currentUser: state.currentUser }))(screen.LoginModal);
 const RegisterRedux = connect(state => ({ currentUser: state.currentUser }))(screen.RegisterModal);
@@ -22,6 +22,13 @@ const PasajerosRedux = connect(state => ({ currentTrip: state.currentTrip }))(sc
 const IdaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.IdaCalendarScreen);
 const VueltaCalendarRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.VueltaCalendarScreen);
 const OrigenRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.OrigenScreen);
+const IdaViajeRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.IdaViajeScreen);
+const VueltaViajeRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.VueltaViajeScreen);
+const RegisterPassangersRedux = connect(state => ({ currentTrip: state.currentTrip }))(screen.RegisterPassangers);
+const NewsRedux = connect(state => ({ currentNews: state.currentNews }))(screen.NewsScreen);
+const SelectNewsRedux = connect(state => ({ currentNews: state.currentNews }))(screen.SelectNewScreen);
+const UserTripsRedux = connect(state => ({ currentUser: state.currentUser }))(screen.UserTrips);
+
 export default class AppNavigator extends Component {
 
   render() {
@@ -32,11 +39,14 @@ export default class AppNavigator extends Component {
       DestinosScreen: { screen: DestinosRedux },
       PasajerosScreen: { screen: PasajerosRedux },
       IdaCalendarScreen: { screen: IdaCalendarRedux },
-      VueltaCalendarScreen: { screen: VueltaCalendarRedux }
+      VueltaCalendarScreen: { screen: VueltaCalendarRedux },
+      IdaViajeScreen: { screen: IdaViajeRedux },
+      VueltaViajeScreen: { screen: VueltaViajeRedux },
+      RegisterPassangers: { screen: RegisterPassangersRedux }
     });
 
     TripsStack.navigationOptions = {
-      tabBarLabel: "Trips",
+      tabBarLabel: "Viajes",
       tabBarIcon: ({ focused }) => (
         <Icon.Ionicons
           color={focused ? "#ED1650" : "white"}
@@ -46,32 +56,32 @@ export default class AppNavigator extends Component {
       )
     }
 
-    const HomeStack = createStackNavigator({
-      Home: { screen: screen.HomeScreen },
+    const NewsStack = createStackNavigator({
+      News: { screen: NewsRedux },
+      selectNewsScreen: { screen: SelectNewsRedux },
     });
 
-    HomeStack.navigationOptions = {
-      tabBarLabel: "Home",
+    NewsStack.navigationOptions = {
+      tabBarLabel: "Noticias",
       tabBarIcon: ({ focused }) => (
-        <Icon.Ionicons
+        <Entypo
           color={focused ? "#ED1650" : "white"}
           size={25}
-          name="md-home"
+          name="news"
         />
       )
     }
 
-    const GraphStack = createStackNavigator({
-      Graph: { screen: screen.GraphScreen }
+    const pasajesStack = createStackNavigator({
+      pasajes: { screen: UserTripsRedux }
     });
-
-    GraphStack.navigationOptions = {
-      tabBarLabel: "Graph",
+    pasajesStack.navigationOptions = {
+      tabBarLabel: "Tus Pasajes",
       tabBarIcon: ({ focused }) => (
-        <Icon.Foundation
+        <Icon.Entypo
           color={focused ? "#ED1650" : "white"}
           size={25}
-          name="graph-pie"
+          name="ticket"
         />
       )
     }
@@ -110,8 +120,8 @@ export default class AppNavigator extends Component {
     const DashboardTabNavigator = createBottomTabNavigator(
       {
         Trips: TripsStack,
-        Graph: GraphStack,
-        Home: HomeStack,
+        News: NewsStack,
+        Pasajes: pasajesStack,
       }, {
         initialRouteName: "Trips",
         navigationOptions: () => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Button } from "native-base";
 import Calendar from "../../../components/screens/tripsStack/calendarScreen/Calendar";
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-
+import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window');
 const mySpanishDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 const mySpanishMonths = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -27,12 +27,15 @@ export default class VueltaCalendarScreen extends React.Component {
     const { date } = this.state;
     const fechaVuelta = date.year + "-" + date.month + "-" + date.day;
     this.props.dispatch({ type: 'FECHAVUELTA', fechaVuelta });
+    this.props.dispatch({ type: 'DATEVUELTA', date });
     this.props.navigation.navigate("Trips");
   }
 
   render() {
     const { date } = this.state;
     const ts = date.timestamp ? new Date(date.timestamp) : null;
+    const { dateIda } = this.props.currentTrip;
+
     return (
       <View style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         {date
@@ -47,16 +50,19 @@ export default class VueltaCalendarScreen extends React.Component {
           </View>
           : null
         }
-        <View style={{ height: 365 }}>
-          <Calendar
-            onChange={(date) => { this.handleChange("date", date) }}
-          />
-        </View>
-        <View>
-          <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={ !date ? true : false}>
-            <Text style={styles.buttonLoginText}>Continuar</Text>
-          </Button>
-        </View>
+        <ScrollView>
+          <View style={{ height: 365 }}>
+            <Calendar
+              onChange={(date) => { this.handleChange("date", date) }}
+              minDate={dateIda}
+            />
+          </View>
+          <View style={{ marginBottom: 50 }}>
+            <Button style={styles.Button} onPress={() => { this.saveStorage() }} disabled={!date ? true : false}>
+              <Text style={styles.buttonLoginText}>Continuar</Text>
+            </Button>
+          </View>
+        </ScrollView>
       </View>
     );
 

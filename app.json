@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Movil-Peru-App",
-    "slug": "Movil-Peru-App",
+    "name": "MovilPeru",
+    "slug": "MovilPeru",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#6C24AA"
+      "backgroundColor": "#BF1643"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

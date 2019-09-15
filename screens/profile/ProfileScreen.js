@@ -36,7 +36,13 @@ export default class ProfileScreen extends React.Component {
         alertTitle: "",
         alertContent: "",
     }
-
+    handleChangeText = (name, value) => {
+        if (/^[a-zA-Z ]+$/.test(value) || value === '') {
+          this.setState({
+            [name]: value
+          });
+        }
+      }
     componentDidMount = async () => {
         const currentUser = await this.props.currentUser
         currentUser ? this.propsToState(currentUser) : null;
@@ -54,12 +60,18 @@ export default class ProfileScreen extends React.Component {
             numDocumento: data.numDocumento,
             correoElectronico: data.correoElectronico,
             telefono: data.telefono,
-            direccion: data.direccion
+            direccion: data.direccion,
+            imagen: data.imagen
         });
     }
 
     handleChange(name, value) {
         this.setState({ [name]: value })
+    }
+
+    handleImage(imageUri) {
+        this.setState({ imagen: imageUri });
+        this.dataToFetch();
     }
 
     updateUser() {
@@ -182,6 +194,9 @@ export default class ProfileScreen extends React.Component {
                     <UserProfile
                         firstname={nombres}
                         lastname={apellidos}
+                        image={imagen}
+                        uploading={(value)=>{this.handleChange("loading",value)}}
+                        handleImage={(value)=>{this.handleImage(value)}}
                     />
                     <View style={styles.container}>
                         <View style={styles.containerHeader}>
@@ -244,14 +259,14 @@ export default class ProfileScreen extends React.Component {
                                 placeholder={"Nombres"}
                                 value={nombres}
                                 editable={editable}
-                                onChange={(value) => { this.handleChange("nombres", value) }}
+                                onChange={(value) => { this.handleChangeText("nombres", value) }}
                             />
                             <InputText
                                 label={"Apellidos"}
                                 placeholder={"Apellidos"}
                                 value={apellidos}
                                 editable={editable}
-                                onChange={(value) => { this.handleChange("apellidos", value) }}
+                                onChange={(value) => { this.handleChangeText("apellidos", value) }}
                             />
                             <View style={styles.inputContainer}>
                                 <Text style={styles.inputLabel}>Genero</Text>
@@ -286,6 +301,8 @@ export default class ProfileScreen extends React.Component {
                                                 textStyle={{ color: "black" }}
                                                 placeHolderTextStyle={{ color: "grey" }}
                                                 onDateChange={(value) => { this.handleChange("fecNac", value) }}
+                                                minimumDate={new Date(1900, 1, 1)}
+                                                maximumDate={new Date(2019, 12, 31)}
                                             />
                                         </View>
                                     </View>
@@ -319,6 +336,8 @@ export default class ProfileScreen extends React.Component {
                                 value={numDocumento}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("numDocumento", value) }}
+                                keyboardType="number-pad"
+                                maxLength={8}
                             />
                             <View style={styles.separator} />
                             <Text style={{
@@ -333,6 +352,7 @@ export default class ProfileScreen extends React.Component {
                                 value={correoElectronico}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("correoElectronico", value) }}
+                                keyboardType="email-address"
                             />
                             <InputText
                                 label={"Numero de telefono"}
@@ -340,6 +360,8 @@ export default class ProfileScreen extends React.Component {
                                 value={telefono}
                                 editable={editable}
                                 onChange={(value) => { this.handleChange("telefono", value) }}
+                                keyboardType="number-pad"
+                                maxLength = {10}
                             />
                             <InputText
                                 label={"Direccion"}
