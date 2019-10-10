@@ -62,6 +62,7 @@ export default class UserTrips extends React.Component {
     render() {
         const { pasajes } = this.state;
         const { currentUser } = this.props;
+        //test keymap
 
         return (
             <View style={{ backgroundColor: "#f7fafc", height: height }}>
