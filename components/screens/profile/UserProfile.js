@@ -240,7 +240,7 @@ async function uploadImageAsync(uri) {
 
     const ref = firebase
         .storage()
-        .ref()
+        .ref("users/")
         .child(uuid.v4());
     const snapshot = await ref.put(blob);
 
