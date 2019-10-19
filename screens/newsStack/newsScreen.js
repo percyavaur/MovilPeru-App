@@ -3,6 +3,8 @@ import { StyleSheet, View, ScrollView, Dimensions, Image, RefreshControl, FlatLi
 import { Card, CardItem, Body, Text } from "native-base";
 import { NavigationOptions } from "../../navigation/NavigationOptions";
 import { BlurView } from 'expo';
+import { sortBy } from "lodash";
+import { fetchCollection } from "../../firebase";
 const { width, height } = Dimensions.get('window');
 import RF from "react-native-responsive-fontsize";
 
@@ -19,23 +21,15 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({loading: true})
     this.fetchGetNews();
   }
 
-  fetchGetNews = async () => {
-    this.setState({ loading: true });
-    await fetch('http://35.236.27.209/movilPeru/api/controller/get_news.php', {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(response => { return response.json() })
-      .then(
-        (data) => {
-          this.setState({ news: data.news });
-          this.setState({ loading: false });
-        });
+  fetchGetNews() {
+    fetchCollection("news", (news) => {
+      var newsSorted = sortBy(news, 'created').reverse();
+      this.setState({ news: newsSorted, loading: false });
+    });
   }
 
   _onRefresh = () => {

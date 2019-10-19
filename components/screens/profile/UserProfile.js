@@ -10,18 +10,6 @@ const { width, height } = Dimensions.get('window');
 YellowBox.ignoreWarnings(['Setting a timer']);
 console.ignoredYellowBox = ['Setting a timer'];
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDLieBYpSFU6fyL6EPz4hzEhevkOda27es",
-    authDomain: "movilperu.firebaseapp.com",
-    databaseURL: "https://movilperu.firebaseio.com",
-    projectId: "movilperu",
-    storageBucket: "movilperu.appspot.com",
-    messagingSenderId: "135498032188",
-    appId: "1:135498032188:web:88106717a56fe17b"
-};
-
-firebase.initializeApp(firebaseConfig);
-
 export default class UserProfile extends React.Component {
 
     state = {
@@ -245,7 +233,6 @@ async function uploadImageAsync(uri) {
     const snapshot = await ref.put(blob);
 
     // We're done with the blob, close and release it
-    blob.close();
 
     return await snapshot.ref.getDownloadURL();
 }

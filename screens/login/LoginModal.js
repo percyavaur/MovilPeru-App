@@ -78,16 +78,28 @@ export default class LoginModal extends Component {
         });
   }
 
-  confirmAccess(jwt) {
+  async confirmAccess(jwt) {
     _SetAsyncStorage("jwt", jwt).then(() => {
       this.props.dispatch({ type: 'LOGIN', jwt });
     });
 
-    GetTokenNotifications(jwt)
+    const token = await GetTokenNotifications();
+    this.setExpoToken(jwt, token)
       .then(() => {
         this.props.navigation.navigate("Trips");
         this.setState({ loading: false });
       });
+  }
+
+  async setExpoToken(jwt, token) {
+    await fetch('http://35.236.27.209/movilPeru/api/controller/update_Token.php', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ jwt: jwt, expoToken: token, action: "login" })
+    })
   }
 
   deniedAccess(message) {

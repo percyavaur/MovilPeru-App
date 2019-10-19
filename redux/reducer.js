@@ -1,5 +1,6 @@
 import { _GetAsyncStorage } from "../utils/asyncStorage/getAsyncStorage";
 import { _RemoveStorage } from "../utils/asyncStorage/removeAsyncStorage";
+import { GetTokenNotifications } from "../utils/GetTokenNotification";
 
 export function currentTrip(state, action) {
   var trip = {};
@@ -145,7 +146,8 @@ export async function currentUser(state, action) {
 
       case 'LOGOUT':
         jwt = await _GetAsyncStorage("jwt");
-        await fetchLogout(jwt);
+        const token = await GetTokenNotifications();
+        await fetchLogout(jwt, token);
         await _RemoveStorage("jwt");
         state = null;
         return state;
@@ -178,13 +180,13 @@ fetchValidateToken = async (jwt) => {
   });
 }
 
-fetchLogout = async (jwt) => {
+fetchLogout = async (jwt, token) => {
   await fetch('http://35.236.27.209/movilPeru/api/controller/update_Token.php', {
     method: "POST",
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ jwt: jwt, expoToken: "" })
+    body: JSON.stringify({ jwt: jwt, expoToken: token, action: "logout" })
   })
 }
