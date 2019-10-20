@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Dimensions, Image, RefreshControl, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, Image, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { Card, CardItem, Body, Text } from "native-base";
 import { NavigationOptions } from "../../navigation/NavigationOptions";
 import { BlurView } from 'expo';
@@ -16,7 +16,6 @@ export default class HomeScreen extends React.Component {
 
   state = {
     news: [{}, {}, {}, {}],
-    refreshing: false,
     loading: false
   }
 
@@ -29,13 +28,6 @@ export default class HomeScreen extends React.Component {
     fetchCollection("news", (news) => {
       var newsSorted = sortBy(news, 'created').reverse();
       this.setState({ news: newsSorted, loading: false });
-    });
-  }
-
-  _onRefresh = () => {
-    this.setState({ refreshing: true });
-    this.fetchGetNews().then(() => {
-      this.setState({ refreshing: false });
     });
   }
 
@@ -55,12 +47,6 @@ export default class HomeScreen extends React.Component {
       <View style={{ backgroundColor: "#f7fafc" }}>
         <ScrollView
           style={{ marginHorizontal: width * 0.05 }}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
         >
           <FlatList
             inset={true}

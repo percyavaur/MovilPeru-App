@@ -89,8 +89,7 @@ export default class DrawerContent extends Component {
                             </Button>
                         </Left>
                         <Body>
-                            <TouchableOpacity
-                                onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                            <TouchableOpacity>
                                 <Text>About Us</Text>
                             </TouchableOpacity>
                         </Body>
@@ -98,8 +97,7 @@ export default class DrawerContent extends Component {
                     {currentUser ?
                         <ListItem icon>
                             <Left>
-                                <Button style={{ backgroundColor: "red" }}
-                                    onPress={() => { this.props.navigation.navigate('LoginModal') }}>
+                                <Button style={{ backgroundColor: "red" }}>
                                     <Icon active name="ios-power" />
                                 </Button>
                             </Left>

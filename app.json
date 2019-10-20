@@ -4,6 +4,10 @@
     "slug": "MovilPeru",
     "privacy": "public",
     "sdkVersion": "32.0.0",
+    "notification": {
+      "icon": "./assets/images/colibri_nazca.png",
+      "color": "#BF1643"
+    },
     "platforms": [
       "ios",
       "android"
