@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body, Left, Right, Button } from 'native-base';
+import { Card, CardItem, Left, Right, Button } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import RF from "react-native-responsive-fontsize";
 import { NavigationOptions2 } from "../../../navigation/NavigationOptions";
-import { NavigationEvents } from "react-navigation";
 import { BlurView } from 'expo';
 import Accordion from 'react-native-collapsible/Accordion';
+import moment from "moment";
 const { width, height } = Dimensions.get('window');
-
 
 export default class IdaViajeScreen extends Component {
 
@@ -28,7 +27,7 @@ export default class IdaViajeScreen extends Component {
         this.fetchGetViajes(idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta);
     }
 
-    fetchGetViajes = async (idOrigen, idDestino, cantPasajeros, fechaIda, fechaVuelta) => {
+    fetchGetViajes = async (idOrigen, idDestino, cantPasajeros, fechaIda) => {
         await fetch('http://35.236.27.209/movilPeru/api/controller/get_viajes.php', {
             method: "POST",
             headers: {
@@ -71,7 +70,8 @@ export default class IdaViajeScreen extends Component {
 
     _renderHeader = section => {
 
-        var hour = section.horaSalida.split(":");
+        var hour = moment(section.departureDate).format("hh:mm:ss");
+        hour = hour.split(":");
 
         return (
             <View style={{ marginHorizontal: width * 0.025 }}>
@@ -113,8 +113,6 @@ export default class IdaViajeScreen extends Component {
 
     _renderContent = section => {
 
-        const { currentTrip } = this.props;
-
         return (
             <View style={{ display: "flex", flexDirection: "column", marginHorizontal: width * 0.05 }}>
                 <Card>
@@ -154,7 +152,7 @@ export default class IdaViajeScreen extends Component {
                     justifyContent: "center",
                 }}>
                     <Text style={styles.texto}>
-                        {tripsData[0] ? tripsData[0].fechaSalida : null}
+                        {tripsData[0] ? moment(tripsData[0].departureDate).format("YYYY-MM-DD") : null}
                     </Text>
                 </View>
                 <Accordion
