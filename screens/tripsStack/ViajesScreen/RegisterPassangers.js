@@ -82,11 +82,28 @@ export default class RegisterPassangers extends React.Component {
                     this.props.navigation.navigate("Trips");
                     this.setState({ ticket: data.idVenta });
                     this.setState({ loading: false });
+                    this.fetchSendEmail();
                     alert("Este es tu id de reserva: " + data.idVenta);
                 } else {
                     alert("Algo salió mal");
                 }
             });
+    }
+
+    fetchSendEmail = async () => {
+        const { correo, ticket } = this.state;
+
+        await fetch('http://35.236.27.209/movilPeru/api/controller/send_email.php', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ticket: ticket,
+                destinatario: correo
+            })
+        })
     }
 
     render() {

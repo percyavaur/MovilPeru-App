@@ -9,7 +9,6 @@ function cacheFonts(fonts) {
   return fonts.map(font => Font.loadAsync(font));
 }
 
-
 export default class App extends React.Component {
 
   state = {
@@ -48,17 +47,6 @@ export default class App extends React.Component {
     if (finalStatus !== 'granted') {
       return;
     }
-
-    /* Notifications.presentLocalNotificationAsync({
-      title: 'New Message',
-      body: 'Message!!!!',
-      android: {
-        channelId: 'chat-messages',
-        priority: 'max',
-        vibrate: [0, 250, 250, 250],
-        color: '#ffff',
-      },
-    }); */
   }
 
   async _loadAssetsAsync() {
